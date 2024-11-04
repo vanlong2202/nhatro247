@@ -22,7 +22,7 @@ public class Newsletter {
     private String Title;
     private String Detail;
     private String Format;
-    private String Address;
+    private String NewsletterAddress;
     private String AddressDetail;
     private String Price;
     private int Acreage;// diện tích
@@ -30,6 +30,7 @@ public class Newsletter {
     private int Maximum; // ở tối đa
     private int VacantRoom; // Phòng trống
     private int SelfManagement; // tự quản lí
+    private int Prioritize; // giới tính ưu tiên
     private Date createTime; // thời gian tạo bản tin
     private int isStatus; // trạng thái bản tin
     private int isActive; // trạng thái hoạt động bản tin
@@ -57,6 +58,14 @@ public class Newsletter {
         Newsletter_ID = newsletter_ID;
     }
 
+    public int getPrioritize() {
+        return Prioritize;
+    }
+
+    public void setPrioritize(int prioritize) {
+        Prioritize = prioritize;
+    }
+
     public String getTitle() {
         return Title;
     }
@@ -81,12 +90,12 @@ public class Newsletter {
         Format = format;
     }
 
-    public String getAddress() {
-        return Address;
+    public String getNewsletterAddress() {
+        return NewsletterAddress;
     }
 
-    public void setAddress(String address) {
-        Address = address;
+    public void setNewsletterAddress(String newsletterAddress) {
+        NewsletterAddress = newsletterAddress;
     }
 
     public String getAddressDetail() {
@@ -220,12 +229,12 @@ public class Newsletter {
     @Override
     public String toString() {
         return "Newsletter [Newsletter_ID=" + Newsletter_ID + ", Title=" + Title + ", Detail=" + Detail + ", Format="
-                + Format + ", Address=" + Address + ", AddressDetail=" + AddressDetail + ", Price=" + Price
-                + ", Acreage=" + Acreage + ", TotalRoom=" + TotalRoom + ", Maximum=" + Maximum + ", VacantRoom="
-                + VacantRoom + ", SelfManagement=" + SelfManagement + ", createTime=" + createTime + ", isStatus="
-                + isStatus + ", isActive=" + isActive + ", Svip=" + Svip + ", Image1=" + Image1 + ", Image2=" + Image2
-                + ", Image3=" + Image3 + ", newsletterType=" + newsletterType + ", account=" + account
-                + ", reportNewsletter=" + reportNewsletter + "]";
+                + Format + ", NewsletterAddress=" + NewsletterAddress + ", AddressDetail=" + AddressDetail + ", Price="
+                + Price + ", Acreage=" + Acreage + ", TotalRoom=" + TotalRoom + ", Maximum=" + Maximum + ", VacantRoom="
+                + VacantRoom + ", SelfManagement=" + SelfManagement + ", Prioritize=" + Prioritize + ", createTime="
+                + createTime + ", isStatus=" + isStatus + ", isActive=" + isActive + ", Svip=" + Svip + ", Image1="
+                + Image1 + ", Image2=" + Image2 + ", Image3=" + Image3 + ", newsletterType=" + newsletterType
+                + ", account=" + account + "]";
     }
 
 }
