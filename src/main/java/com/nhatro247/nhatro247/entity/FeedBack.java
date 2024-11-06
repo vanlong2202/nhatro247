@@ -11,53 +11,53 @@ import jakarta.persistence.Table;
 public class FeedBack {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long Feedback_ID;
+    private long feedBackID;
 
-    private String FullName;
-    private String Email;
-    private String Title;
-    private String Context;
+    private String fullName;
+    private String email;
+    private String title;
+    private String context;
     private int isStatus;
-    private String Description;
+    private String description;
 
-    public long getFeedBack_ID() {
-        return Feedback_ID;
+    public long getFeedBackID() {
+        return feedBackID;
     }
 
-    public void setFeedBack_ID(long feedBack_ID) {
-        Feedback_ID = feedBack_ID;
+    public void setFeedBackID(long feedBackID) {
+        this.feedBackID = feedBackID;
     }
 
     public String getFullName() {
-        return FullName;
+        return fullName;
     }
 
     public void setFullName(String fullName) {
-        FullName = fullName;
+        this.fullName = fullName;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     public void setTitle(String title) {
-        Title = title;
+        this.title = title;
     }
 
     public String getContext() {
-        return Context;
+        return context;
     }
 
     public void setContext(String context) {
-        Context = context;
+        this.context = context;
     }
 
     public int getIsStatus() {
@@ -69,18 +69,17 @@ public class FeedBack {
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
     }
 
     @Override
     public String toString() {
-        return "FeedBack [FeedBack_ID=" + Feedback_ID + ", FullName=" + FullName + ", Email=" + Email + ", Title="
-                + Title
-                + ", Context=" + Context + ", isStatus=" + isStatus + ", Description=" + Description + "]";
+        return "FeedBack [feedBackID=" + feedBackID + ", fullName=" + fullName + ", email=" + email + ", title=" + title
+                + ", context=" + context + ", isStatus=" + isStatus + ", description=" + description + "]";
     }
 
 }

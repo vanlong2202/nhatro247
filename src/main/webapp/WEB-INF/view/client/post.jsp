@@ -64,7 +64,7 @@
                         </div>
                     </div>
                 </div>
-                <form action="/new/port" method="post" id="contact-form">
+                <form:form action="/new/port" method="post" modelAttribute="infoNewsletterDTO" id="contact-form">
                     <div class="contact-page section">
                         <div class="container">
                             <div class="section-heading">
@@ -82,23 +82,23 @@
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
                                                 <label for="simpleinput">Họ Và Tên</label>
-                                                <input value="" type="text" name="fullName" class="form-control">
+                                                <form:input type="text" path="account.fullName" class="form-control" />
                                             </div>
                                             <div class="form-group mb-3">
                                                 <label for="example-email">Email</label>
-                                                <input value="" type="email" name="email" class="form-control"
-                                                    placeholder="Email">
+                                                <form:input path="account.email" type="email" class="form-control"
+                                                    placeholder="Email" />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
                                                 <label for="example-password">Số Điện Thoại</label>
-                                                <input value="" type="text" name="phone" class="form-control">
+                                                <form:input path="account.phone" type="text" class="form-control" />
                                             </div>
                                             <div class="form-group mb-3">
                                                 <label for="example-palaceholder">Facebook</label>
-                                                <input value="" name="facebook" type="text" class="form-control"
-                                                    placeholder="Nhập đường đẫn facebook của bạn tại đây...">
+                                                <form:input path="account.facebook" type="text" class="form-control"
+                                                    placeholder="Nhập đường đẫn facebook của bạn tại đây..." />
                                             </div>
                                         </div>
 
@@ -117,23 +117,24 @@
                                     <div class="col-md-12 mb-2">
                                         <div class="form-group mb-1">
                                             <label>Tiêu đề tin</label>
-                                            <input name="title" class="form-control" type="text"
+                                            <form:input path="newsletter.title" class="form-control" type="text"
                                                 placeholder="Tiêu đề bản tin..." />
                                         </div>
                                     </div>
 
                                     <div class="col-md-12 mb-2 d-flex justify-content-between">
-                                        <div class="col-md-3 mb-2">
+                                        <!-- <div class="col-md-3 mb-2">
                                             <label>Loại Hình</label>
                                             <select class="form-control" name="" required>
                                                 <option value="Cho Thuê Trọ">Cho Thuê Trọ</option>
                                                 <option value="Cho Thuê Nhà/Căn Hộ">Cho Thuê Nhà/Căn Hộ</option>
                                                 <option value="Tìm Ở Ghép">Tìm Ở Ghép</option>
                                             </select>
-                                        </div>
+                                        </div> -->
                                         <div class="col-md-3 mb-1">
                                             <label for="validationCustom04">Hình Thức Trọ</label>
-                                            <select class="form-control" name="format" id="" required>
+                                            <form:select class="form-control" path="newsletter.format"
+                                                required="required">
                                                 <option value="Phòng trọ">Phòng trọ</option>
                                                 <option value="Ký túc xá (dorm)">Ký túc xá (dorm)</option>
                                                 <option value="Chung cư mini">Chung cư mini</option>
@@ -141,15 +142,16 @@
                                                 <option value="Homestay">Homestay</option>
                                                 <option value="Trọ nhà nguyên căn">Trọ nhà nguyên căn</option>
                                                 <option value="Trọ trong nhà chung chủ">Trọ trong nhà chung chủ</option>
-                                            </select>
+                                            </form:select>
                                         </div>
                                         <div class="col-md-3 mb-1">
                                             <label for="validationCustom04">Trọ tự quản</label>
-                                            <select class="form-control" name="selfManagement" required>
+                                            <form:select class="form-control" path="newsletter.selfManagement"
+                                                required="required">
                                                 <option selected disabled value="0">--- Chọn Hình Thức ---</option>
                                                 <option value="1">Không</option>
                                                 <option value="2">Có</option>
-                                            </select>
+                                            </form:select>
                                         </div>
                                     </div>
 
@@ -157,30 +159,31 @@
                                         <div class="col-md-3 mb-1">
                                             <label for="validationCustomUsername">Phòng trống:</label>
                                             <div class="input-group">
-                                                <input name="vacantRoom" type="number" class="form-control"
-                                                    placeholder="Số phòng trống ..." required>
+                                                <form:input path="newsletter.vacantRoom" type="text"
+                                                    class="form-control" placeholder="Số phòng trống ..."
+                                                    required="required" />
 
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label for="validationCustomUsername">Tổng Số Phòng:</label>
                                             <div class="input-group">
-                                                <input name="totalRoom" type="text" class="form-control"
-                                                    placeholder="Tổng số phòng ..." required>
+                                                <form:input path="newsletter.totalRoom" type="text" class="form-control"
+                                                    placeholder="Tổng số phòng ..." required="required" />
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-2">
                                             <label for="validationCustomUsername">Ở Tối Đa(Người/Phòng)</label>
-                                            <input name="maximum" type="text" class="form-control"
-                                                placeholder="Tối đa số người ở 1 phòng ..." required>
+                                            <form:input path="newsletter.maximum" type="text" class="form-control"
+                                                placeholder="Tối đa số người ở 1 phòng ..." required="required" />
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-2 d-flex justify-content-between">
                                         <div class="col-md-3 mb-1">
                                             <label for="validationCustomUsername">Diện tích phòng</label>
                                             <div class="input-group">
-                                                <input name="acreage" type="number" class="form-control"
-                                                    placeholder="Diện tích của phòng" required>
+                                                <form:input path="newsletter.acreage" type="text" class="form-control"
+                                                    placeholder="Diện tích của phòng" required="required" />
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="inputGroupPrepend">m²</span>
                                                 </div>
@@ -189,8 +192,8 @@
                                         <div class="col-md-3 mb-3">
                                             <label for="validationCustomUsername">Giá phòng</label>
                                             <div class="input-group">
-                                                <input name="price" type="text" class="form-control"
-                                                    placeholder="Nhập đúng giá trị tiền" required>
+                                                <form:input path="newsletter.price" type="text" class="form-control"
+                                                    placeholder="Nhập đúng giá trị tiền" required="required" />
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="inputGroupPrepend">VND</span>
                                                 </div>
@@ -198,17 +201,19 @@
                                         </div>
                                         <div class="col-md-3 mb-2">
                                             <label for="validationCustomUsername">Giới Tính Ưu Tiên</label>
-                                            <select class="form-control" name="prioritize" required>
+                                            <form:select class="form-control" path="newsletter.prioritize"
+                                                required="required">
                                                 <option value="0">--- Tất cả ---</option>
                                                 <option value="1">Nữ</option>
                                                 <option value="2">Nam</option>
-                                            </select>
+                                            </form:select>
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-2 d-flex justify-content-between">
                                         <div class="col-md-2 mb-2">
                                             <label for="example-static">Địa Chỉ</label>
-                                            <select class="form-control" name="newsletterAddress" required>
+                                            <form:select class="form-control" path="newsletter.newsletterAddress"
+                                                required="required">
                                                 <option selected disabled value="0">Chọn địa điểm</option>
                                                 <option value="Hồ Chí Minh">Hồ Chí Minh</option>
                                                 <option value="Hà Nội">Hà Nội</option>
@@ -273,21 +278,21 @@
                                                 <option value="Điện Biên">Điện Biên</option>
                                                 <option value="Đồng Nai">Đồng Nai</option>
                                                 <option value="dong-thap">Đồng Tháp</option>
-                                            </select>
+                                            </form:select>
                                         </div>
                                         <div class="col-md-9 mb-2">
                                             <div class="form-group mb-1">
                                                 <label for="example-static">Địa Chỉ Chi Tiết</label>
-                                                <input name="addressDetail" class="form-control" type="text"
-                                                    placeholder="Nhập địa chỉ chi tiết tại đây ...">
+                                                <form:input path="newsletter.addressDetail" class="form-control"
+                                                    type="text" placeholder="Nhập địa chỉ chi tiết tại đây ..." />
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-12  mb-2">
                                         <div class="form-group">
                                             <label for="example-static">Mô tả chi tiết</label>
-                                            <textarea name="detail" class="form-control" type="text"
-                                                placeholder="Mô tả chi tiết tại đây ..." rows="6"></textarea>
+                                            <form:textarea path="newsletter.detail" class="form-control" type="text"
+                                                placeholder="Mô tả chi tiết tại đây ..." rows="6"></form:textarea>
                                         </div>
                                     </div>
                                     <div class="form-group mb-12">
@@ -312,7 +317,7 @@
 
 
                     </div>
-                </form>
+                </form:form>
                 <jsp:include page="../client/layout/footer.jsp" />
                 <script src="/jquery/jquery.min.js"></script>
                 <script src="/js/bootstrap.min.js"></script>

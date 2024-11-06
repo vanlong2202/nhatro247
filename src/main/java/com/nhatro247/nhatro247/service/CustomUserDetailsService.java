@@ -26,7 +26,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("Account fail");
         }
         return new User(account.getUsername(), account.getPassword(),
-                Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + account.getRole().getRole_name())));
+                Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + account.getRole().getRoleName())));
     }
 
 }

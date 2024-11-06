@@ -21,8 +21,8 @@
                                     <c:if test="${not empty pageContext.request.userPrincipal}">
 
                                         <li>
-                                            <a href="/logout"><i class="fa-solid fa-user"></i>
-                                                <c:out value="${pageContext.request.userPrincipal.name}" />
+                                            <a href="/profile"><i class="fa-solid fa-user"></i>
+                                                <c:out value="${sessionScope.username}" />
                                             </a>
                                         </li>
                                         <form method="post" action="/logout" id="myForm">

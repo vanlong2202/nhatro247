@@ -7,6 +7,11 @@
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <link rel="preconnect" href="https://fonts.googleapis.com">
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Anton+SC&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+                    rel="stylesheet">
                 <title>Đăng kí/Đăng nhập</title>
                 <style>
                     @import url(https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Noto+Sans:wght@400;700&display=swap);
@@ -21,12 +26,13 @@
                         justify-content: center;
                         align-items: center;
                         flex-direction: column;
-                        font-family: Verdana, Geneva, Tahoma, sans-serif, 'Segoe UI', Tahoma, Verdana, sans-serif;
+                        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
                         height: 100vh;
                         margin: -20px 0 50px;
                     }
 
                     h1 {
+                        font-family: "Anton SC", sans-serif;
                         font-weight: bold;
                         margin: 0;
                     }
@@ -269,34 +275,31 @@
             <body>
                 <div class="container" id="container">
                     <div class="form-container sign-up-container">
-                        <form action="#">
+                        <form action="/addAcc" method="post">
                             <h1>Tạo tài khoản</h1>
-                            <div class="social-container">
-                                <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                                <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-                            </div>
-                            <span>or use your email for registration</span>
-                            <input type="text" placeholder="Name" />
-                            <input type="email" placeholder="Email" />
-                            <input type="password" placeholder="Password" />
-                            <button>Sign Up</button>
+                            <input name="username" type="text" placeholder="Name" />
+                            <input name="email" type="email" placeholder="Email" />
+                            <input name="password" type="password" placeholder="Password" />
+                            ${var}
+                            <button type="submit">Đăng Kí</button>
                         </form>
                     </div>
                     <div class="form-container sign-in-container">
-                        <form action="#">
+                        <!-- <form action="/login" method="post">
                             <h1>Đăng nhập</h1>
-                            <div class="social-container">
-                                <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                                <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                            <input name="username" id="username" type="text" placeholder="Username" />
+                            <input name="password" id="password" type="password" placeholder="Password" />
+                            <c:if test="${param.error != null}">
+                                <div class="my-2"
+                                    style="color: red; font-size: 14px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                                    Thông tin không chính xác !
+                                </div>
+                            </c:if>
+                            <div>
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                             </div>
-                            <span>or use your account</span>
-                            <input type="email" placeholder="Email" />
-                            <input type="password" placeholder="Password" />
-                            <a href="#">Forgot your password?</a>
-                            <button>Sign In</button>
-                        </form>
+                            <button>Đăng Nhập</button>
+                        </form> -->
                     </div>
                     <div class="overlay-container">
                         <div class="overlay">
@@ -319,12 +322,19 @@
                     const signInButton = document.getElementById('signIn');
                     const container = document.getElementById('container');
 
+                    if (localStorage.getItem("isSignUpActive") === "true") {
+                        setTimeout(() => {
+                            container.classList.add("right-panel-active");
+                        }, 50);
+                    }
                     signUpButton.addEventListener('click', () => {
                         container.classList.add("right-panel-active");
+                        localStorage.setItem("isSignUpActive", "true");
                     });
 
                     signInButton.addEventListener('click', () => {
                         container.classList.remove("right-panel-active");
+                        localStorage.setItem("isSignUpActive", "false");
                     });
                 </script>
             </body>

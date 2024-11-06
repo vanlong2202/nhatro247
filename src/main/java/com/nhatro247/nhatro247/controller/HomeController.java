@@ -5,8 +5,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.nhatro247.nhatro247.entity.Account;
 import com.nhatro247.nhatro247.entity.FeedBack;
 import com.nhatro247.nhatro247.service.MenuService;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class HomeController {
@@ -29,8 +32,15 @@ public class HomeController {
     }
 
     @GetMapping("/login1")
-    public String getLoginPage1() {
-        return "client/auth/register";
+    public String getRegisterPage() {
+        return "client/login1";
+    }
+
+    @PostMapping("/submit")
+    public String postMethodName(Model model) {
+        model.addAttribute("var", "Thông tin đăng nhập khum chính xác");
+
+        return "client/login1";
     }
 
     @GetMapping("/admin")

@@ -11,53 +11,45 @@ import jakarta.persistence.Table;
 public class Menu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Menu_ID;
+    private int menuID;
 
-    private String MenuName;
-    private String ControllerName;
-    private String AcctionName;
-    private int Position;
+    private String menuName;
+    private String controllerName;
+    private String acctionName;
+    private int position;
     private int isActive;
-    private int Lever;
+    private int lever;
 
     public int getMenuID() {
-        return Menu_ID;
+        return menuID;
     }
 
     public void setMenuID(int menuID) {
-        Menu_ID = menuID;
-    }
-
-    public String getMenuName() {
-        return MenuName;
-    }
-
-    public void setMenuName(String menuName) {
-        MenuName = menuName;
+        this.menuID = menuID;
     }
 
     public String getControllerName() {
-        return ControllerName;
+        return controllerName;
     }
 
     public void setControllerName(String controllerName) {
-        ControllerName = controllerName;
+        this.controllerName = controllerName;
     }
 
     public String getAcctionName() {
-        return AcctionName;
+        return acctionName;
     }
 
     public void setAcctionName(String acctionName) {
-        AcctionName = acctionName;
+        this.acctionName = acctionName;
     }
 
     public int getPosition() {
-        return Position;
+        return position;
     }
 
     public void setPosition(int position) {
-        Position = position;
+        this.position = position;
     }
 
     public int getIsActive() {
@@ -69,18 +61,26 @@ public class Menu {
     }
 
     public int getLever() {
-        return Lever;
+        return lever;
     }
 
     public void setLever(int lever) {
-        Lever = lever;
+        this.lever = lever;
+    }
+
+    public String getMenuName() {
+        return menuName;
+    }
+
+    public void setMenuName(String menuName) {
+        this.menuName = menuName;
     }
 
     @Override
     public String toString() {
-        return "Menu [MenuID=" + Menu_ID + ", MenuName=" + MenuName + ", ControllerName=" + ControllerName
-                + ", AcctionName=" + AcctionName + ", Position=" + Position + ", isActive=" + isActive + ", Lever="
-                + Lever + "]";
+        return "Menu [menuID=" + menuID + ", menuName=" + menuName + ", controllerName=" + controllerName
+                + ", acctionName=" + acctionName + ", position=" + position + ", isActive=" + isActive + ", lever="
+                + lever + "]";
     }
 
 }

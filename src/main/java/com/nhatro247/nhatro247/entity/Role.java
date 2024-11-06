@@ -13,28 +13,28 @@ import jakarta.persistence.Table;
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long Role_id;
+    private long roleID;
 
-    private String Role_name;
+    private String roleName;
     private String Description;
 
     @OneToMany(mappedBy = "role")
     private List<Account> accounts;
 
-    public long getRole_id() {
-        return Role_id;
+    public long getRoleID() {
+        return roleID;
     }
 
-    public void setRole_id(long role_id) {
-        Role_id = role_id;
+    public void setRoleID(long roleID) {
+        this.roleID = roleID;
     }
 
-    public String getRole_name() {
-        return Role_name;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setRole_name(String role_name) {
-        Role_name = role_name;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     public String getDescription() {
@@ -45,9 +45,17 @@ public class Role {
         Description = description;
     }
 
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
+    }
+
     @Override
     public String toString() {
-        return "Role [Role_id=" + Role_id + ", Role_name=" + Role_name + ", Description=" + Description + ", accounts="
+        return "Role [roleID=" + roleID + ", roleName=" + roleName + ", Description=" + Description + ", accounts="
                 + accounts + "]";
     }
 

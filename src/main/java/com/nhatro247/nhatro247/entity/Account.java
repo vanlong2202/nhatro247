@@ -19,104 +19,32 @@ import jakarta.validation.constraints.NotNull;
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Account_ID;
+    private int accountID;
     private String username;
-    private String FullName;
-    private String Phone;
-    private String Address;
-    private String Password;
+    private String fullName;
+    private String phone;
+    private String address;
+    private String password;
 
     @NotNull
     private String email;
 
-    private String Facebook;
-    private String Description;
+    private String facebook;
+    private String description;
 
     @ManyToOne
-    @JoinColumn(name = "Role_id")
+    @JoinColumn(name = "roleID")
     private Role role;
 
     @OneToMany(mappedBy = "account")
     private List<Newsletter> newsletter;
 
-    public int getAccount_ID() {
-        return Account_ID;
+    public int getAccountID() {
+        return accountID;
     }
 
-    public void setAccount_ID(int account_ID) {
-        Account_ID = account_ID;
-    }
-
-    public String getFullName() {
-        return FullName;
-    }
-
-    public void setFullName(String fullName) {
-        FullName = fullName;
-    }
-
-    public String getPhone() {
-        return Phone;
-    }
-
-    public void setPhone(String phone) {
-        Phone = phone;
-    }
-
-    public String getAddress() {
-        return Address;
-    }
-
-    public void setAddress(String address) {
-        Address = address;
-    }
-
-    public String getPassword() {
-        return Password;
-    }
-
-    public void setPassword(String password) {
-        Password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public List<Newsletter> getNewsletter() {
-        return newsletter;
-    }
-
-    public void setNewsletter(List<Newsletter> newsletter) {
-        this.newsletter = newsletter;
-    }
-
-    public String getFacebook() {
-        return Facebook;
-    }
-
-    public void setFacebook(String facebook) {
-        Facebook = facebook;
-    }
-
-    public String getDescription() {
-        return Description;
-    }
-
-    public void setDescription(String description) {
-        Description = description;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
+    public void setAccountID(int accountID) {
+        this.accountID = accountID;
     }
 
     public String getUsername() {
@@ -127,11 +55,83 @@ public class Account {
         this.username = username;
     }
 
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFacebook() {
+        return facebook;
+    }
+
+    public void setFacebook(String facebook) {
+        this.facebook = facebook;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public List<Newsletter> getNewsletter() {
+        return newsletter;
+    }
+
+    public void setNewsletter(List<Newsletter> newsletter) {
+        this.newsletter = newsletter;
+    }
+
     @Override
     public String toString() {
-        return "Account [Account_ID=" + Account_ID + ", username=" + username + ", FullName=" + FullName + ", Phone="
-                + Phone + ", Address=" + Address + ", Password=" + Password + ", email=" + email + ", Facebook="
-                + Facebook + ", Description=" + Description + ", role=" + role + "]";
+        return "Account [accountID=" + accountID + ", username=" + username + ", fullName=" + fullName + ", phone="
+                + phone + ", address=" + address + ", password=" + password + ", email=" + email + ", facebook="
+                + facebook + ", description=" + description + ", role=" + role + ", newsletter=" + newsletter + "]";
     }
 
 }

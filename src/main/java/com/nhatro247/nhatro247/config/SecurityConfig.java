@@ -5,11 +5,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.session.security.web.authentication.SpringSessionRememberMeServices;
 
 import com.nhatro247.nhatro247.service.AccountService;
 import com.nhatro247.nhatro247.service.CustomUserDetailsService;
@@ -50,6 +52,13 @@ public class SecurityConfig {
     }
 
     @Bean
+    public SpringSessionRememberMeServices rememberMeServices() {
+        SpringSessionRememberMeServices rememberMeServices = new SpringSessionRememberMeServices();
+        rememberMeServices.setAlwaysRemember(true);
+        return rememberMeServices;
+    }
+
+    @Bean
     public AuthenticationSuccessHandler customSuccessHandler() {
         return new CustomSuccessHandler();
     }
@@ -60,12 +69,23 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
 
                         .dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.INCLUDE).permitAll()
-                        .requestMatchers("/", "/login", "/register", "/product/**", "/client/**", "/css/**", "/js/**",
+                        .requestMatchers("/", "/login", "/login1", "/register", "/product/**", "/client/**", "/css/**",
+                                "/js/**",
                                 "/images/**", "/webfonts/**")
                         .permitAll()
                         .requestMatchers("/admin/**").hasRole("Admin")
+                        .requestMatchers("/post").authenticated()
                         .anyRequest().authenticated())
 
+                .sessionManagement((sessionManagement) -> sessionManagement
+                        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                        .invalidSessionUrl("/logout?expired")
+                        .maximumSessions(1)
+                        .maxSessionsPreventsLogin(false))
+
+                .logout(logout -> logout.deleteCookies("JSESSIONID").invalidateHttpSession(true))
+
+                .rememberMe(rememberme -> rememberme.rememberMeServices(rememberMeServices()))
                 // cấu hình sửu dụng trang login của project thay phần security mạc định
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")

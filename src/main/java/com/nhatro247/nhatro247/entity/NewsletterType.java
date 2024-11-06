@@ -13,28 +13,20 @@ import jakarta.persistence.Table;
 public class NewsletterType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long NewsletterType_ID;
+    private long newsletterTypeID;
 
     private String name;
-    private String Description;
+    private String description;
 
     @OneToMany(mappedBy = "newsletterType")
     private List<Newsletter> newsletters;
 
-    public long getNewsletterType_ID() {
-        return NewsletterType_ID;
+    public long getNewsletterTypeID() {
+        return newsletterTypeID;
     }
 
-    public void setNewsletterType_ID(long newsletterType_ID) {
-        NewsletterType_ID = newsletterType_ID;
-    }
-
-    public String getDescription() {
-        return Description;
-    }
-
-    public void setDescription(String description) {
-        Description = description;
+    public void setNewsletterTypeID(long newsletterTypeID) {
+        this.newsletterTypeID = newsletterTypeID;
     }
 
     public String getName() {
@@ -45,10 +37,26 @@ public class NewsletterType {
         this.name = name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<Newsletter> getNewsletters() {
+        return newsletters;
+    }
+
+    public void setNewsletters(List<Newsletter> newsletters) {
+        this.newsletters = newsletters;
+    }
+
     @Override
     public String toString() {
-        return "NewsletterType [NewsletterType_ID=" + NewsletterType_ID + ", name=" + name + ", Description="
-                + Description + "]";
+        return "NewsletterType [newsletterTypeID=" + newsletterTypeID + ", name=" + name + ", description="
+                + description + ", newsletters=" + newsletters + "]";
     }
 
 }

@@ -1,52 +1,105 @@
 package com.nhatro247.nhatro247.controller;
 
+import java.net.http.HttpClient;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.nhatro247.nhatro247.entity.Account;
+import com.nhatro247.nhatro247.entity.Newsletter;
 import com.nhatro247.nhatro247.entity.Role;
 import com.nhatro247.nhatro247.service.AccountService;
+import com.nhatro247.nhatro247.service.MenuService;
 
-import jakarta.validation.Valid;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class AccountController {
 
-    // private final PasswordEncoder passwordEncoder;
     private final AccountService accountService;
+    private final MenuService menuService;
     private final PasswordEncoder passwordEncoder;
 
-    public AccountController(AccountService accountService, PasswordEncoder passwordEncoder) {
+    public AccountController(AccountService accountService, PasswordEncoder passwordEncoder, MenuService menuService) {
         this.accountService = accountService;
         this.passwordEncoder = passwordEncoder;
+        this.menuService = menuService;
+    }
+
+    @GetMapping("/profile")
+    public String getAccountManegerPage(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        model.addAttribute("menu", this.menuService.getAll());
+        String user = (String) session.getAttribute("username");
+        Account account = this.accountService.getAccountByName(user);
+        model.addAttribute("info", account);
+        return "client/profile";
+    }
+
+    @GetMapping("/update-profile")
+    public String getPageUpdateProfile(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        model.addAttribute("menu", this.menuService.getAll());
+        String user = (String) session.getAttribute("username");
+        Account account = this.accountService.getAccountByName(user);
+        model.addAttribute("info", account);
+        return "client/updateProfile";
+    }
+
+    @PostMapping("/update-info")
+    public String updateAccount(@ModelAttribute("info") Account account) {
+        Account acc = this.accountService.getAccountByID(account.getAccountID());
+        if (acc != null) {
+            acc.setFullName(account.getFullName());
+            acc.setAddress(account.getAddress());
+            acc.setEmail(account.getEmail());
+            acc.setPhone(account.getPhone());
+
+            this.accountService.addAccount(acc);
+            return "redirect:/profile";
+        } else {
+            return "client/profile";
+        }
+
+    }
+
+    @GetMapping("/register")
+    public String showRegistrationForm(Model model) {
+        model.addAttribute("account", new Account());
+        return "client/register";
     }
 
     @PostMapping("/register")
-    public String register(Model model, @ModelAttribute Account account) {
+    public String registerAccount(Model model, Account account) {
+        Account checkUser = this.accountService.getAccountByName(account.getUsername());
+        Account checkEmail = this.accountService.getAccByEmail("vanlong.check@gmail.com");
+        if (checkEmail != null) {
+            System.out.println("Email đã được dùng");
+        }
+        if (checkUser == null) {
 
-        // Account check = this.accountService.checkEmail(account.getEmail());
-        // Account checkUser = this.accountService.checkUsernam(account.getUsername());
-        // if (checkUser != null) {
-        // model.addAttribute("errolUser", "Tên người dùng đã đưowcj sử dụng !!");
-        // } else {
-        // if (check != null) {
-        // model.addAttribute("errolEmail", "Email đã tồn tại !!");
-        // } else {
-        // Role role = new Role();
-        // role.setRole_id(1);
-        // account.setRole(role);
-        // String hashPassword = passwordEncoder.encode(account.getPassword());
-        // account.setPassword(hashPassword);
-        // this.accountService.addAccount(account);
+            //
 
-        // }
-        // }
-        return "redirect:client/login";
+            Role role = new Role();
+            role.setRoleID(1);
+            account.setRole(role);
+            String hashPass = this.passwordEncoder.encode(account.getPassword());
+            account.setPassword(hashPass);
+            this.accountService.addAccount(account);
+            return "redirect:/login";
+        } else {
+            model.addAttribute("errorUser", "Username đã được sử dụng!");
+            System.out.println(model);
+            return "client/register";
+        }
     }
 
 }

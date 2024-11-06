@@ -7,6 +7,11 @@
             <head>
                 <meta charset="UTF-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <link rel="preconnect" href="https://fonts.googleapis.com">
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Anton+SC&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+                    rel="stylesheet">
                 <link
                     href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
                     rel="stylesheet">
@@ -28,6 +33,18 @@
                     input {
                         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                         font-size: 14px;
+                    }
+
+                    .message {
+                        font-size: 1.8em;
+                        color: #ff0000;
+                        text-align: center;
+                        margin-top: 50px;
+                    }
+
+                    h1 {
+                        font-family: "Anton SC", sans-serif;
+                        ;
                     }
 
                     .container {
@@ -428,39 +445,52 @@
                 <div class="container">
                     <div class="forms-container">
                         <div class="signin-signup">
-                            <form action="/login" method="post" class="sign-in-form">
-                                <div><img style="height: 155px;" src="/images/logo.png" alt=""></div>
+                            <form:form action="/register" method="post" modelAttribute="account" class="sign-in-form">
+                                <h1>Tạo tài khoản</h1>
                                 <div class="input-field">
                                     <i class="fas fa-user"></i>
-                                    <input name="username" id="username" type="text" placeholder="Username" />
+                                    <form:input path="username" id="username" type="text" placeholder="Username" />
+                                </div>
+                                <div
+                                    style="color: red; font-size: 14px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                                    ${errorUser}
                                 </div>
                                 <div class="input-field">
-                                    <i class="fas fa-lock"></i>
-                                    <input name="password" id="password" type="password" placeholder="Password" />
+                                    <i class="fas fa-envelope"></i>
+                                    <form:input path="email" id="email" type="email" placeholder="Email" />
                                 </div>
-                                <c:if test="${param.error != null}">
+
+
+                                <!-- <p
+                                    style="color: #ff0000;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 12px;">
+                                    ${errorEmail}</p> -->
+                                <div class="input-field">
+                                    <i class="fas fa-lock"></i>
+                                    <form:input path="password" id="password" type="password" />
+                                </div>
+                                <!-- <c:if test="${param.error != null}">
                                     <div class="my-2"
                                         style="color: red; font-size: 14px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
                                         Thông tin đăng nhập không chính xác !
                                     </div>
-                                </c:if>
-                                <div>
+                                </c:if> -->
+                                <!-- <div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                                </div>
-                                <button name="submit_form1" class="btn solid" type="submit">Đăng nhập</button>
-                            </form>
+                                </div> -->
+                                <button class="btn solid" type="submit">Đăng Kí</button>
+                            </form:form>
+
                         </div>
                     </div>
 
                     <div class="panels-container">
                         <div class="panel left-panel">
                             <div class="content">
-                                <h3>Bạn chưa có tài khoản?</h3>
+                                <h3>Nếu đã có tài khoản ?</h3>
                                 <p>
-                                    Đăng kí tài khoản để sử dụng các dịch vụ cùng chúng tôi !
+                                    Tiến hành quay lại đăng nhập hệ thống !
                                 </p>
-                                <a href="/register"><button class="btn transparent" id="sign-up-btn">
-                                        Tạo Tài Khoản
+                                <a href="/login"><button class="btn transparent" id="sign-in-btn">Đăng Nhập
                                     </button></a>
                             </div>
                             <img src="/images/log.svg" class="image" alt="" />

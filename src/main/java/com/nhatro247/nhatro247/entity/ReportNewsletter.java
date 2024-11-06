@@ -13,47 +13,53 @@ import jakarta.persistence.Table;
 public class ReportNewsletter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long Report_ID;
+    private long reportID;
 
-    private String Context;
-    private String Phone;
-    private String Email;
+    private String context;
+    private String phone;
+    private String email;
     private int isStatus;
 
     @ManyToOne
-    @JoinColumn(name = "Newsletter_ID")
+    @JoinColumn(name = "newsletterID")
     private Newsletter newsletter;
 
-    public long getReport_ID() {
-        return Report_ID;
+    public long getReportID() {
+        return reportID;
     }
 
-    public void setReport_ID(long report_ID) {
-        Report_ID = report_ID;
+    @Override
+    public String toString() {
+        return "ReportNewsletter [reportID=" + reportID + ", context=" + context + ", phone=" + phone + ", email="
+                + email + ", isStatus=" + isStatus + ", newsletter=" + newsletter + "]";
+    }
+
+    public void setReportID(long reportID) {
+        this.reportID = reportID;
     }
 
     public String getContext() {
-        return Context;
+        return context;
     }
 
     public void setContext(String context) {
-        Context = context;
+        this.context = context;
     }
 
     public String getPhone() {
-        return Phone;
+        return phone;
     }
 
     public void setPhone(String phone) {
-        Phone = phone;
+        this.phone = phone;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
     public int getIsStatus() {
@@ -62,6 +68,14 @@ public class ReportNewsletter {
 
     public void setIsStatus(int isStatus) {
         this.isStatus = isStatus;
+    }
+
+    public Newsletter getNewsletter() {
+        return newsletter;
+    }
+
+    public void setNewsletter(Newsletter newsletter) {
+        this.newsletter = newsletter;
     }
 
 }
