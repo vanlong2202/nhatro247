@@ -18,6 +18,8 @@
                                     <c:forEach var="mn" items="${menu}">
                                         <li><a href="${mn.acctionName}">${mn.menuName}</a></li>
                                     </c:forEach>
+
+
                                     <c:if test="${not empty pageContext.request.userPrincipal}">
 
                                         <li>

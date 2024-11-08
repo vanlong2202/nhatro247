@@ -1,8 +1,10 @@
 package com.nhatro247.nhatro247.entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,7 +13,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Null;
 
 @Entity
 @Table(name = "tbl_Newsletter")
@@ -19,30 +20,28 @@ public class Newsletter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long newsletterID;
-
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String title;
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String detail;
     private String format;
     private String newsletterAddress;
     private String addressDetail;
     private String price;
-    @Null
-    private int acreage;// diện tích
-    @Null
-    private int totalRoom;
-    @Null
-    private int maximum; // ở tối đa
-    @Null
-    private int vacantRoom; // Phòng trống
+    private Integer acreage;// diện tích
+    private Integer totalRoom;
+    private Integer maximum; // ở tối đa
+    private Integer vacantRoom; // Phòng trống
     private int selfManagement; // tự quản lí
     private int prioritize; // giới tính ưu tiên
-    private Date createTime; // thời gian tạo bản tin
+    private String createTime; // thời gian tạo bản tin
     private int isStatus; // trạng thái bản tin
     private int isActive; // trạng thái hoạt động bản tin
     private int svip; // trạng thái bản tin ưu tiên
     private String image1;
     private String image2;
     private String image3;
+    private String description;
 
     @ManyToOne
     @JoinColumn(name = "newsletterTypeID")
@@ -111,35 +110,35 @@ public class Newsletter {
         this.price = price;
     }
 
-    public int getAcreage() {
+    public Integer getAcreage() {
         return acreage;
     }
 
-    public void setAcreage(int acreage) {
+    public void setAcreage(Integer acreage) {
         this.acreage = acreage;
     }
 
-    public int getTotalRoom() {
+    public Integer getTotalRoom() {
         return totalRoom;
     }
 
-    public void setTotalRoom(int totalRoom) {
+    public void setTotalRoom(Integer totalRoom) {
         this.totalRoom = totalRoom;
     }
 
-    public int getMaximum() {
+    public Integer getMaximum() {
         return maximum;
     }
 
-    public void setMaximum(int maximum) {
+    public void setMaximum(Integer maximum) {
         this.maximum = maximum;
     }
 
-    public int getVacantRoom() {
+    public Integer getVacantRoom() {
         return vacantRoom;
     }
 
-    public void setVacantRoom(int vacantRoom) {
+    public void setVacantRoom(Integer vacantRoom) {
         this.vacantRoom = vacantRoom;
     }
 
@@ -157,14 +156,6 @@ public class Newsletter {
 
     public void setPrioritize(int prioritize) {
         this.prioritize = prioritize;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
     }
 
     public int getIsStatus() {
@@ -239,6 +230,22 @@ public class Newsletter {
         this.reportNewsletter = reportNewsletter;
     }
 
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public String toString() {
         return "Newsletter [newsletterID=" + newsletterID + ", title=" + title + ", detail=" + detail + ", format="
@@ -246,8 +253,9 @@ public class Newsletter {
                 + price + ", acreage=" + acreage + ", totalRoom=" + totalRoom + ", maximum=" + maximum + ", vacantRoom="
                 + vacantRoom + ", selfManagement=" + selfManagement + ", prioritize=" + prioritize + ", createTime="
                 + createTime + ", isStatus=" + isStatus + ", isActive=" + isActive + ", svip=" + svip + ", image1="
-                + image1 + ", image2=" + image2 + ", image3=" + image3 + ", newsletterType=" + newsletterType
-                + ", account=" + account + ", reportNewsletter=" + reportNewsletter + "]";
+                + image1 + ", image2=" + image2 + ", image3=" + image3 + ", description=" + description
+                + ", newsletterType=" + newsletterType + ", account=" + account + ", reportNewsletter="
+                + reportNewsletter + "]";
     }
 
 }

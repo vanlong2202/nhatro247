@@ -64,7 +64,8 @@
                         </div>
                     </div>
                 </div>
-                <form:form action="/new/port" method="post" modelAttribute="infoNewsletterDTO" id="contact-form">
+                <form:form action="/new/port" method="post" modelAttribute="infoNewsletterDTO" id="contact-form"
+                    enctype="multipart/form-data">
                     <div class="contact-page section">
                         <div class="container">
                             <div class="section-heading">
@@ -80,6 +81,10 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-6">
+                                            <div class="col-lg-12" style="display: none;">
+                                                <form:input path="account.accountID" type="text"
+                                                    placeholder="Subject..." />
+                                            </div>
                                             <div class="form-group mb-3">
                                                 <label for="simpleinput">Họ Và Tên</label>
                                                 <form:input type="text" path="account.fullName" class="form-control" />
@@ -123,14 +128,14 @@
                                     </div>
 
                                     <div class="col-md-12 mb-2 d-flex justify-content-between">
-                                        <!-- <div class="col-md-3 mb-2">
+                                        <div class="col-md-3 mb-2">
                                             <label>Loại Hình</label>
-                                            <select class="form-control" name="" required>
-                                                <option value="Cho Thuê Trọ">Cho Thuê Trọ</option>
-                                                <option value="Cho Thuê Nhà/Căn Hộ">Cho Thuê Nhà/Căn Hộ</option>
-                                                <option value="Tìm Ở Ghép">Tìm Ở Ghép</option>
+                                            <select class="form-control" name="newsletter.newsletterType" required>
+                                                <c:forEach var="type" items="${newsletterType}">
+                                                    <option value="${type.newsletterTypeID}">${type.name}</option>
+                                                </c:forEach>
                                             </select>
-                                        </div> -->
+                                        </div>
                                         <div class="col-md-3 mb-1">
                                             <label for="validationCustom04">Hình Thức Trọ</label>
                                             <form:select class="form-control" path="newsletter.format"
@@ -162,7 +167,6 @@
                                                 <form:input path="newsletter.vacantRoom" type="text"
                                                     class="form-control" placeholder="Số phòng trống ..."
                                                     required="required" />
-
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
@@ -297,16 +301,35 @@
                                     </div>
                                     <div class="form-group mb-12">
                                         <label for="image">Tải hình ảnh lên</label>
-                                        <input type="file" class="form-control-file">
+                                        <input name="file" id="image1" type="file" class="form-control-file"
+                                            required="required">
                                     </div>
                                     <div class="form-group mb-12 mt-3">
                                         <label for="image1">Tải hình ảnh lên</label>
-                                        <input type="file" class="form-control-file">
+                                        <input name="file" id="image2" type="file" class="form-control-file"
+                                            required="required">
                                     </div>
                                     <div class="form-group mb-12 mt-3">
                                         <label for="image2">Tải hình ảnh lên</label>
-                                        <input type="file" class="form-control-file">
+                                        <input name="file" id="image3" type="file" class="form-control-file"
+                                            required="required">
                                     </div>
+                                    <div class="col-md-12 mb-2 mt-3 d-flex justify-content-space-between">
+                                        <div class="col-md-3 mb-1">
+                                            <img id="previewImage1" src="#" alt="Preview Image"
+                                                style="max-width: 300px; display: none;">
+                                        </div>
+                                        <div class="col-md-3 mb-1">
+                                            <img id="previewImage2" src="#" alt="Preview Image"
+                                                style="max-width: 300px; display: none;">
+                                        </div>
+                                        <div class="col-md-3 mb-1">
+                                            <img id="previewImage3" src="#" alt="Preview Image"
+                                                style="max-width: 300px; display: none;">
+                                        </div>
+                                    </div>
+
+
                                 </div>
                             </div>
                         </div>
@@ -319,6 +342,29 @@
                     </div>
                 </form:form>
                 <jsp:include page="../client/layout/footer.jsp" />
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(() => {
+                        const file1 = $("#image1");
+                        const file2 = $("#image2");
+                        const file3 = $("#image3");
+                        file1.change(function (e) {
+                            const imgURL = URL.createObjectURL(e.target.files[0]);
+                            $("#previewImage1").attr("src", imgURL);
+                            $("#previewImage1").css({ "display": "block" });
+                        });
+                        file2.change(function (e) {
+                            const imgURL = URL.createObjectURL(e.target.files[0]);
+                            $("#previewImage2").attr("src", imgURL);
+                            $("#previewImage2").css({ "display": "block" });
+                        });
+                        file3.change(function (e) {
+                            const imgURL = URL.createObjectURL(e.target.files[0]);
+                            $("#previewImage3").attr("src", imgURL);
+                            $("#previewImage3").css({ "display": "block" });
+                        });
+                    });
+                </script>
                 <script src="/jquery/jquery.min.js"></script>
                 <script src="/js/bootstrap.min.js"></script>
                 <script src="/js/isotope.min.js"></script>
