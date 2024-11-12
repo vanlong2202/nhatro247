@@ -144,82 +144,83 @@
                                     <div class="col-md-12">
                                         <div class="card-body">
                                             <c:if test="${empty news}">
-                                                Không có kết quả
+                                                Không có kết quả nào !
                                             </c:if>
-                                            <table class="table table-hover">
-                                                <thead>
-                                                    <tr>
-                                                        <th>ID</th>
-                                                        <th>Tiều đề</th>
-                                                        <th>Thời gian</th>
-                                                        <th>Trạng thái</th>
-                                                        <th>Hoạt động</th>
-                                                        <th>Lí do từ chối</th>
-                                                        <th>Chức năng</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <c:forEach var="list" items="${news}" varStatus="status">
+                                            <c:if test="${not empty news}">
+                                                <table class="table table-hover">
+                                                    <thead>
                                                         <tr>
-                                                            <td>#${status.index + 1}</td>
-                                                            <td style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis; max-width: 200px;"
-                                                                class="col-lg-3">${list.title}</td>
-                                                            <td class="col-lg-1">${list.createTime}</td>
-                                                            <td>
-                                                                <c:if test="${list.isStatus == 0}">
-                                                                    <button style="width: 122px;" type="button"
-                                                                        class="btn mb-2 btn-primary btn-sm">Đang Phê
-                                                                        Duyệt</button>
-                                                                </c:if>
-                                                                <c:if test="${list.isStatus == 1}">
-                                                                    <button style="width: 122px;" type="button"
-                                                                        class="btn mb-2 btn-success pd-2 btn-sm">Thành
-                                                                        Công</button>
-                                                                </c:if>
-                                                                <c:if test="${list.isStatus == 2}"><button
-                                                                        style="width: 122px;" type="button"
-                                                                        class="btn mb-2 btn-danger btn-sm">Từ
-                                                                        Chối</button></c:if>
-                                                            </td>
-                                                            <td>
-                                                                <c:if
-                                                                    test="${list.isStatus == 1 && list.isActive == 1}">
-                                                                    <button style="width: 88px;" type="button"
-                                                                        class="btn mb-2 btn-info pd-2 btn-sm">Hiển
-                                                                        thị</button>
-                                                                </c:if>
-                                                                <c:if test="${list.isActive == 0}">
-                                                                    <button style="width: 88px;" type="button"
-                                                                        class="btn mb-2 btn-secondary pd-2 btn-sm">Ẩn</button>
-                                                                </c:if>
-                                                            </td>
-                                                            <td>
-                                                                <p style="color: red;">${list.description}</p>
-                                                            </td>
-                                                            <td>
-                                                                <a onclick="return confirm('Bạn có muốn xoá bản tin này không ?');"
-                                                                    class="btn mb-2 btn-danger btn-sm"
-                                                                    href="./model/deletebantin.php?id=<?php echo $row1['TinID']; ?>"
-                                                                    title="Xóa bản tin"><i
-                                                                        class="fa-solid fa-xmark"></i></a>
-                                                                <a href="" class="btn mb-2 btn-info btn-sm"
-                                                                    title="Xem Chi Tiết">
-                                                                    <i class="fas fa-eye"></i>
-                                                                </a>
-                                                                <a href="" type="button"
-                                                                    class="btn mb-2 btn-secondary btn-sm"
-                                                                    title="Đăng Lại"><i
-                                                                        class="fa-solid fa-repeat"></i></a>
-                                                                <a href="" type="button"
-                                                                    class="btn mb-2 btn-secondary btn-sm"
-                                                                    title="Đăng Lại"><i
-                                                                        class="fa-solid fa-pen-to-square"></i></a>
-                                                            </td>
+                                                            <th>ID</th>
+                                                            <th>Tiều đề</th>
+                                                            <th>Thời gian</th>
+                                                            <th>Trạng thái</th>
+                                                            <th>Hoạt động</th>
+                                                            <th>Lí do từ chối</th>
+                                                            <th>Chức năng</th>
                                                         </tr>
-                                                    </c:forEach>
-
-                                                </tbody>
-                                            </table>
+                                                    </thead>
+                                                    <tbody>
+                                                        <c:forEach var="list" items="${news}" varStatus="status">
+                                                            <tr>
+                                                                <td>#${status.index + 1}</td>
+                                                                <td style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis; max-width: 200px;"
+                                                                    class="col-lg-3">${list.title}</td>
+                                                                <td class="col-lg-1">${list.createTime}</td>
+                                                                <td>
+                                                                    <c:if test="${list.isStatus == 0}">
+                                                                        <button style="width: 122px;" type="button"
+                                                                            class="btn mb-2 btn-primary btn-sm">Đang Phê
+                                                                            Duyệt</button>
+                                                                    </c:if>
+                                                                    <c:if test="${list.isStatus == 1}">
+                                                                        <button style="width: 122px;" type="button"
+                                                                            class="btn mb-2 btn-success pd-2 btn-sm">Thành
+                                                                            Công</button>
+                                                                    </c:if>
+                                                                    <c:if test="${list.isStatus == 2}"><button
+                                                                            style="width: 122px;" type="button"
+                                                                            class="btn mb-2 btn-danger btn-sm">Từ
+                                                                            Chối</button></c:if>
+                                                                </td>
+                                                                <td>
+                                                                    <c:if
+                                                                        test="${list.isStatus == 1 && list.isActive == 1}">
+                                                                        <button style="width: 88px;" type="button"
+                                                                            class="btn mb-2 btn-info pd-2 btn-sm">Hiển
+                                                                            thị</button>
+                                                                    </c:if>
+                                                                    <c:if test="${list.isActive == 0}">
+                                                                        <button style="width: 88px;" type="button"
+                                                                            class="btn mb-2 btn-secondary pd-2 btn-sm">Ẩn</button>
+                                                                    </c:if>
+                                                                </td>
+                                                                <td>
+                                                                    <p style="color: red;">${list.description}</p>
+                                                                </td>
+                                                                <td>
+                                                                    <a onclick="return confirm('Bạn có muốn xoá bản tin này không ?');"
+                                                                        class="btn mb-2 btn-danger btn-sm"
+                                                                        href="./model/deletebantin.php?id=<?php echo $row1['TinID']; ?>"
+                                                                        title="Xóa bản tin"><i
+                                                                            class="fa-solid fa-xmark"></i></a>
+                                                                    <a href="" class="btn mb-2 btn-info btn-sm"
+                                                                        title="Xem Chi Tiết">
+                                                                        <i class="fas fa-eye"></i>
+                                                                    </a>
+                                                                    <a href="" type="button"
+                                                                        class="btn mb-2 btn-secondary btn-sm"
+                                                                        title="Đăng Lại"><i
+                                                                            class="fa-solid fa-repeat"></i></a>
+                                                                    <a href="" type="button"
+                                                                        class="btn mb-2 btn-secondary btn-sm"
+                                                                        title="Đăng Lại"><i
+                                                                            class="fa-solid fa-pen-to-square"></i></a>
+                                                                </td>
+                                                            </tr>
+                                                        </c:forEach>
+                                                    </tbody>
+                                                </table>
+                                            </c:if>
                                         </div>
                                     </div>
                                 </div>

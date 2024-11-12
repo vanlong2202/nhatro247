@@ -51,7 +51,7 @@
             </header>
             <script>
                 document.getElementById("submitLink").addEventListener("click", function (event) {
-                    event.preventDefault();  // Ngăn chặn liên kết tải lại trang
+                    event.preventDefault();
                     document.getElementById("myForm").submit();
                 });
             </script>

@@ -42,6 +42,7 @@ public class Newsletter {
     private String image2;
     private String image3;
     private String description;
+    private String approver;
 
     @ManyToOne
     @JoinColumn(name = "newsletterTypeID")
@@ -246,6 +247,14 @@ public class Newsletter {
         this.description = description;
     }
 
+    public String getApprover() {
+        return approver;
+    }
+
+    public void setApprover(String approver) {
+        this.approver = approver;
+    }
+
     @Override
     public String toString() {
         return "Newsletter [newsletterID=" + newsletterID + ", title=" + title + ", detail=" + detail + ", format="
@@ -253,8 +262,8 @@ public class Newsletter {
                 + price + ", acreage=" + acreage + ", totalRoom=" + totalRoom + ", maximum=" + maximum + ", vacantRoom="
                 + vacantRoom + ", selfManagement=" + selfManagement + ", prioritize=" + prioritize + ", createTime="
                 + createTime + ", isStatus=" + isStatus + ", isActive=" + isActive + ", svip=" + svip + ", image1="
-                + image1 + ", image2=" + image2 + ", image3=" + image3 + ", description=" + description
-                + ", newsletterType=" + newsletterType + ", account=" + account + ", reportNewsletter="
+                + image1 + ", image2=" + image2 + ", image3=" + image3 + ", description=" + description + ", approver="
+                + approver + ", newsletterType=" + newsletterType + ", account=" + account + ", reportNewsletter="
                 + reportNewsletter + "]";
     }
 

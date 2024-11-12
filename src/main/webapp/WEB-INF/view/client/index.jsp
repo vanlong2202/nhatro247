@@ -20,6 +20,101 @@
                     <link rel="stylesheet" href="/css/owl.css">
                     <link rel="stylesheet" href="/css/animate.css">
                     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+                    <style>
+                        .city-list {
+                            box-sizing: border-box;
+                            width: 15%;
+                            margin: 0;
+                            padding: 0;
+                            border-radius: 8px;
+                            overflow: hidden;
+                            background-color: #f4f4f4;
+                            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+                        }
+
+                        .city-list:hover {
+                            color: #00b7ff;
+                            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+                        }
+
+                        .city-text {
+                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                            font-size: 18px;
+                            font-weight: 600;
+                            margin: 10px;
+                        }
+
+                        .container-city {
+                            display: flex;
+                            justify-content: space-between;
+                            padding: 0 0 50px 0;
+                        }
+
+                        .container-blog {
+                            width: 100%;
+                            margin: 0;
+                            padding: 0;
+                            border-radius: 8px;
+                            background-color: #f4f4f4;
+                        }
+
+                        .header-blog {
+                            display: flex;
+                            justify-content: space-between;
+                            padding: 20px 20px 20px 20px;
+                        }
+
+                        .header-blog a {
+                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                            font-weight: 600;
+                            color: #0045a8;
+                        }
+
+                        .blog-context {
+                            display: flex;
+                            justify-content: space-evenly;
+                            padding-bottom: 3%;
+                        }
+
+                        .blog-items {
+                            width: 22%;
+                            height: auto;
+                            background-color: white;
+                            border-radius: 8px;
+                            overflow: hidden;
+                        }
+
+                        .blog-items:hover span {
+                            color: #00b7ff;
+                        }
+
+                        .blog-items img {
+                            width: 100%;
+                            height: 180px;
+                            object-fit: cover;
+                        }
+
+                        .blog-items-detail {
+                            padding: 12px 10px;
+                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                            font-weight: 600;
+                            display: flex;
+                        }
+
+                        .blog-items-detail span {
+                            font-size: 30px;
+                            padding: 5px 10px 5px 10px;
+                            font-weight: 900;
+                        }
+
+                        .blog-items-detail a {
+                            display: -webkit-box;
+                            -webkit-line-clamp: 2;
+                            -webkit-box-orient: vertical;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+                    </style>
                 </head>
 
                 <body>
@@ -78,312 +173,80 @@
                         </div>
                     </div>
                     <!-- jdj -->
-                    <style>
-                        #room-list {
-                            position: absolute;
-                            width: 65%;
-                            background-color: #fff;
-                            border: 1px solid #ccc;
-                            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-                            z-index: 1000;
-                            display: none;
-                            margin-top: 40px;
-                            /* Điều chỉnh vị trí của danh sách tìm kiếm */
-                        }
 
-                        #room-list ul {
-                            list-style: none;
-                            padding: 0;
-                        }
-
-                        #room-list li {
-                            padding: 10px;
-                            border-bottom: 1px solid #eee;
-                            cursor: pointer;
-                        }
-
-                        .search-results:focus-within #room-list {
-                            display: block;
-                        }
-
-                        .search-results:focus-within #room-list.show-results {
-                            display: none;
-                        }
-                    </style>
                     <div class="properties section">
-
                         <div class="container">
-                            <div class="row">
-                                <div class="col-lg-4 offset-lg-4">
-                                    <div class="section-heading text-center">
-                                        <h6>| Bài Viết</h6>
-                                        <h2>LỰA CHỌN NỔI BẬT</h2>
-                                    </div>
-                                </div>
-                                <div class="search-bar">
-                                    <div class="card shadow mb-4">
-                                        <div class="card-body" style="background-color: #dedede;">
-                                            <div class="row">
-                                                <div class="container mt-5">
-                                                    <div class="col-md-12 mb-2 mt-3 d-flex justify-content-center">
-                                                        <div class="form-group col-md-8 mb-12 d-flex search-results">
-                                                            <form id="search-form" class="col-md-12 mb-12">
-                                                                <input type="text" class="form-control" name="timkiem"
-                                                                    id="timkiem" placeholder="Tìm Kiếm Nhanh">
-                                                            </form>
-
-                                                            <div id="room-list" class="card shadow mb-4 col-md-8 ">
-                                                                <!-- hiện thị kết quả ajax -->
-
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <form method="get" action="bantin.php">
-                                                    <div class="col-md-12 mb-2 d-flex justify-content-center">
-                                                        <div class="col-md-2 mb-2">
-                                                            <select class="form-control" name="Tin_diachi"
-                                                                id="Tin_diachi" required>
-                                                                <option selected disabled value="0">Chọn địa điểm
-                                                                </option>
-                                                                <option value="Hồ Chí Minh">Hồ Chí Minh</option>
-                                                                <option value="Hà Nội">Hà Nội</option>
-                                                                <option value="Đà Nẵng">Đà Nẵng</option>
-                                                                <option value="Thừa Thiên Huế">Thừa Thiên Huế</option>
-                                                                <option value="Bình Dương">Bình Dương</option>
-                                                                <option value="An Giang">An Giang</option>
-                                                                <option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu
-                                                                </option>
-                                                                <option value="Bắc Giang">Bắc Giang</option>
-                                                                <option value="Bắc Kạn">Bắc Kạn</option>
-                                                                <option value="Bạc Liêu">Bạc Liêu</option>
-                                                                <option value="Bắc Ninh">Bắc Ninh</option>
-                                                                <option value="Bến Tre">Bến Tre</option>
-                                                                <option value="Bình Phước">Bình Phước</option>
-                                                                <option value="Bình Thuận">Bình Thuận</option>
-                                                                <option value="Bình Định">Bình Định</option>
-                                                                <option value="Cà Mau">Cà Mau</option>
-                                                                <option value="Cần Thơ">Cần Thơ</option>
-                                                                <option value="Cao Bằng">Cao Bằng</option>
-                                                                <option value="Gia Lai">Gia Lai</option>
-                                                                <option value="Hà Giang">Hà Giang</option>
-                                                                <option value="Hà Nam">Hà Nam</option>
-                                                                <option value="Hà Tĩnh">Hà Tĩnh</option>
-                                                                <option value="hHải Dương">Hải Dương</option>
-                                                                <option value="Hải Phòng">Hải Phòng</option>
-                                                                <option value="hHậu Giang">Hậu Giang</option>
-                                                                <option value="Hòa Bình">Hòa Bình</option>
-                                                                <option value="Hưng Yên">Hưng Yên</option>
-                                                                <option value="Khánh Hòa">Khánh Hòa</option>
-                                                                <option value="Kiên Giang">Kiên Giang</option>
-                                                                <option value="Kon Tum">Kon Tum</option>
-                                                                <option value="Lai Châu">Lai Châu</option>
-                                                                <option value="Lâm Đồng">Lâm Đồng</option>
-                                                                <option value="Lạng Sơn">Lạng Sơn</option>
-                                                                <option value="Lào Cai">Lào Cai</option>
-                                                                <option value="Long An">Long An</option>
-                                                                <option value="Nam Định">Nam Định</option>
-                                                                <option value="Nghệ An">Nghệ An</option>
-                                                                <option value="Ninh Bình">Ninh Bình</option>
-                                                                <option value="Ninh Thuận">Ninh Thuận</option>
-                                                                <option value="Phú Thọ">Phú Thọ</option>
-                                                                <option value="Phú Yên">Phú Yên</option>
-                                                                <option value="Quảng Bình">Quảng Bình</option>
-                                                                <option value="Quảng Nam">Quảng Nam</option>
-                                                                <option value="Quảng Ngãi">Quảng Ngãi</option>
-                                                                <option value="Quảng Ninh">Quảng Ninh</option>
-                                                                <option value="Quảng Trị">Quảng Trị</option>
-                                                                <option value="Sóc Trăng">Sóc Trăng</option>
-                                                                <option value="Sơn La">Sơn La</option>
-                                                                <option value="Tây Ninh">Tây Ninh</option>
-                                                                <option value="Thái Bình">Thái Bình</option>
-                                                                <option value="Thái Nguyên">Thái Nguyên</option>
-                                                                <option value="Thanh Hóa">Thanh Hóa</option>
-                                                                <option value="Tiền Giang">Tiền Giang</option>
-                                                                <option value="Trà Vinh">Trà Vinh</option>
-                                                                <option value="Tuyên Quang">Tuyên Quang</option>
-                                                                <option value="Vĩnh Long">Vĩnh Long</option>
-                                                                <option value="Vĩnh Phúc">Vĩnh Phúc</option>
-                                                                <option value="Yên Bái">Yên Bái</option>
-                                                                <option value="Đắk Lắk">Đắk Lắk</option>
-                                                                <option value="Đắk Nông">Đắk Nông</option>
-                                                                <option value="Điện Biên">Điện Biên</option>
-                                                                <option value="ồng Nai">Đồng Nai</option>
-                                                                <option value="Đồng Tháp">Đồng Tháp</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-2 mb-1">
-                                                            <select class="form-control" name="Tin_hinhthuc"
-                                                                id="Tin_hinhthuc" required>
-                                                                <option selected disabled value="0">Chọn loại hình
-                                                                </option>
-                                                                <option value="Phòng Trọ">Phòng Trọ</option>
-                                                                <option value="Ký túc xá (dorm)">Ký túc xá (dorm)
-                                                                </option>
-                                                                <option value="Chung cư mini">Chung cư mini</option>
-                                                                <option value="Cư xá">Cư xá</option>
-                                                                <option value="Homestay">Homestay</option>
-                                                                <option value="Trọ nhà nguyên căn">Trọ nhà nguyên căn
-                                                                </option>
-                                                                <option value="Trọ trong nhà chung chủ">Trọ trong nhà
-                                                                    chung
-                                                                    chủ</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-2 mb-2">
-                                                            <select class="form-control" name="Tin_gia" id="Tin_gia"
-                                                                required>
-                                                                <option selected disabled value="0">Chọn giá</i>
-                                                                </option>
-                                                                <option value="1">Dưới 1.000.000 VND</option>
-                                                                <option value="2">1.000.000 VND - 2.000.000 VND</option>
-                                                                <option value="3">2.000.000 VND - 3.000.000 VND</option>
-                                                                <option value="4">3.000.000 VND - 5.000.000 VND</option>
-                                                                <option value="5">Trên 5.000.000 VND</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-2 mb-1">
-                                                            <button type="submit"
-                                                                class="form-control btn btn-primary">Tìm
-                                                                Kiếm</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
+                            <div class="properties section">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-4 offset-lg-4">
+                                            <div class="section-heading text-center">
+                                                <h6>| Bản Tin</h6>
+                                                <h2>LỰA CHỌN NỔI BẬT</h2>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <c:forEach var="post" items="${list}">
+                                            <div class="col-lg-4 col-md-6">
+                                                <div class="item">
+                                                    <a href="/newsletter-detail/${post.newsletterID}"><img
+                                                            style="width: 100%; height: 200px;object-fit: cover;"
+                                                            src="/uploads/${post.image1}" alt=""></a>
+                                                    <span class="category">${post.newsletterAddress}</span>
+                                                    <h6>
+                                                        <fmt:formatNumber value="${post.price}" />
+                                                        VND
+                                                    </h6>
+                                                    <h4
+                                                        style="display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;">
+                                                        <a href="property-details.html">${post.title}</a>
+                                                    </h4>
+                                                    <ul>
+                                                        <li>Diện tích: <span>${post.acreage} m²</span></li>
+                                                        <li>Phòng khả dụng: <span>${post.vacantRoom} phòng</span>
+                                                        </li>
+                                                        <li>Loại hình: <span>${post.newsletterType.name}</span>
+                                                        </li>
+                                                        <li>Ngày cập nhật: <span>${post.createTime}</span></li>
+                                                    </ul>
+                                                    <div style="display: flex; justify-content: space-evenly;">
+                                                        <div class="main-button">
+                                                            <a href="/newsletter-detail/${post.newsletterID}">THÔNG
+                                                                TIN
+                                                                CHI TIẾT</a>
+                                                        </div>
+                                                        <div class="main-button">
+                                                            <a href="property-details.html"><i
+                                                                    class="fa-brands fa-gratipay"></i></a>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </c:forEach>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <!-- Danh sách sản phẩm
-                    <?php
-                    include_once(__DIR__ . '/model/config.php');
-              
-                    $search_query = "SELECT * FROM tbltindv WHERE Tin_svip = 1 AND Tin_trangthai = 1 AND Tttindv_id = 2 ORDER BY Tin_time DESC LIMIT 6";
-              
-                    if ($_SERVER["REQUEST_METHOD"] == "GET") {
-                      $location = isset($_GET["Tin_diachi"]) ? $_GET["Tin_diachi"] : "0";
-                      $type = isset($_GET["Tin_hinhthuc"]) ? $_GET["Tin_hinhthuc"] : "0";
-                      $price = isset($_GET["Tin_gia"]) ? $_GET["Tin_gia"] : "0";
-              
-                      if ($location != "0") {
-                        $search_query .= " AND Tin_diachi = '$location'";
-                      }
-              
-                      if ($type != "0") {
-                        $search_query .= " AND Tin_hinhthuc = '$type'";
-                      }
-              
-                      if ($price != "0") {
-                        if($price == 1){
-                          $search_query .= " AND Tin_gia < 1000000";
-                        }
-                        if($price == 2){
-                            $search_query .= " AND Tin_gia >= 1000000 AND Tin_gia <= 2000000";
-                        }
-                        if($price == 3){
-                            $search_query .= " AND Tin_gia >= 2000000 AND Tin_gia <= 3000000";
-                        }
-                        if($price == 4){
-                            $search_query .= " AND Tin_gia >= 3000000 AND Tin_gia <= 5000000";
-                        }
-                        if($price == 5){
-                            $search_query .= " AND Tin_gia > 5000000";
-                        }
-                      }
-                    }
-              
-                    $result = mysqli_query($conn, $search_query);
-              
-                    if (!$result) {
-                      die('Query failed: ' . mysqli_error($conn));
-                    }
-              
-                    $dataroms = [];
-                    $TT = 1;
-              
-                    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                      $dataroms[] = [
-                        'TT' => $TT,
-                        'TinID' => $row['TinID'],
-                        'Tin_title' => $row['Tin_title'],
-                        'Tin_gia' => $row['Tin_gia'],
-                        'Tin_phong' => $row['Tin_phong'],
-                        'Tin_dientich' => $row['Tin_dientich'],
-                        'Tin_toida' => $row['Tin_toida'],
-                        'Tin_phongtrong' => $row['Tin_phongtrong'],
-                        'Tin_diachi' => $row['Tin_diachi'],
-                        'Tin_diachichitiet' => $row['Tin_diachichitiet'],
-                        'Tin_tuquan' => $row['Tin_tuquan'],
-                        'Tin_image1' => $row['Tin_image1'],
-                        'Tin_time' => $row['Tin_time'],
-                      ];
-                      $TT++;
-                    }
-                    ?>
-              
-                    <div class="row">
-                      <?php foreach ($dataroms as $room) : ?>
-                        <div class="col-lg-4 col-md-6">
-                          <div class="item">
-                            <a href="chitietbantin.php?id=<?php echo $room['TinID']; ?>"><img style="height: 260px; width: 350px;" src="<?php echo $room['Tin_image1']; ?>" alt=""></a>
-                            <span class="category"><?php echo $room['Tin_diachi']; ?></span>
-                            <h6><?php echo number_format($room['Tin_gia']); ?> VNĐ</h6>
-                            <h4><a href="chitietbantin.php?id=<?php echo $room['TinID']; ?>"><?php echo $room['Tin_title']; ?></a></h4>
-                            <p><?php echo $room['Tin_diachichitiet']; ?></p>
-                            <ul>
-                              <li><span><?php echo $room['Tin_time']; ?></span></li>
-                            </ul>
-                            <div class="main-button">
-                              <a href="chitietbantin.php?id=<?php echo $room['TinID']; ?>">THÔNG TIN CHI TIẾT</a>
-                            </div>
-                          </div>
-                        </div>
-                      <?php endforeach; ?>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-              <script>
-                $(document).ready(function() {
-                  // Bắt sự kiện khi người dùng nhập vào ô tìm kiếm
-                  $("#timkiem").on("input", function() {
-                    // Lấy dữ liệu từ form tìm kiếm
-                    var formData = $("#search-form").serialize();
-              
-                    // Thực hiện yêu cầu Ajax
-                    $.ajax({
-                      type: "GET",
-                      url: "ajax_search.php", // Tên tệp xử lý tìm kiếm Ajax của bạn
-                      data: formData,
-                      success: function(response) {
-                        // Cập nhật nội dung của #room-list với kết quả tìm kiếm
-                        $("#room-list").html(response);
-                      },
-                      error: function(error) {
-                        console.log("Lỗi Ajax: " + error);
-                      }
-                    });
-                  });
-                });
-              </script> -->
                                 <div class="featured section">
                                     <div class="container">
                                         <div class="row">
+
                                             <div class="col-lg-4">
-                                                <div class="left-image">
-                                                    <img src="assets/images/featured.jpg" alt="">
-                                                    <a href="property-details.html"><img
-                                                            src="assets/images/featured-icon.png" alt=""
-                                                            style="max-width: 60px; padding: 0px;"></a>
+                                                <div style="height: 460px; width: 400px;" class="left-image">
+                                                    <img style="height: 100%; width: 100%; object-fit: cover;"
+                                                        src="/uploads/${type2.image1}" alt="">
+                                                    <a href="property-details.html"><img src="/images/featured-icon.png"
+                                                            alt="" style="max-width: 60px; padding: 0px;"></a>
                                                 </div>
                                             </div>
                                             <div class="col-lg-5">
                                                 <div class="section-heading">
-                                                    <h6>| Featured</h6>
-                                                    <h2>Best Appartment &amp; Sea view</h2>
+                                                    <h6>| NHÀ, CĂN HỘ CHO THUÊ</h6>
+                                                    <h2
+                                                        style="display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;">
+                                                        ${type2.title}</h2>
                                                 </div>
                                                 <div class="accordion" id="accordionExample">
                                                     <div class="accordion-item">
@@ -391,23 +254,75 @@
                                                             <button class="accordion-button" type="button"
                                                                 data-bs-toggle="collapse" data-bs-target="#collapseOne"
                                                                 aria-expanded="true" aria-controls="collapseOne">
-                                                                Best useful links ?
+                                                                THÔNG TIN DỊCH VỤ
                                                             </button>
                                                         </h2>
-                                                        <div id="collapseOne" class="accordion-collapse collapse show"
+                                                        <div id="collapseOne" class="accordion-collapse collapse  "
                                                             aria-labelledby="headingOne"
                                                             data-bs-parent="#accordionExample">
                                                             <div class="accordion-body">
-                                                                Get <strong>the best villa</strong> website template in
-                                                                HTML
-                                                                CSS and
-                                                                Bootstrap for
-                                                                your business. TemplateMo provides you the <a
-                                                                    href="https://www.google.com/search?q=best+free+css+templates"
-                                                                    target="_blank">best free CSS templates</a> in the
-                                                                world. Please
-                                                                tell your
-                                                                friends about it.</div>
+                                                                <div>
+                                                                    <div>
+                                                                        <ul>
+                                                                            <li>Phòng khả dụng: <span
+                                                                                    style="font-weight: bold;">${type2.vacantRoom}
+                                                                                    phòng</span></li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div>
+                                                                        <ul>
+                                                                            <li>Ở tối đa (người/phòng): <span
+                                                                                    style="font-weight: bold;">
+                                                                                    ${type2.maximum} người
+                                                                                </span></li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                                <div>
+                                                                    <div>
+                                                                        <ul>
+                                                                            <li>Giới tính ưu tiên: <span
+                                                                                    style="font-weight: bold;">
+                                                                                    <c:if test="${type2.prioritize==0}">
+                                                                                        Tất cả
+                                                                                    </c:if>
+                                                                                    <c:if test="${type2.prioritize==1}">
+                                                                                        Nữ
+                                                                                    </c:if>
+                                                                                    <c:if test="${type2.prioritize==2}">
+                                                                                        Nam
+                                                                                    </c:if>
+                                                                                </span></li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div>
+                                                                        <ul>
+                                                                            <li>Hình Thức Tự Quản: <span
+                                                                                    style="font-weight: bold;">
+                                                                                    <c:if
+                                                                                        test="${type2.selfManagement==1}">
+                                                                                        Không
+                                                                                    </c:if>
+                                                                                    <c:if
+                                                                                        test="${type2.selfManagement==2}">
+                                                                                        Có
+                                                                                    </c:if>
+                                                                                </span></li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                                <div>
+                                                                    <div>
+                                                                        <ul>
+                                                                            <li>Địa chỉ chi tiết: <span
+                                                                                    style="font-weight: bold;">
+                                                                                    ${type2.addressDetail},
+                                                                                    ${type2.newsletterAddress}
+                                                                                </span></li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="accordion-item">
@@ -415,22 +330,14 @@
                                                             <button class="accordion-button collapsed" type="button"
                                                                 data-bs-toggle="collapse" data-bs-target="#collapseTwo"
                                                                 aria-expanded="false" aria-controls="collapseTwo">
-                                                                How does this work ?
+                                                                MÔ TẢ CHI TIẾT
                                                             </button>
                                                         </h2>
                                                         <div id="collapseTwo" class="accordion-collapse collapse"
                                                             aria-labelledby="headingTwo"
                                                             data-bs-parent="#accordionExample">
                                                             <div class="accordion-body">
-                                                                Dolor <strong>almesit amet</strong>, consectetur
-                                                                adipiscing
-                                                                elit, sed
-                                                                doesn't
-                                                                eiusmod tempor incididunt ut labore consectetur
-                                                                <code>adipiscing</code>
-                                                                elit, sed do
-                                                                eiusmod tempor incididunt ut labore et dolore magna
-                                                                aliqua.
+                                                                ${type2.detail}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -440,22 +347,27 @@
                                                                 data-bs-toggle="collapse"
                                                                 data-bs-target="#collapseThree" aria-expanded="false"
                                                                 aria-controls="collapseThree">
-                                                                Why is Villa Agency the best ?
+                                                                THÔNG TIN LIÊN HỆ
                                                             </button>
                                                         </h2>
                                                         <div id="collapseThree" class="accordion-collapse collapse"
                                                             aria-labelledby="headingThree"
                                                             data-bs-parent="#accordionExample">
                                                             <div class="accordion-body">
-                                                                Dolor <strong>almesit amet</strong>, consectetur
-                                                                adipiscing
-                                                                elit, sed
-                                                                doesn't
-                                                                eiusmod tempor incididunt ut labore consectetur
-                                                                <code>adipiscing</code>
-                                                                elit, sed do
-                                                                eiusmod tempor incididunt ut labore et dolore magna
-                                                                aliqua.
+                                                                <ul>
+                                                                    <li>Tên chủ: <span style="font-weight: bold;">
+                                                                            ${type2.account.fullName}
+                                                                        </span></li>
+                                                                    <li>Số điện thoại: <span style="font-weight: bold;">
+                                                                            ${type2.account.phone}
+                                                                        </span></li>
+                                                                    <li>Email: <span style="font-weight: bold;">
+                                                                            ${type2.account.email}
+                                                                        </span></li>
+                                                                    <li>Facebook: <span style="font-weight: bold;">
+                                                                            ${type2.account.facebook}
+                                                                        </span></li>
+                                                                </ul>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -465,129 +377,59 @@
                                                 <div class="info-table">
                                                     <ul>
                                                         <li>
-                                                            <img src="assets/images/info-icon-01.png" alt=""
+                                                            <img src="/images/info-icon-01.png" alt=""
                                                                 style="max-width: 52px;">
-                                                            <h4>250 m2<br><span>Total Flat Space</span></h4>
+                                                            <h4>
+                                                                ${type2.acreage} m²<br><span>Diện tích
+                                                                    phòng</span>
+                                                            </h4>
                                                         </li>
                                                         <li>
-                                                            <img src="assets/images/info-icon-02.png" alt=""
+                                                            <img src="/images/info-icon-02.png" alt=""
                                                                 style="max-width: 52px;">
-                                                            <h4>Contract<br><span>Contract Ready</span></h4>
+                                                            <h4>${type2.account.phone}<br><span>Số điện thoại liên
+                                                                    hệ</span>
+                                                            </h4>
                                                         </li>
                                                         <li>
-                                                            <img src="assets/images/info-icon-03.png" alt=""
+                                                            <img src="/images/info-icon-03.png" alt=""
                                                                 style="max-width: 52px;">
-                                                            <h4>Payment<br><span>Payment Process</span></h4>
+                                                            <h4>
+                                                                <fmt:formatNumber value="${type2.price}" />
+                                                                VND<br><span>Giá
+                                                                    dịch
+                                                                    vụ</span>
+                                                            </h4>
                                                         </li>
                                                         <li>
-                                                            <img src="assets/images/info-icon-04.png" alt=""
+                                                            <img src="/images/info-icon-04.png" alt=""
                                                                 style="max-width: 52px;">
-                                                            <h4>Safety<br><span>24/7 Under Control</span></h4>
+                                                            <h4>
+                                                                ${type2.format}<br><span>Hình thức</span>
+                                                            </h4>
                                                         </li>
                                                     </ul>
+
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="video section">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-lg-4 offset-lg-4">
-                                                <div class="section-heading text-center">
-                                                    <h6>| Video View</h6>
-                                                    <h2>Get Closer View & Different Feeling</h2>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="video-content">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-lg-10 offset-lg-1">
-                                                <div class="video-frame">
-                                                    <img src="assets/images/video-frame.jpg" alt="">
-                                                    <a href="https://youtube.com" target="_blank"><i
-                                                            class="fa fa-play"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="fun-facts">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="wrapper">
-                                                    <div class="row">
-                                                        <div class="col-lg-4">
-                                                            <div class="counter">
-                                                                <h2 class="timer count-title count-number" data-to="34"
-                                                                    data-speed="1000"></h2>
-                                                                <p class="count-text ">Buildings<br>Finished Now</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="counter">
-                                                                <h2 class="timer count-title count-number" data-to="12"
-                                                                    data-speed="1000"></h2>
-                                                                <p class="count-text ">Years<br>Experience</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="counter">
-                                                                <h2 class="timer count-title count-number" data-to="24"
-                                                                    data-speed="1000"></h2>
-                                                                <p class="count-text ">Awwards<br>Won 2023</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
                                 <div class="section best-deal">
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-lg-4">
                                                 <div class="section-heading">
-                                                    <h6>| Best Deal</h6>
-                                                    <h2>Find Your Best Deal Right Now!</h2>
+                                                    <h6>| TÌM Ở GHÉP</h6>
+                                                    <h2>THÔNG TIN Ở GHÉP</h2>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12">
                                                 <div class="tabs-content">
                                                     <div class="row">
-                                                        <div class="nav-wrapper ">
-                                                            <ul class="nav nav-tabs" role="tablist">
-                                                                <li class="nav-item" role="presentation">
-                                                                    <button class="nav-link active" id="appartment-tab"
-                                                                        data-bs-toggle="tab"
-                                                                        data-bs-target="#appartment" type="button"
-                                                                        role="tab" aria-controls="appartment"
-                                                                        aria-selected="true">Appartment</button>
-                                                                </li>
-                                                                <li class="nav-item" role="presentation">
-                                                                    <button class="nav-link" id="villa-tab"
-                                                                        data-bs-toggle="tab" data-bs-target="#villa"
-                                                                        type="button" role="tab" aria-controls="villa"
-                                                                        aria-selected="false">Villa House</button>
-                                                                </li>
-                                                                <li class="nav-item" role="presentation">
-                                                                    <button class="nav-link" id="penthouse-tab"
-                                                                        data-bs-toggle="tab" data-bs-target="#penthouse"
-                                                                        type="button" role="tab"
-                                                                        aria-controls="penthouse"
-                                                                        aria-selected="false">Penthouse</button>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
                                                         <div class="tab-content" id="myTabContent">
                                                             <div class="tab-pane fade show active" id="appartment"
                                                                 role="tabpanel" aria-labelledby="appartment-tab">
@@ -595,142 +437,64 @@
                                                                     <div class="col-lg-3">
                                                                         <div class="info-table">
                                                                             <ul>
-                                                                                <li>Total Flat Space <span>185 m2</span>
+                                                                                <li>DIỆN TÍCH PHÒNG
+                                                                                    <span>${type2.acreage} m²</span>
                                                                                 </li>
-                                                                                <li>Floor number <span>26th</span></li>
-                                                                                <li>Number of rooms <span>4</span></li>
-                                                                                <li>Parking Available <span>Yes</span>
+                                                                                <li>PHÒNG Ở TỐI ĐA
+                                                                                    <span>${type2.maximum} người</span>
                                                                                 </li>
-                                                                                <li>Payment Process <span>Bank</span>
+                                                                                <li>GIỚI TÍNH ƯU TIÊN <span>
+                                                                                        <c:if
+                                                                                            test="${type2.prioritize==0}">
+                                                                                            Tất cả
+                                                                                        </c:if>
+                                                                                        <c:if
+                                                                                            test="${type2.prioritize==1}">
+                                                                                            Nữ
+                                                                                        </c:if>
+                                                                                        <c:if
+                                                                                            test="${type2.prioritize==2}">
+                                                                                            Nam
+                                                                                        </c:if>
+                                                                                    </span>
+                                                                                </li>
+                                                                                <li>PHÒNG KHẢ DỤNG
+                                                                                    <span>${type2.vacantRoom}
+                                                                                        phòng</span>
+                                                                                </li>
+                                                                                <li>HÌNH THỨC TỰ QUẢN <span>
+                                                                                        <c:if
+                                                                                            test="${type2.selfManagement==1}">
+                                                                                            Không
+                                                                                        </c:if>
+                                                                                        <c:if
+                                                                                            test="${type2.selfManagement==2}">
+                                                                                            Có
+                                                                                        </c:if>
+                                                                                    </span>
                                                                                 </li>
                                                                             </ul>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-6">
-                                                                        <img src="assets/images/deal-01.jpg" alt="">
+                                                                        <img style="height: 100%; width: 100%; object-fit: cover;"
+                                                                            src="/uploads/${type2.image1}" alt="">
                                                                     </div>
                                                                     <div class="col-lg-3">
-                                                                        <h4>Extra Info About Property</h4>
-                                                                        <p>Lorem ipsum dolor sit amet, consectetur
-                                                                            adipiscing elit, do
-                                                                            eiusmod
-                                                                            tempor pack incididunt ut labore et dolore
-                                                                            magna
-                                                                            aliqua
-                                                                            quised ipsum
-                                                                            suspendisse.
-                                                                            <br><br>When you need free CSS templates,
-                                                                            you
-                                                                            can simply
-                                                                            type TemplateMo
-                                                                            in any search engine website. In addition,
-                                                                            you
-                                                                            can type
-                                                                            TemplateMo
-                                                                            Portfolio, TemplateMo One Page Layouts, etc.
+                                                                        <h3>${type2.title}</h3>
+                                                                        <p
+                                                                            style="display: -webkit-box;-webkit-line-clamp: 4;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;">
+                                                                            ${type2.detail}
                                                                         </p>
                                                                         <div class="icon-button">
                                                                             <a href="property-details.html"><i
-                                                                                    class="fa fa-calendar"></i> Schedule
-                                                                                a visit</a>
+                                                                                    class="fa fa-calendar"></i>XEM CHI
+                                                                                TIẾT</a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="tab-pane fade" id="villa" role="tabpanel"
-                                                                aria-labelledby="villa-tab">
-                                                                <div class="row">
-                                                                    <div class="col-lg-3">
-                                                                        <div class="info-table">
-                                                                            <ul>
-                                                                                <li>Total Flat Space <span>250 m2</span>
-                                                                                </li>
-                                                                                <li>Floor number <span>26th</span></li>
-                                                                                <li>Number of rooms <span>5</span></li>
-                                                                                <li>Parking Available <span>Yes</span>
-                                                                                </li>
-                                                                                <li>Payment Process <span>Bank</span>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-6">
-                                                                        <img src="assets/images/deal-02.jpg" alt="">
-                                                                    </div>
-                                                                    <div class="col-lg-3">
-                                                                        <h4>Detail Info About Villa</h4>
-                                                                        <p>Lorem ipsum dolor sit amet, consectetur
-                                                                            adipiscing elit, do
-                                                                            eiusmod
-                                                                            tempor pack incididunt ut labore et dolore
-                                                                            magna
-                                                                            aliqua
-                                                                            quised ipsum
-                                                                            suspendisse. <br><br>Swag fanny pack lyft
-                                                                            blog
-                                                                            twee. JOMO
-                                                                            ethical copper
-                                                                            mug, succulents typewriter shaman DIY kitsch
-                                                                            twee taiyaki
-                                                                            fixie hella
-                                                                            venmo after messenger poutine next level
-                                                                            humblebrag swag
-                                                                            franzen.</p>
-                                                                        <div class="icon-button">
-                                                                            <a href="property-details.html"><i
-                                                                                    class="fa fa-calendar"></i> Schedule
-                                                                                a visit</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="tab-pane fade" id="penthouse" role="tabpanel"
-                                                                aria-labelledby="penthouse-tab">
-                                                                <div class="row">
-                                                                    <div class="col-lg-3">
-                                                                        <div class="info-table">
-                                                                            <ul>
-                                                                                <li>Total Flat Space <span>320 m2</span>
-                                                                                </li>
-                                                                                <li>Floor number <span>34th</span></li>
-                                                                                <li>Number of rooms <span>6</span></li>
-                                                                                <li>Parking Available <span>Yes</span>
-                                                                                </li>
-                                                                                <li>Payment Process <span>Bank</span>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-6">
-                                                                        <img src="assets/images/deal-03.jpg" alt="">
-                                                                    </div>
-                                                                    <div class="col-lg-3">
-                                                                        <h4>Extra Info About Penthouse</h4>
-                                                                        <p>Lorem ipsum dolor sit amet, consectetur
-                                                                            adipiscing elit, do
-                                                                            eiusmod
-                                                                            tempor pack incididunt ut labore et dolore
-                                                                            magna
-                                                                            aliqua
-                                                                            quised ipsum
-                                                                            suspendisse. <br><br>Swag fanny pack lyft
-                                                                            blog
-                                                                            twee. JOMO
-                                                                            ethical copper
-                                                                            mug, succulents typewriter shaman DIY kitsch
-                                                                            twee taiyaki
-                                                                            fixie hella
-                                                                            venmo after messenger poutine next level
-                                                                            humblebrag swag
-                                                                            franzen.</p>
-                                                                        <div class="icon-button">
-                                                                            <a href="property-details.html"><i
-                                                                                    class="fa fa-calendar"></i> Schedule
-                                                                                a visit</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -738,57 +502,144 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
 
-                                <div class="properties section">
-                                    <div class="container">
+                    <div class="container">
+                        <div class="section-heading text-center mt-5 mb-5">
+                            <h3
+                                style="color: #0045a8;font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;">
+                                TỈNH THÀNH NỔI BẬT</h3>
+                        </div>
+                        <div class="container-city">
+                            <div class="city-list">
+                                <img src="/uploads/ha_noi.jpg" alt="">
+                                <div class="city-text">Hà Nội</div>
+                            </div>
+                            <div class="city-list">
+                                <img src="/uploads/hcm.jpg" alt="">
+                                <div class="city-text">Hồ Chí Minh</div>
+                            </div>
+                            <div class="city-list">
+                                <img src="/uploads/da_nang.jpg" alt="">
+                                <div class="city-text">Đà Nẵng</div>
+                            </div>
+                            <div class="city-list">
+                                <img src="/uploads/hue.jpg" alt="">
+                                <div class="city-text">Thừa Thiên Huế</div>
+                            </div>
+                            <div class="city-list">
+                                <img src="/uploads/can_tho.jpg" alt="">
+                                <div class="city-text">Cần Thơ</div>
+                            </div>
+                            <div class="city-list">
+                                <img src="/uploads/khanh_hoa.jpg" alt="">
+                                <div class="city-text">Khánh Hòa</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="container-blog">
+                            <div class="header-blog">
+                                <h3
+                                    style="color: #0045a8;font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;">
+                                    TIN TỨC NỔI BẬT</h3>
+                                <a href="https://tromoi.com/blog/" class="button btn-text">Xem thêm <i
+                                        class="fa-solid fa-arrow-right-long"></i></a>
+                            </div>
+                            <div class="blog-context">
+                                <div class="blog-items">
+                                    <img src="/uploads/BIATRO.jpg" alt="">
+                                    <div class="blog-items-detail">
+                                        <span>01</span>
+                                        <a>Trọ Mới - Giải pháp "F5" công cuộc tìm trọ cho sinh viên và người lao động
+                                            thời đại 4.0</a>
+                                    </div>
+                                </div>
+                                <div class="blog-items">
+                                    <img src="/uploads/BIATRO2.jpg" alt="">
+                                    <div class="blog-items-detail">
+                                        <span>01</span>
+                                        <a>Trọ Mới - Giải pháp "F5" công cuộc tìm trọ cho sinh viên và người lao động
+                                            thời đại 4.0</a>
+                                    </div>
+                                </div>
+                                <div class="blog-items">
+                                    <img src="/uploads/THUMP-TRO-811-01.jpg" alt="">
+                                    <div class="blog-items-detail">
+                                        <span>01</span>
+                                        <a>Trọ Mới - Giải pháp "F5" công cuộc tìm trọ cho sinh viên và người lao động
+                                            thời đại 4.0</a>
+                                    </div>
+                                </div>
+                                <div class="blog-items">
+                                    <img src="/uploads/ha_noi.jpg" alt="">
+                                    <div class="blog-items-detail">
+                                        <span>01</span>
+                                        <a>Trọ Mới - Giải pháp "F5" công cuộc tìm trọ cho sinh viên và người lao động
+                                            thời đại 4.0</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="video section">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-4 offset-lg-4">
+                                    <div class="section-heading text-center">
+                                        <h6>| Thông tin về chúng tôi</h6>
+                                        <h2>HƠN 50.000 CHỦ TRỌ TIN TƯỞNG TRỌ MỚI</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="video-content">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-10 offset-lg-1">
+                                    <div class="video-frame">
+                                        <a href="https://www.youtube.com/watch?v=3Ltxw6YIFU4&ab_channel=Tr%E1%BB%8DM%E1%BB%9Bi-K%C3%AAnhth%C3%B4ngtinPh%C3%B2ngtr%E1%BB%8D%2CNh%C3%A0chothu%C3%AA"
+                                            target="_blank"><i class="fa fa-play"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fun-facts">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="wrapper">
                                         <div class="row">
-                                            <div class="col-lg-4 offset-lg-4">
-                                                <div class="section-heading text-center">
-                                                    <h6>| Properties</h6>
-                                                    <h2>We Provide The Best Property You Like</h2>
+                                            <div class="col-lg-4">
+                                                <div class="counter">
+                                                    <h2 class="timer count-title count-number" data-to="555"
+                                                        data-speed="1000"></h2>
+                                                    <p class="count-text ">Bản Tin được<br>cập nhật hàng tháng</p>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <c:forEach var="post" items="${list}">
-                                                <div class="col-lg-4 col-md-6">
-                                                    <div class="item">
-                                                        <a href="/newsletter-detail/${post.newsletterID}"><img
-                                                                style="width: 100%; height: 200px;object-fit: cover;"
-                                                                src="/uploads/${post.image1}" alt=""></a>
-                                                        <span class="category">${post.newsletterAddress}</span>
-                                                        <h6>
-                                                            <fmt:formatNumber value="${post.price}" />
-                                                            VND
-                                                        </h6>
-                                                        <h4
-                                                            style="display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;">
-                                                            <a href="property-details.html">${post.title}</a>
-                                                        </h4>
-                                                        <ul>
-                                                            <li>Diện tích: <span>${post.acreage} m²</span></li>
-                                                            <li>Phòng khả dụng: <span>${post.vacantRoom} phòng</span>
-                                                            </li>
-                                                            <li>Ở tối đa (người/phòng): <span>${post.maximum}
-                                                                    người</span>
-                                                            </li>
-                                                            <li>Ngày cập nhật: <span>${post.createTime}</span></li>
-                                                        </ul>
-                                                        <div style="display: flex; justify-content: space-evenly;">
-                                                            <div class="main-button">
-                                                                <a href="/newsletter-detail/${post.newsletterID}">THÔNG
-                                                                    TIN
-                                                                    CHI TIẾT</a>
-                                                            </div>
-                                                            <div class="main-button">
-                                                                <a href="property-details.html"><i
-                                                                        class="fa-brands fa-gratipay"></i></a>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
+                                            <div class="col-lg-4">
+                                                <div class="counter">
+                                                    <h2 class="timer count-title count-number" data-to="1000"
+                                                        data-speed="1000"></h2>
+                                                    <p class="count-text ">Lượt truy cập sử<br>dụng hệ thống</p>
                                                 </div>
-                                            </c:forEach>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="counter">
+                                                    <h2 class="timer count-title count-number" data-to="2024"
+                                                        data-speed="1000"></h2>
+                                                    <p class="count-text ">Hứa hẹn<br>phát triển</p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -886,7 +737,6 @@
                     <script src="/js/owl-carousel.js"></script>
                     <script src="/js/counter.js"></script>
                     <script src="/js/custom.js"></script>
-
                 </body>
 
                 </html>

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.nhatro247.nhatro247.entity.Account;
 import com.nhatro247.nhatro247.entity.FeedBack;
 import com.nhatro247.nhatro247.entity.Newsletter;
+import com.nhatro247.nhatro247.entity.NewsletterType;
 import com.nhatro247.nhatro247.service.MenuService;
 import com.nhatro247.nhatro247.service.NewsletterService;
 
@@ -30,6 +31,9 @@ public class HomeController {
     public String getHomePage(Model model) {
         model.addAttribute("f", new FeedBack());
         model.addAttribute("menu", this.menuService.getAll());
+        NewsletterType newsletterType = new NewsletterType();
+        newsletterType.setNewsletterTypeID(2);
+        model.addAttribute("type2", this.newsletterService.getOneNewsletter(newsletterType, 1, 1, 1));
         model.addAttribute("list", this.newsletterService.getListActive(1, 1));
         return "client/index";
     }
@@ -37,18 +41,6 @@ public class HomeController {
     @GetMapping("/login")
     public String getLoginPage() {
         return "client/login";
-    }
-
-    @GetMapping("/login1")
-    public String getRegisterPage() {
-        return "client/login1";
-    }
-
-    @PostMapping("/submit")
-    public String postMethodName(Model model) {
-        model.addAttribute("var", "Thông tin đăng nhập khum chính xác");
-
-        return "client/login1";
     }
 
     @GetMapping("/admin")
