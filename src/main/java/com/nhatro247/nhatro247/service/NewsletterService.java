@@ -2,6 +2,9 @@ package com.nhatro247.nhatro247.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +45,10 @@ public class NewsletterService {
         return this.newsletterRepository.findByIsStatusAndIsActive(isStatus, isActive);
     }
 
+    public Page<Newsletter> getAll(Pageable pageable) {
+        return this.newsletterRepository.findAll(pageable);
+    }
+
     public List<Newsletter> getAll() {
         return this.newsletterRepository.findAll();
     }
@@ -63,4 +70,5 @@ public class NewsletterService {
         return this.newsletterRepository.findTopOneByNewsletterTypeAndIsStatusAndIsActiveAndSvip(newsletterType,
                 isStatus, isActive, svip, sort);
     }
+
 }

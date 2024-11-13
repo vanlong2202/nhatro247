@@ -1,5 +1,7 @@
 package com.nhatro247.nhatro247.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -13,6 +15,8 @@ import java.util.List;
 @Repository
 public interface NewsletterRepository extends JpaRepository<Newsletter, Long> {
     List<Newsletter> findByIsStatus(int isStatus);
+
+    Page<Newsletter> findAll(Pageable pageable);
 
     List<Newsletter> findByIsStatusAndIsActive(int isStatus, int isActive);
 
@@ -30,4 +34,5 @@ public interface NewsletterRepository extends JpaRepository<Newsletter, Long> {
 
     Newsletter findTopOneByNewsletterTypeAndIsStatusAndIsActiveAndSvip(NewsletterType newsletterType, int isStatus,
             int isActive, int svip, Sort sort);
+
 }

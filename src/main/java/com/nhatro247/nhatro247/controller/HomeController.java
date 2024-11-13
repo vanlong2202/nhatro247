@@ -43,6 +43,12 @@ public class HomeController {
         return "client/login";
     }
 
+    @GetMapping("/blog")
+    public String getBlogPage(Model model) {
+        model.addAttribute("menu", this.menuService.getAll());
+        return "client/blog";
+    }
+
     @GetMapping("/admin")
     public String getAdminPage() {
         return "admin/dashboard/view";
