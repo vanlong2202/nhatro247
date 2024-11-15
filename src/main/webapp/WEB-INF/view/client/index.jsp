@@ -514,28 +514,38 @@
                         </div>
                         <div class="container-city">
                             <div class="city-list">
-                                <img src="/uploads/ha_noi.jpg" alt="">
-                                <div class="city-text">Hà Nội</div>
+                                <a href="/service?page=1&address=Hà Nội"><img src="/uploads/ha_noi.jpg" alt="">
+                                    <div class="city-text">Hà Nội</div>
+                                </a>
+
                             </div>
                             <div class="city-list">
-                                <img src="/uploads/hcm.jpg" alt="">
-                                <div class="city-text">Hồ Chí Minh</div>
+                                <a href="/service?page=1&address=Hồ Chí Minh"><img src="/uploads/hcm.jpg" alt="">
+                                    <div class="city-text">Hồ Chí Minh</div>
+                                </a>
+
                             </div>
                             <div class="city-list">
                                 <img src="/uploads/da_nang.jpg" alt="">
                                 <div class="city-text">Đà Nẵng</div>
                             </div>
                             <div class="city-list">
-                                <img src="/uploads/hue.jpg" alt="">
-                                <div class="city-text">Thừa Thiên Huế</div>
+                                <a href="/service?page=1&address=Thừa Thiên Huế">
+                                    <img src="/uploads/hue.jpg" alt="">
+                                    <div class="city-text">Thừa Thiên Huế</div>
+                                </a>
                             </div>
                             <div class="city-list">
-                                <img src="/uploads/can_tho.jpg" alt="">
-                                <div class="city-text">Cần Thơ</div>
+                                <a href="/service?page=1&address=Cần Thơ">
+                                    <img src="/uploads/can_tho.jpg" alt="">
+                                    <div class="city-text">Cần Thơ</div>
+                                </a>
                             </div>
                             <div class="city-list">
-                                <img src="/uploads/khanh_hoa.jpg" alt="">
-                                <div class="city-text">Khánh Hòa</div>
+                                <a href="/service?page=1&address=Khánh Hòa">
+                                    <img src="/uploads/khanh_hoa.jpg" alt="">
+                                    <div class="city-text">Khánh Hòa</div>
+                                </a>
                             </div>
                         </div>
                     </div>

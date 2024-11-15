@@ -1,18 +1,26 @@
 package com.nhatro247.nhatro247.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import com.nhatro247.nhatro247.entity.Newsletter;
+import com.nhatro247.nhatro247.entity.Newsletter_;
 import com.nhatro247.nhatro247.entity.ReportNewsletter;
+import com.nhatro247.nhatro247.entity.dto.NewsletterCriteriaDTO;
 import com.nhatro247.nhatro247.service.MenuService;
 import com.nhatro247.nhatro247.service.NewsletterService;
+
+import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,23 +44,47 @@ public class NewsletterController {
     }
 
     @GetMapping("/service")
-    public String getServicePage(Model model, @RequestParam("page") Optional<String> pageGet) {
+    public String getServicePage(Model model, NewsletterCriteriaDTO newsletterCriteriaDTO, HttpServletRequest request) {
         int page = 1;
         try {
-            if (pageGet.isPresent()) {
-                page = Integer.parseInt(pageGet.get());
+            if (newsletterCriteriaDTO.getPage().isPresent()) {
+                page = Integer.parseInt(newsletterCriteriaDTO.getPage().get());
             }
         } catch (Exception e) {
-            // TODO: handle exception
         }
         Pageable pageable = PageRequest.of(page - 1, 6);
-        Page<Newsletter> getPage = this.newsletterService.getAll(pageable);
+
+        if (newsletterCriteriaDTO.getSort() != null && newsletterCriteriaDTO.getSort().isPresent()) {
+            String sort = newsletterCriteriaDTO.getSort().get();
+            if (sort.equals("moi-nhat")) {
+                pageable = PageRequest.of(page - 1, 6, Sort.by(Newsletter_.CREATE_TIME).descending());
+
+            } else if (sort.equals("gia-giam-dan")) {
+                pageable = PageRequest.of(page - 1, 6, Sort.by(Newsletter_.PRICE).descending());
+
+            } else if (sort.equals("gia-tang-dan")) {
+                pageable = PageRequest.of(page - 1, 6, Sort.by(Newsletter_.PRICE).ascending());
+
+            } else {
+                pageable = PageRequest.of(page - 1, 6);
+            }
+        } else {
+            pageable = PageRequest.of(page - 1, 6, Sort.by(Newsletter_.CREATE_TIME).descending());
+        }
+
+        Page<Newsletter> getPage = this.newsletterService.getAllSpecs(pageable, newsletterCriteriaDTO);
+        List<Newsletter> list = getPage.getContent().size() > 0 ? getPage.getContent() : new ArrayList<Newsletter>();
+
+        String qs = request.getQueryString();
+        if (qs != null && !qs.isBlank()) {
+            qs = qs.replace("page=" + page, "");
+        }
         model.addAttribute("menu", this.menuService.getAll());
-        List<Newsletter> list = getPage.getContent();
-        // model.addAttribute("list", this.newsletterService.getListActive(1, 1));
         model.addAttribute("list", list);
+        model.addAttribute("request", getPage.getTotalElements());
         model.addAttribute("curentPage", page);
         model.addAttribute("totalPages", getPage.getTotalPages());
+        model.addAttribute("queryString", qs);
         return "client/service";
     }
 

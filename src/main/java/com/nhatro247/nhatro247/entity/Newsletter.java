@@ -27,7 +27,7 @@ public class Newsletter {
     private String format;
     private String newsletterAddress;
     private String addressDetail;
-    private String price;
+    private double price;
     private Integer acreage;// diện tích
     private Integer totalRoom;
     private Integer maximum; // ở tối đa
@@ -101,14 +101,6 @@ public class Newsletter {
 
     public void setAddressDetail(String addressDetail) {
         this.addressDetail = addressDetail;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
     }
 
     public Integer getAcreage() {
@@ -253,6 +245,14 @@ public class Newsletter {
 
     public void setApprover(String approver) {
         this.approver = approver;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     @Override
