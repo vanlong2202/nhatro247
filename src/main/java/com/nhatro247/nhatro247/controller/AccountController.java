@@ -47,7 +47,7 @@ public class AccountController {
         String user = (String) session.getAttribute("username");
         Account account = this.accountService.getAccountByName(user);
         model.addAttribute("info", account);
-        model.addAttribute("news", this.newsletterService.getAllByAccount(account));
+        model.addAttribute("news", this.newsletterService.findByIsStatusAndAccount(1, account));
         return "client/profile";
     }
 
@@ -107,6 +107,24 @@ public class AccountController {
             System.out.println(model);
             return "client/register";
         }
+    }
+
+    @GetMapping("/maneger-newsletter")
+    public String getNewsletterManegerPage(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        model.addAttribute("menu", this.menuService.getAll());
+        String user = (String) session.getAttribute("username");
+        Account account = this.accountService.getAccountByName(user);
+        model.addAttribute("info", account);
+        model.addAttribute("news", this.newsletterService.findByIsStatusAndAccount(1, account));
+        model.addAttribute("refuse", this.newsletterService.findByIsStatusAndAccount(2, account));
+        model.addAttribute("pending", this.newsletterService.findByIsStatusAndAccount(0, account));
+        model.addAttribute("svip", this.newsletterService.findByAccountAndSvip(account, 1));
+        model.addAttribute("countActive", this.newsletterService.findByIsStatusAndAccount(1, account).size());
+        model.addAttribute("countRefuse", this.newsletterService.findByIsStatusAndAccount(2, account).size());
+        model.addAttribute("countPending", this.newsletterService.findByIsStatusAndAccount(0, account).size());
+        model.addAttribute("countSvip", this.newsletterService.findByAccountAndSvip(account, 1).size());
+        return "client/manager";
     }
 
 }

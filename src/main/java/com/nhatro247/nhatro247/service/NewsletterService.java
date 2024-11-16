@@ -229,6 +229,18 @@ public class NewsletterService {
         return this.newsletterRepository.findByAccount(account);
     }
 
+    public List<Newsletter> findByIsStatusAndAccount(int isStatus, Account account) {
+        return this.newsletterRepository.findByIsStatusAndAccount(isStatus, account);
+    }
+
+    public List<Newsletter> findByAccountAndSvip(Account account, int svip) {
+        return this.newsletterRepository.findByAccountAndSvip(account, svip);
+    }
+
+    public List<Newsletter> getAllByIsStatusAndSvip(int isStatus, int svip) {
+        return this.newsletterRepository.findByIsStatusAndSvip(isStatus, svip);
+    }
+
     public List<Newsletter> getAllBySvip(int isStatus, int isActive, int svip) {
         return this.newsletterRepository.findByIsStatusAndIsActiveAndSvip(isStatus, isActive, svip);
     }

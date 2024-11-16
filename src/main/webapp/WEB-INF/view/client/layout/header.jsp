@@ -84,7 +84,7 @@
                                             </a>
                                             <ul class="dropdown">
                                                 <li><a href="/profile">Thông Tin Cá Nhân</a></li>
-                                                <li><a href="#">Bản Tin Đã Đăng</a></li>
+                                                <li><a href="/maneger-newsletter">Quản Lí Bản Tin</a></li>
                                                 <li><a href="#">Danh Sách Yêu Thích</a></li>
                                                 <li><a href="#">Nạp Tiền Tài Khoản</a>
                                                 </li>

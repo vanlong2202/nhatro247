@@ -2,8 +2,10 @@ package com.nhatro247.nhatro247.controller;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -76,6 +78,7 @@ public class PostServiceController {
         Newsletter newsletter = infoNewsletterDTO.getNewsletter();
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy");
+        Newsletter news = this.newsletterService.getNewsletterByID(newsletter.getNewsletterID());
         String formattedDate = now.format(formatter);
         newsletter.setCreateTime(formattedDate);
         newsletter.setAccount(account);
@@ -88,6 +91,73 @@ public class PostServiceController {
         newsletter.setImage3(image3);
         this.newsletterService.addNewsletter(newsletter);
         return "redirect:/post";
+    }
+
+    @PostMapping("/update-post")
+    public String update(@ModelAttribute("infoNewsletterDTO") InfoNewsletterDTO infoNewsletterDTO,
+            @RequestParam("file") MultipartFile[] files) {
+        Account account = infoNewsletterDTO.getAccount();
+        Account acc = this.accountService.getAccountByID(account.getAccountID());
+        Newsletter newsletter = infoNewsletterDTO.getNewsletter();
+        long newsletterID = newsletter.getNewsletterID();
+        Newsletter news = this.newsletterService.getNewsletterByID(newsletter.getNewsletterID());
+        if (acc != null && news != null) {
+            // update info account
+            acc.setFullName(account.getFullName());
+            acc.setFacebook(account.getFacebook());
+            acc.setEmail(account.getEmail());
+            acc.setPhone(account.getPhone());
+            this.accountService.addAccount(acc);
+
+            // update newsletter
+            LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy");
+            String formattedDate = now.format(formatter);
+            news.setCreateTime(formattedDate);
+            news.setTitle(newsletter.getTitle());
+            news.setFormat(newsletter.getFormat());
+            news.setSelfManagement(newsletter.getSelfManagement());
+            news.setNewsletterType(newsletter.getNewsletterType());
+            news.setVacantRoom(newsletter.getVacantRoom());
+            news.setTotalRoom(newsletter.getTotalRoom());
+            news.setMaximum(newsletter.getMaximum());
+            news.setAcreage(newsletter.getAcreage());
+            news.setPrice(newsletter.getPrice());
+            news.setPrioritize(newsletter.getPrioritize());
+            news.setNewsletterAddress(newsletter.getNewsletterAddress());
+            news.setAddressDetail(newsletter.getAddressDetail());
+            news.setDetail(newsletter.getDetail());
+            news.setIsStatus(0);
+            news.setIsActive(0);
+            news.setDescription("");
+            news.setApprover("");
+
+            List<String> filenames = new ArrayList<>();
+            for (MultipartFile file : files) {
+                if (!file.isEmpty()) {
+                    String filename = uploadService.handeSaveOneUploadFile(file);
+                    filenames.add(filename);
+                }
+            }
+            if (filenames.size() == 1) {
+                news.setImage1(filenames.get(0));
+            }
+
+            if (filenames.size() == 2) {
+                news.setImage1(filenames.get(0));
+                news.setImage2(filenames.get(1));
+            }
+
+            if (filenames.size() == 3) {
+                news.setImage1(filenames.get(0));
+                news.setImage2(filenames.get(1));
+                news.setImage3(filenames.get(2));
+            }
+            this.newsletterService.addNewsletter(news);
+            return "redirect:/maneger-newsletter";
+        } else {
+            return "redirect:/delete-newsletter/" + newsletter.getNewsletterID();
+        }
     }
 
 }

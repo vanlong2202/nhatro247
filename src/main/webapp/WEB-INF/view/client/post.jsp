@@ -296,7 +296,7 @@
                                         <div class="form-group">
                                             <label for="example-static">Mô tả chi tiết</label>
                                             <form:textarea path="newsletter.detail" class="form-control" type="text"
-                                                placeholder="Mô tả chi tiết tại đây ..." rows="6"></form:textarea>
+                                                placeholder="Mô tả chi tiết tại đây ..." rows="6" />
                                         </div>
                                     </div>
                                     <div class="form-group mb-12">

@@ -46,4 +46,24 @@ public class UploadService {
         return listFile;
     }
 
+    public String handeSaveOneUploadFile(MultipartFile files) {
+        String rootPath = this.servletContext.getRealPath("/resources/uploads");
+        String finalName = "";
+        try {
+            byte[] bytes = files.getBytes();
+            File dir = new File(rootPath + File.separator);
+            if (!dir.exists())
+                dir.mkdirs();
+            finalName = System.currentTimeMillis() + "-" + files.getOriginalFilename();
+            File serverFile = new File(dir.getAbsolutePath() + File.separator + finalName);
+            BufferedOutputStream stream = new BufferedOutputStream(
+                    new FileOutputStream(serverFile));
+            stream.write(bytes);
+            stream.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return finalName;
+    }
 }

@@ -18,15 +18,21 @@ import java.util.List;
 public interface NewsletterRepository extends JpaRepository<Newsletter, Long>, JpaSpecificationExecutor<Newsletter> {
     List<Newsletter> findByIsStatus(int isStatus);
 
+    List<Newsletter> findByIsStatusAndAccount(int isStatus, Account account);
+
     Page<Newsletter> findAll(Pageable pageable);
 
     Page<Newsletter> findAll(Specification<Newsletter> spec, Pageable pageable);
 
     List<Newsletter> findByIsStatusAndIsActive(int isStatus, int isActive);
 
+    List<Newsletter> findByIsStatusAndSvip(int isStatus, int svip);
+
     List<Newsletter> findByIsStatusAndIsActiveAndSvip(int isStatus, int isActive, int svip);
 
     List<Newsletter> findBySvip(int svip);
+
+    List<Newsletter> findByAccountAndSvip(Account account, int svip);
 
     Newsletter findByNewsletterID(long newsletterID);
 
