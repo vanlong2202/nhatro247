@@ -11,8 +11,14 @@ import com.nhatro247.nhatro247.entity.Account;
 import com.nhatro247.nhatro247.entity.FeedBack;
 import com.nhatro247.nhatro247.entity.Newsletter;
 import com.nhatro247.nhatro247.entity.NewsletterType;
+import com.nhatro247.nhatro247.entity.dto.NewsletterFollowDTO;
+import com.nhatro247.nhatro247.service.AccountService;
 import com.nhatro247.nhatro247.service.MenuService;
+import com.nhatro247.nhatro247.service.NewsletterFollowService;
 import com.nhatro247.nhatro247.service.NewsletterService;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,10 +27,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class HomeController {
     private final MenuService menuService;
     private final NewsletterService newsletterService;
+    private final NewsletterFollowService newsletterFollowService;
+    private final AccountService accountService;
 
-    public HomeController(MenuService menuService, NewsletterService newsletterService) {
+    public HomeController(MenuService menuService, NewsletterService newsletterService,
+            NewsletterFollowService newsletterFollowService, AccountService accountService) {
         this.menuService = menuService;
         this.newsletterService = newsletterService;
+        this.newsletterFollowService = newsletterFollowService;
+        this.accountService = accountService;
     }
 
     @GetMapping("")
@@ -49,6 +60,12 @@ public class HomeController {
         return "client/blog";
     }
 
+    @GetMapping("/deposit")
+    public String getDepositPage(Model model) {
+        model.addAttribute("menu", this.menuService.getAll());
+        return "client/deposit";
+    }
+
     @GetMapping("/admin")
     public String getAdminPage() {
         return "admin/dashboard/view";
@@ -57,5 +74,19 @@ public class HomeController {
     @GetMapping("/error-page")
     public String getErrorPage() {
         return "admin/dashboard/error";
+    }
+
+    @GetMapping("/check")
+    public String getCheck(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        String user = (String) session.getAttribute("username");
+        Account account = this.accountService.getAccountByName(user);
+        model.addAttribute("f", new FeedBack());
+        model.addAttribute("menu", this.menuService.getAll());
+        NewsletterType newsletterType = new NewsletterType();
+        newsletterType.setNewsletterTypeID(2);
+        model.addAttribute("type2", this.newsletterService.getOneNewsletter(newsletterType, 1, 1, 1));
+        model.addAttribute("list", this.newsletterService.getListActive(1, 1));
+        return "client/index";
     }
 }

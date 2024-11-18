@@ -217,8 +217,9 @@
                                                                 CHI TIẾT</a>
                                                         </div>
                                                         <div class="main-button">
-                                                            <a href="property-details.html"><i
-                                                                    class="fa-brands fa-gratipay"></i></a>
+                                                            <a href="/newsletter-follow/${post.newsletterID}"><i
+                                                                    class="fa-solid fa-heart fa-beat"
+                                                                    style="color: #ff0088;"></i></a>
                                                         </div>
                                                     </div>
 

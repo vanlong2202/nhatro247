@@ -29,6 +29,18 @@
                             font-weight: bold;
                             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
                         }
+
+                        .main-image {
+                            width: auto;
+                            height: 650px;
+                            overflow: hidden;
+                        }
+
+                        .main-image img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
                     </style>
                 </head>
 

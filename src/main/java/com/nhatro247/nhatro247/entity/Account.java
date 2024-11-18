@@ -39,6 +39,9 @@ public class Account {
     @OneToMany(mappedBy = "account")
     private List<Newsletter> newsletter;
 
+    @OneToMany(mappedBy = "account")
+    private List<NewsletterFollow> newsletterFollows;
+
     public int getAccountID() {
         return accountID;
     }
@@ -132,6 +135,14 @@ public class Account {
         return "Account [accountID=" + accountID + ", username=" + username + ", fullName=" + fullName + ", phone="
                 + phone + ", address=" + address + ", password=" + password + ", email=" + email + ", facebook="
                 + facebook + ", description=" + description + ", role=" + role + ", newsletter=" + newsletter + "]";
+    }
+
+    public List<NewsletterFollow> getNewsletterFollows() {
+        return newsletterFollows;
+    }
+
+    public void setNewsletterFollows(List<NewsletterFollow> newsletterFollows) {
+        this.newsletterFollows = newsletterFollows;
     }
 
 }

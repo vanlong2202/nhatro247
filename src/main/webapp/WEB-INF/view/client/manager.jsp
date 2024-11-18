@@ -12,7 +12,7 @@
                     rel="stylesheet">
                 <link rel="stylesheet"
                     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-                <title>Tìm Kiếm Chỗ Ở Online</title>
+                <title>Quản lí bản tin - TroNhanh247</title>
                 <link href="/css/bootstrap.min.css" rel="stylesheet">
                 <link rel="stylesheet" href="/css/fontawesome.css">
                 <link rel="stylesheet" href="/css/templatemo-villa-agency.css">
@@ -68,8 +68,8 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12">
-                                <span class="breadcrumb"><a href="#">Home</a> / PROFILE</span>
-                                <h3>Trang Cá Nhân</h3>
+                                <span class="breadcrumb"><a href="#">Home</a> / Manager</span>
+                                <h3>QUẢN LÍ BẢN TIN</h3>
                             </div>
                         </div>
                     </div>

@@ -102,14 +102,12 @@ public class PostServiceController {
         long newsletterID = newsletter.getNewsletterID();
         Newsletter news = this.newsletterService.getNewsletterByID(newsletter.getNewsletterID());
         if (acc != null && news != null) {
-            // update info account
             acc.setFullName(account.getFullName());
             acc.setFacebook(account.getFacebook());
             acc.setEmail(account.getEmail());
             acc.setPhone(account.getPhone());
             this.accountService.addAccount(acc);
 
-            // update newsletter
             LocalDateTime now = LocalDateTime.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy");
             String formattedDate = now.format(formatter);

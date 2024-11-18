@@ -19,6 +19,28 @@
                 <link rel="stylesheet" href="/css/owl.css">
                 <link rel="stylesheet" href="/css/animate.css">
                 <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+                <style>
+                    .balance {
+                        margin-top: 25px;
+                        display: flex;
+                    }
+
+                    .balance-items {
+                        display: flex;
+                        align-items: center;
+                    }
+
+                    .balance-items button {
+                        background-color: #F35525;
+                        color: white;
+                        border: none;
+                        margin-left: 30px;
+                        border-radius: 4px;
+                        padding: 5px 10px 5px 10px;
+                        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+                        font-size: 16px;
+                    }
+                </style>
             </head>
 
             <body>
@@ -87,6 +109,21 @@
                                             <img src="/images/email-icon.png" alt="" style="max-width: 44px;">
                                             <h6 style="font-size: 18px;">${info.email}<br><span>Địa Chỉ Email</span>
                                             </h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="item balance">
+
+                                            <div class="balance-items">
+                                                <img src="/images/info-icon-03.png" alt="" style="max-width: 44px;">
+                                                <h6 style="font-size: 18px;">50.000 VND<br><span>Số Dư
+                                                        Tài
+                                                        Khoản</span>
+                                                </h6>
+                                                <div><button>Nạp Tiền</button></div>
+
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>

@@ -11,4 +11,5 @@ public interface NewsletterTypeRepository extends JpaRepository<NewsletterType, 
     NewsletterType findByNewsletterTypeID(long newsletterTypeID);
 
     NewsletterType findByName(String name);
+
 }

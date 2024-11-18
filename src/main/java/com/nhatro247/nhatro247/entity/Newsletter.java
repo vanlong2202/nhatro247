@@ -53,6 +53,9 @@ public class Newsletter {
     private Account account;
 
     @OneToMany(mappedBy = "newsletter")
+    private List<NewsletterFollow> newsletterFollows;
+
+    @OneToMany(mappedBy = "newsletter")
     private List<ReportNewsletter> reportNewsletter;
 
     public long getNewsletterID() {
@@ -265,6 +268,14 @@ public class Newsletter {
                 + image1 + ", image2=" + image2 + ", image3=" + image3 + ", description=" + description + ", approver="
                 + approver + ", newsletterType=" + newsletterType + ", account=" + account + ", reportNewsletter="
                 + reportNewsletter + "]";
+    }
+
+    public List<NewsletterFollow> getNewsletterFollows() {
+        return newsletterFollows;
+    }
+
+    public void setNewsletterFollows(List<NewsletterFollow> newsletterFollows) {
+        this.newsletterFollows = newsletterFollows;
     }
 
 }

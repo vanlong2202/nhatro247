@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 
 import com.nhatro247.nhatro247.entity.Account;
 import com.nhatro247.nhatro247.entity.Newsletter;
+import com.nhatro247.nhatro247.entity.NewsletterFollow;
 import com.nhatro247.nhatro247.entity.Newsletter_;
 import com.nhatro247.nhatro247.entity.ReportNewsletter;
 import com.nhatro247.nhatro247.entity.dto.InfoNewsletterDTO;
@@ -62,6 +63,7 @@ public class NewsletterController {
         InfoNewsletterDTO infoNewsletterDTO = new InfoNewsletterDTO();
         infoNewsletterDTO.setAccount(account);
         infoNewsletterDTO.setNewsletter(newsletter);
+        model.addAttribute("menu", this.menuService.getAll());
         model.addAttribute("infoNewsletterDTO", infoNewsletterDTO);
         model.addAttribute("newsletterType", this.newsletterTypeService.getAllType());
         return "client/updateNewsletter";
