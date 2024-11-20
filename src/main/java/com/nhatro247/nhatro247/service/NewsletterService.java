@@ -255,4 +255,8 @@ public class NewsletterService {
                 isStatus, isActive, svip, sort);
     }
 
+    public List<Newsletter> getAllNewslettersSvip() {
+        return this.newsletterRepository.findNewsletterSvip();
+    }
+
 }

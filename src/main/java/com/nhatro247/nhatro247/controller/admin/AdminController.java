@@ -3,13 +3,13 @@ package com.nhatro247.nhatro247.controller.admin;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import com.nhatro247.nhatro247.entity.Post;
 import com.nhatro247.nhatro247.entity.Role;
-import com.nhatro247.nhatro247.repository.FeedBackRepository;
 import com.nhatro247.nhatro247.service.AccountService;
 import com.nhatro247.nhatro247.service.FeedBackService;
 import com.nhatro247.nhatro247.service.NewsletterService;
+import com.nhatro247.nhatro247.service.PostTypeService;
 import com.nhatro247.nhatro247.service.ReportService;
 
 @Controller
@@ -18,13 +18,15 @@ public class AdminController {
     private final NewsletterService newsletterService;
     private final ReportService reportService;
     private final FeedBackService feedBackService;
+    private final PostTypeService postTypeService;
 
     public AdminController(AccountService accountService, NewsletterService newsletterService,
-            ReportService reportService, FeedBackService feedBackService) {
+            ReportService reportService, FeedBackService feedBackService, PostTypeService postTypeService) {
         this.accountService = accountService;
         this.newsletterService = newsletterService;
         this.reportService = reportService;
         this.feedBackService = feedBackService;
+        this.postTypeService = postTypeService;
     }
 
     @GetMapping("/admin/account")
@@ -86,6 +88,13 @@ public class AdminController {
     public String getPageContactView(Model model) {
         model.addAttribute("feedback", this.feedBackService.getAll());
         return "admin/contact/view";
+    }
+
+    @GetMapping("/admin/addPost")
+    public String getPageAddPost(Model model) {
+        model.addAttribute("post", new Post());
+        model.addAttribute("type", this.postTypeService.getAll());
+        return "admin/post/addPost";
     }
 
 }

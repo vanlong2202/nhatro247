@@ -19,6 +19,55 @@
                 <link rel="stylesheet" href="/css/owl.css">
                 <link rel="stylesheet" href="/css/animate.css">
                 <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+                <style>
+                    .preview-img {
+                        display: flex;
+                        overflow: hidden;
+                        justify-content: flex-start;
+                        margin-top: 20px;
+
+                    }
+
+                    .preview-img img {
+                        width: auto;
+                        height: auto;
+                        max-height: 250px;
+                        object-fit: cover;
+                        margin-right: 10px;
+                        border-radius: 8px;
+                    }
+
+                    label {
+                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                        font-weight: 600;
+                        font-size: 16px;
+                    }
+
+                    .form-control {
+                        border-radius: 2px;
+                    }
+
+                    .input-group-prepend {
+                        border-radius: 2px;
+                    }
+
+                    .input-group-text {
+                        border-radius: 2px;
+                        font-weight: 600;
+                    }
+
+                    input.form-control {
+                        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+                    }
+
+                    select.form-control {
+                        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+                    }
+
+                    textarea {
+                        border-radius: 2px;
+                    }
+                </style>
             </head>
 
             <body>
@@ -153,7 +202,7 @@
                                             <label for="validationCustom04">Trọ tự quản</label>
                                             <form:select class="form-control" path="newsletter.selfManagement"
                                                 required="required">
-                                                <option selected disabled value="0">--- Chọn Hình Thức ---</option>
+                                                <option selected disabled value="0">Chọn Hình Thức</option>
                                                 <option value="1">Không</option>
                                                 <option value="2">Có</option>
                                             </form:select>
@@ -162,7 +211,7 @@
 
                                     <div class="col-md-12 mb-2 d-flex justify-content-between">
                                         <div class="col-md-3 mb-1">
-                                            <label for="validationCustomUsername">Phòng trống:</label>
+                                            <label for="validationCustomUsername">Phòng trống</label>
                                             <div class="input-group">
                                                 <form:input path="newsletter.vacantRoom" type="text"
                                                     class="form-control" placeholder="Số phòng trống ..."
@@ -170,7 +219,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
-                                            <label for="validationCustomUsername">Tổng Số Phòng:</label>
+                                            <label for="validationCustomUsername">Tổng Số Phòng</label>
                                             <div class="input-group">
                                                 <form:input path="newsletter.totalRoom" type="text" class="form-control"
                                                     placeholder="Tổng số phòng ..." required="required" />
@@ -199,7 +248,7 @@
                                                 <form:input path="newsletter.price" type="text" class="form-control"
                                                     placeholder="Nhập đúng giá trị tiền" required="required" />
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text" id="inputGroupPrepend">VND</span>
+                                                    <span class="input-group-text" id="inputGroupPrepend">VNĐ</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -207,7 +256,7 @@
                                             <label for="validationCustomUsername">Giới Tính Ưu Tiên</label>
                                             <form:select class="form-control" path="newsletter.prioritize"
                                                 required="required">
-                                                <option value="0">--- Tất cả ---</option>
+                                                <option value="0">Tất cả</option>
                                                 <option value="1">Nữ</option>
                                                 <option value="2">Nam</option>
                                             </form:select>
@@ -295,8 +344,8 @@
                                     <div class="col-md-12  mb-2">
                                         <div class="form-group">
                                             <label for="example-static">Mô tả chi tiết</label>
-                                            <form:textarea path="newsletter.detail" class="form-control" type="text"
-                                                placeholder="Mô tả chi tiết tại đây ..." rows="6" />
+                                            <form:textarea id="detail" path="newsletter.detail" class="form-control"
+                                                type="text" placeholder="Mô tả chi tiết tại đây ..." rows="6" />
                                         </div>
                                     </div>
                                     <div class="form-group mb-12">
@@ -314,22 +363,14 @@
                                         <input name="file" id="image3" type="file" class="form-control-file"
                                             required="required">
                                     </div>
-                                    <div class="col-md-12 mb-2 mt-3 d-flex justify-content-space-between">
-                                        <div class="col-md-3 mb-1">
-                                            <img id="previewImage1" src="#" alt="Preview Image"
-                                                style="max-width: 300px; display: none;">
-                                        </div>
-                                        <div class="col-md-3 mb-1">
-                                            <img id="previewImage2" src="#" alt="Preview Image"
-                                                style="max-width: 300px; display: none;">
-                                        </div>
-                                        <div class="col-md-3 mb-1">
-                                            <img id="previewImage3" src="#" alt="Preview Image"
-                                                style="max-width: 300px; display: none;">
-                                        </div>
+                                    <div class="preview-img">
+                                        <img id="previewImage1" src="/uploads/${infoNewsletterDTO.newsletter.image1}"
+                                            alt="Preview Image" style="max-width: 300px; display: none;">
+                                        <img id="previewImage2" src="/uploads/${infoNewsletterDTO.newsletter.image2}"
+                                            alt="Preview Image" style="max-width: 300px;display: none;">
+                                        <img id="previewImage3" src="/uploads/${infoNewsletterDTO.newsletter.image3}"
+                                            alt="Preview Image" style="max-width: 300px;display: none;">
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>
@@ -343,6 +384,17 @@
                 </form:form>
                 <jsp:include page="../client/layout/footer.jsp" />
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                <script
+                    src="https://cdn.tiny.cloud/1/1kalr2fw781xdi3fnqg9j82j2s13bamzismcjdi9x3t26imz/tinymce/6/tinymce.min.js"
+                    referrerpolicy="origin"></script>
+                <script>
+                    tinymce.init({
+                        selector: '#detail',
+                        plugins: 'advlist autolink lists link image charmap print preview anchor',
+                        toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat',
+                        height: 300
+                    });
+                </script>
                 <script>
                     $(document).ready(() => {
                         const file1 = $("#image1");

@@ -25,4 +25,9 @@ public class FeedbackController {
         return "redirect:";
     }
 
+    @PostMapping("/check-text")
+    public String check(@ModelAttribute("f") FeedBack feedback) {
+        return "redirect:";
+    }
+
 }

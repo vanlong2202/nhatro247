@@ -42,6 +42,9 @@ public class Account {
     @OneToMany(mappedBy = "account")
     private List<NewsletterFollow> newsletterFollows;
 
+    @OneToMany(mappedBy = "account")
+    private List<Post> posts;
+
     public int getAccountID() {
         return accountID;
     }

@@ -19,6 +19,55 @@
                 <link rel="stylesheet" href="/css/owl.css">
                 <link rel="stylesheet" href="/css/animate.css">
                 <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+                <style>
+                    .preview-img {
+                        display: flex;
+                        height: 250px;
+                        overflow: hidden;
+                        justify-content: flex-start;
+                        margin-top: 20px;
+
+                    }
+
+                    .preview-img img {
+                        width: auto;
+                        height: 100%;
+                        object-fit: cover;
+                        margin-right: 10px;
+                        border-radius: 8px;
+                    }
+
+                    label {
+                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                        font-weight: 600;
+                        font-size: 16px;
+                    }
+
+                    .form-control {
+                        border-radius: 2px;
+                    }
+
+                    .input-group-prepend {
+                        border-radius: 2px;
+                    }
+
+                    .input-group-text {
+                        border-radius: 2px;
+                        font-weight: 600;
+                    }
+
+                    input.form-control {
+                        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+                    }
+
+                    select.form-control {
+                        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+                    }
+
+                    textarea {
+                        border-radius: 2px;
+                    }
+                </style>
             </head>
 
             <body>
@@ -442,8 +491,8 @@
                                     <div class="col-md-12  mb-2">
                                         <div class="form-group">
                                             <label for="example-static">Mô tả chi tiết</label>
-                                            <form:textarea path="newsletter.detail" class="form-control" type="text"
-                                                placeholder="Mô tả chi tiết tại đây ..." rows="6" />
+                                            <form:textarea id="detail" path="newsletter.detail" class="form-control"
+                                                type="text" placeholder="Mô tả chi tiết tại đây ..." rows="6" />
                                         </div>
                                     </div>
                                     <div class="form-group mb-12">
@@ -458,38 +507,35 @@
                                         <label for="image2">Tải hình ảnh lên</label>
                                         <input name="file" id="image3" type="file" class="form-control-file">
                                     </div>
-                                    <div class="col-md-12 mb-2 mt-3 d-flex justify-content-space-between">
-                                        <div class="col-md-3 mb-1">
-                                            <img id="previewImage1"
-                                                src="/uploads/${infoNewsletterDTO.newsletter.image1}"
-                                                alt="Preview Image" style="max-width: 300px;">
-                                        </div>
-                                        <div class="col-md-3 mb-1">
-                                            <img id="previewImage2"
-                                                src="/uploads/${infoNewsletterDTO.newsletter.image2}"
-                                                alt="Preview Image" style="max-width: 300px;">
-                                        </div>
-                                        <div class="col-md-3 mb-1">
-                                            <img id="previewImage3"
-                                                src="/uploads/${infoNewsletterDTO.newsletter.image3}"
-                                                alt="Preview Image" style="max-width: 300px;">
-                                        </div>
+                                    <div class="preview-img">
+                                        <img id="previewImage1" src="/uploads/${infoNewsletterDTO.newsletter.image1}"
+                                            alt="Preview Image" style="max-width: 300px;">
+                                        <img id="previewImage2" src="/uploads/${infoNewsletterDTO.newsletter.image2}"
+                                            alt="Preview Image" style="max-width: 300px;">
+                                        <img id="previewImage3" src="/uploads/${infoNewsletterDTO.newsletter.image3}"
+                                            alt="Preview Image" style="max-width: 300px;">
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>
                         <div class="form-group d-grid gap-2 col-2 mx-auto mb-3">
                             <input type="submit" class="btn btn-danger" value="ĐĂNG TIN">
                         </div>
-
-
-
                     </div>
                 </form:form>
                 <jsp:include page="../client/layout/footer.jsp" />
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                <script
+                    src="https://cdn.tiny.cloud/1/1kalr2fw781xdi3fnqg9j82j2s13bamzismcjdi9x3t26imz/tinymce/6/tinymce.min.js"
+                    referrerpolicy="origin"></script>
+                <script>
+                    tinymce.init({
+                        selector: '#detail',
+                        plugins: 'advlist autolink lists link image charmap print preview anchor',
+                        toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat',
+                        height: 500
+                    });
+                </script>
                 <script>
                     $(document).ready(() => {
                         const file1 = $("#image1");

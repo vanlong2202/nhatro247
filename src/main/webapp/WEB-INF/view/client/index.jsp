@@ -21,6 +21,10 @@
                     <link rel="stylesheet" href="/css/animate.css">
                     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
                     <style>
+                        body {
+                            background-color: #f4f4f4;
+                        }
+
                         .city-list {
                             box-sizing: border-box;
                             width: 15%;
@@ -32,16 +36,23 @@
                             box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
                         }
 
-                        .city-list:hover {
-                            color: #00b7ff;
-                            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-                        }
+
 
                         .city-text {
                             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                             font-size: 18px;
                             font-weight: 600;
                             margin: 10px;
+                            color: black;
+                        }
+
+                        .city-list:hover {
+                            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+                        }
+
+                        .city-list:hover .city-text {
+                            color: #00b7ff;
+
                         }
 
                         .container-city {
@@ -61,7 +72,7 @@
                         .header-blog {
                             display: flex;
                             justify-content: space-between;
-                            padding: 20px 20px 20px 20px;
+                            padding: 20px 0;
                         }
 
                         .header-blog a {
@@ -72,7 +83,7 @@
 
                         .blog-context {
                             display: flex;
-                            justify-content: space-evenly;
+                            justify-content: space-between;
                             padding-bottom: 3%;
                         }
 
@@ -95,7 +106,7 @@
                         }
 
                         .blog-items-detail {
-                            padding: 12px 10px;
+                            padding: 15px 10px;
                             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                             font-weight: 600;
                             display: flex;
@@ -108,6 +119,7 @@
                         }
 
                         .blog-items-detail a {
+                            color: black;
                             display: -webkit-box;
                             -webkit-line-clamp: 2;
                             -webkit-box-orient: vertical;
@@ -187,45 +199,43 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <c:forEach var="post" items="${list}">
-                                            <div class="col-lg-4 col-md-6">
-                                                <div class="item">
-                                                    <a href="/newsletter-detail/${post.newsletterID}"><img
-                                                            style="width: 100%; height: 200px;object-fit: cover;"
-                                                            src="/uploads/${post.image1}" alt=""></a>
-                                                    <span class="category">${post.newsletterAddress}</span>
-                                                    <h6>
-                                                        <fmt:formatNumber value="${post.price}" />
-                                                        VND
-                                                    </h6>
-                                                    <h4
-                                                        style="display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;">
-                                                        <a href="property-details.html">${post.title}</a>
-                                                    </h4>
-                                                    <ul>
-                                                        <li>Diện tích: <span>${post.acreage} m²</span></li>
-                                                        <li>Phòng khả dụng: <span>${post.vacantRoom} phòng</span>
-                                                        </li>
-                                                        <li>Loại hình: <span>${post.newsletterType.name}</span>
-                                                        </li>
-                                                        <li>Ngày cập nhật: <span>${post.createTime}</span></li>
-                                                    </ul>
-                                                    <div style="display: flex; justify-content: space-evenly;">
-                                                        <div class="main-button">
-                                                            <a href="/newsletter-detail/${post.newsletterID}">THÔNG
-                                                                TIN
-                                                                CHI TIẾT</a>
+                                        <div style="background-color: white;border-radius: 8px;" class="container">
+                                            <div class="newsletter-container">
+                                                <c:forEach var="post" items="${list}">
+                                                    <div class="newsletter-items">
+                                                        <div class="newsletter-item-img">
+                                                            <a href="/newsletter-detail/${post.newsletterID}"><img
+                                                                    src="/uploads/${post.image1}" alt=""></a>
+                                                            <div class="tag">VIP</div>
                                                         </div>
-                                                        <div class="main-button">
-                                                            <a href="/newsletter-follow/${post.newsletterID}"><i
-                                                                    class="fa-solid fa-heart fa-beat"
-                                                                    style="color: #ff0088;"></i></a>
+                                                        <div class="newsletter-item-context">
+                                                            <div class="newsletter-context-title"><a
+                                                                    href="/newsletter-detail/${post.newsletterID}">${post.title}</a>
+                                                            </div>
+
+                                                            <div class="newsletter-context-price"><i
+                                                                    class="fa-solid fa-money-bill-wave"
+                                                                    style="color: #00c721;"></i> <span>
+                                                                    <fmt:formatNumber value="${post.price}" />
+                                                                    VNĐ/Tháng
+                                                                </span></div>
+                                                            <div class="newsletter-context-button">
+                                                                <button>${post.format}</button>
+                                                                <button>${post.acreage} m²</button>
+                                                            </div>
+                                                            <div class="newsletter-context-address"><span> <i
+                                                                        class="fa-solid fa-location-dot fa-beat"
+                                                                        style="color: #ff0000;"></i>
+                                                                    ${post.newsletterAddress},
+                                                                    ${post.addressDetail}</span></div>
                                                         </div>
                                                     </div>
-
-                                                </div>
+                                                </c:forEach>
                                             </div>
-                                        </c:forEach>
+                                            <div class="newsletter-submit"><a href="/service">Xem Tất Cả <i
+                                                        class="fa-solid fa-arrow-right-long fa-beat"
+                                                        style="color: #003694;"></i></a></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -439,37 +449,37 @@
                                                                         <div class="info-table">
                                                                             <ul>
                                                                                 <li>DIỆN TÍCH PHÒNG
-                                                                                    <span>${type2.acreage} m²</span>
+                                                                                    <span>${type3.acreage} m²</span>
                                                                                 </li>
                                                                                 <li>PHÒNG Ở TỐI ĐA
-                                                                                    <span>${type2.maximum} người</span>
+                                                                                    <span>${type3.maximum} người</span>
                                                                                 </li>
                                                                                 <li>GIỚI TÍNH ƯU TIÊN <span>
                                                                                         <c:if
-                                                                                            test="${type2.prioritize==0}">
+                                                                                            test="${type3.prioritize==0}">
                                                                                             Tất cả
                                                                                         </c:if>
                                                                                         <c:if
-                                                                                            test="${type2.prioritize==1}">
+                                                                                            test="${type3.prioritize==1}">
                                                                                             Nữ
                                                                                         </c:if>
                                                                                         <c:if
-                                                                                            test="${type2.prioritize==2}">
+                                                                                            test="${type3.prioritize==2}">
                                                                                             Nam
                                                                                         </c:if>
                                                                                     </span>
                                                                                 </li>
                                                                                 <li>PHÒNG KHẢ DỤNG
-                                                                                    <span>${type2.vacantRoom}
+                                                                                    <span>${type3.vacantRoom}
                                                                                         phòng</span>
                                                                                 </li>
                                                                                 <li>HÌNH THỨC TỰ QUẢN <span>
                                                                                         <c:if
-                                                                                            test="${type2.selfManagement==1}">
+                                                                                            test="${type3.selfManagement==1}">
                                                                                             Không
                                                                                         </c:if>
                                                                                         <c:if
-                                                                                            test="${type2.selfManagement==2}">
+                                                                                            test="${type3.selfManagement==2}">
                                                                                             Có
                                                                                         </c:if>
                                                                                     </span>
@@ -477,15 +487,15 @@
                                                                             </ul>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-lg-6">
+                                                                    <div style="height: 420px;" class="col-lg-6">
                                                                         <img style="height: 100%; width: 100%; object-fit: cover;"
-                                                                            src="/uploads/${type2.image1}" alt="">
+                                                                            src="/uploads/${type3.image1}" alt="">
                                                                     </div>
                                                                     <div class="col-lg-3">
-                                                                        <h3>${type2.title}</h3>
+                                                                        <h3>${type3.title}</h3>
                                                                         <p
                                                                             style="display: -webkit-box;-webkit-line-clamp: 4;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;">
-                                                                            ${type2.detail}
+                                                                            ${type3.detail}
                                                                         </p>
                                                                         <div class="icon-button">
                                                                             <a href="property-details.html"><i
@@ -510,7 +520,7 @@
                     <div class="container">
                         <div class="section-heading text-center mt-5 mb-5">
                             <h3
-                                style="color: #0045a8;font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;">
+                                style="font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;">
                                 TỈNH THÀNH NỔI BẬT</h3>
                         </div>
                         <div class="container-city">
@@ -555,105 +565,21 @@
                         <div class="container-blog">
                             <div class="header-blog">
                                 <h3
-                                    style="color: #0045a8;font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;">
+                                    style="font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;">
                                     TIN TỨC NỔI BẬT</h3>
-                                <a href="https://tromoi.com/blog/" class="button btn-text">Xem thêm <i
+                                <a href="/blog" class="button btn-text">Xem thêm <i
                                         class="fa-solid fa-arrow-right-long"></i></a>
                             </div>
                             <div class="blog-context">
-                                <div class="blog-items">
-                                    <img src="/uploads/BIATRO.jpg" alt="">
-                                    <div class="blog-items-detail">
-                                        <span>01</span>
-                                        <a>Trọ Mới - Giải pháp "F5" công cuộc tìm trọ cho sinh viên và người lao động
-                                            thời đại 4.0</a>
-                                    </div>
-                                </div>
-                                <div class="blog-items">
-                                    <img src="/uploads/BIATRO2.jpg" alt="">
-                                    <div class="blog-items-detail">
-                                        <span>01</span>
-                                        <a>Trọ Mới - Giải pháp "F5" công cuộc tìm trọ cho sinh viên và người lao động
-                                            thời đại 4.0</a>
-                                    </div>
-                                </div>
-                                <div class="blog-items">
-                                    <img src="/uploads/THUMP-TRO-811-01.jpg" alt="">
-                                    <div class="blog-items-detail">
-                                        <span>01</span>
-                                        <a>Trọ Mới - Giải pháp "F5" công cuộc tìm trọ cho sinh viên và người lao động
-                                            thời đại 4.0</a>
-                                    </div>
-                                </div>
-                                <div class="blog-items">
-                                    <img src="/uploads/ha_noi.jpg" alt="">
-                                    <div class="blog-items-detail">
-                                        <span>01</span>
-                                        <a>Trọ Mới - Giải pháp "F5" công cuộc tìm trọ cho sinh viên và người lao động
-                                            thời đại 4.0</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="video section">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-4 offset-lg-4">
-                                    <div class="section-heading text-center">
-                                        <h6>| Thông tin về chúng tôi</h6>
-                                        <h2>HƠN 50.000 CHỦ TRỌ TIN TƯỞNG TRỌ MỚI</h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="video-content">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-10 offset-lg-1">
-                                    <div class="video-frame">
-                                        <a href="https://www.youtube.com/watch?v=3Ltxw6YIFU4&ab_channel=Tr%E1%BB%8DM%E1%BB%9Bi-K%C3%AAnhth%C3%B4ngtinPh%C3%B2ngtr%E1%BB%8D%2CNh%C3%A0chothu%C3%AA"
-                                            target="_blank"><i class="fa fa-play"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="fun-facts">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="wrapper">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="counter">
-                                                    <h2 class="timer count-title count-number" data-to="555"
-                                                        data-speed="1000"></h2>
-                                                    <p class="count-text ">Bản Tin được<br>cập nhật hàng tháng</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <div class="counter">
-                                                    <h2 class="timer count-title count-number" data-to="1000"
-                                                        data-speed="1000"></h2>
-                                                    <p class="count-text ">Lượt truy cập sử<br>dụng hệ thống</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <div class="counter">
-                                                    <h2 class="timer count-title count-number" data-to="2024"
-                                                        data-speed="1000"></h2>
-                                                    <p class="count-text ">Hứa hẹn<br>phát triển</p>
-                                                </div>
-                                            </div>
+                                <c:forEach var="posts" items="${posts}" varStatus="status">
+                                    <div class="blog-items">
+                                        <img src="/uploads/${posts.image}" alt="">
+                                        <div class="blog-items-detail">
+                                            <span>0${status.index + 1}</span>
+                                            <a href="/blog-detail/${posts.postID}">${posts.title}</a>
                                         </div>
                                     </div>
-                                </div>
+                                </c:forEach>
                             </div>
                         </div>
                     </div>

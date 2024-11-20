@@ -6,11 +6,14 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.nhatro247.nhatro247.entity.Account;
 import com.nhatro247.nhatro247.entity.Newsletter;
 import com.nhatro247.nhatro247.entity.NewsletterType;
+import com.nhatro247.nhatro247.entity.Post;
 
 import java.util.List;
 
@@ -44,5 +47,8 @@ public interface NewsletterRepository extends JpaRepository<Newsletter, Long>, J
 
     Newsletter findTopOneByNewsletterTypeAndIsStatusAndIsActiveAndSvip(NewsletterType newsletterType, int isStatus,
             int isActive, int svip, Sort sort);
+
+    @Query(value = "Select * from tbl_newsletter where is_status=1 and is_active=1 and svip=1 order by create_time desc", nativeQuery = true)
+    List<Newsletter> findNewsletterSvip();
 
 }
