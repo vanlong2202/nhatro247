@@ -59,8 +59,9 @@ public class HomeController {
     }
 
     @GetMapping("/login")
-    public String getLoginPage() {
-        return "client/login";
+    public String getLoginPage(Model model) {
+        model.addAttribute("account", new Account());
+        return "client/login1";
     }
 
     @GetMapping("/blog")

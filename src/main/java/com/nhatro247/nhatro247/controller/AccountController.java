@@ -21,6 +21,7 @@ import jakarta.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
@@ -88,27 +89,24 @@ public class AccountController {
     }
 
     @PostMapping("/register")
-    public String registerAccount(Model model, Account account) {
+    public String registerAccount(Model model, Account account, RedirectAttributes redirectAttributes) {
         Account checkUser = this.accountService.getAccountByName(account.getUsername());
         Account checkEmail = this.accountService.getAccByEmail("vanlong.check@gmail.com");
         if (checkEmail != null) {
             System.out.println("Email đã được dùng");
         }
         if (checkUser == null) {
-
-            //
-
             Role role = new Role();
             role.setRoleID(1);
             account.setRole(role);
             String hashPass = this.passwordEncoder.encode(account.getPassword());
             account.setPassword(hashPass);
             this.accountService.addAccount(account);
+            redirectAttributes.addFlashAttribute("success", "Đăng kí tài khoản thành công");
             return "redirect:/login";
         } else {
-            model.addAttribute("errorUser", "Username đã được sử dụng!");
-            System.out.println(model);
-            return "client/register";
+            redirectAttributes.addFlashAttribute("error", "Tên đăng nhập đã được sử dụng !");
+            return "redirect:/login";
         }
     }
 

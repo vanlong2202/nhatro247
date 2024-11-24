@@ -147,17 +147,22 @@ public class NewsletterController {
     public String updateAtive(@PathVariable("id") long id, RedirectAttributes redirectAttributes) {
         Newsletter newsletter = this.newsletterService.getNewsletterByID(id);
         if (newsletter != null) {
-            if (newsletter.getIsActive() == 0) {
-                newsletter.setIsActive(1);
+            if (newsletter.getIsStatus() == 1) {
+                if (newsletter.getIsActive() == 0) {
+                    newsletter.setIsActive(1);
+                } else {
+                    newsletter.setIsActive(0);
+                }
+                this.newsletterService.addNewsletter(newsletter);
+                redirectAttributes.addFlashAttribute("success", "Cập nhật trạng thái hoạt động bản tin thành công !");
+                return "redirect:/maneger-newsletter";
             } else {
-                newsletter.setIsActive(0);
+                redirectAttributes.addFlashAttribute("error", "Đã có lỗi xảy ra, vui lòng thử lại !");
+                return "redirect:/maneger-newsletter";
             }
-            this.newsletterService.addNewsletter(newsletter);
-            redirectAttributes.addFlashAttribute("success", "Cập nhật trạng thái hoạt động bản tin thành công !");
-            return "redirect:/maneger-newsletter";
         } else {
             redirectAttributes.addFlashAttribute("error", "Đã có lỗi xảy ra, vui lòng thử lại !");
-            return "client/manager";
+            return "redirect:/maneger-newsletter";
         }
     }
 

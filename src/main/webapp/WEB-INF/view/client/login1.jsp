@@ -12,6 +12,26 @@
                 <link
                     href="https://fonts.googleapis.com/css2?family=Anton+SC&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
                     rel="stylesheet">
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+                <link href="/admin/img/favicon.png" rel="icon">
+                <link href="/admin/img/apple-touch-icon.png" rel="apple-touch-icon">
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+                <link href="https://fonts.gstatic.com" rel="preconnect">
+                <link
+                    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+                    rel="stylesheet">
+
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+                    integrity="sha384-rbsA2VBKQ24qUp3IwRaaE5oPQbPbfsjWoXDmZTSfdvBdkzZ9+gFW3U3PaMx6j9mG"
+                    crossorigin="anonymous">
+
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+                    integrity="sha384-pBwY6qnK8zjF4w9SY1PSoVfBjfQmPS99f1e0Uhvf7EZB08KcW5GA7D/x9LZ/s6BY"
+                    crossorigin="anonymous"></script>
+
                 <title>Đăng kí/Đăng nhập</title>
                 <style>
                     @import url(https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Noto+Sans:wght@400;700&display=swap);
@@ -26,14 +46,13 @@
                         justify-content: center;
                         align-items: center;
                         flex-direction: column;
-                        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                         height: 100vh;
                         margin: -20px 0 50px;
                     }
 
                     h1 {
-                        font-family: "Anton SC", sans-serif;
-                        font-weight: bold;
+                        font-weight: 600;
                         margin: 0;
                     }
 
@@ -61,15 +80,15 @@
                     }
 
                     button {
+                        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
                         border-radius: 20px;
-                        border: 1px solid #FF4B2B;
-                        background-color: #FF4B2B;
+                        border: 1px solid #00b7ff;
+                        background-color: #0045a8;
                         color: #FFFFFF;
                         font-size: 12px;
-                        font-weight: bold;
-                        padding: 12px 45px;
+                        font-weight: 500;
+                        padding: 10px 45px;
                         letter-spacing: 1px;
-                        text-transform: uppercase;
                         transition: transform 80ms ease-in;
                     }
 
@@ -98,11 +117,15 @@
                     }
 
                     input {
-                        background-color: #eee;
+                        background-color: #f4f4f4;
                         border: none;
                         padding: 12px 15px;
                         margin: 8px 0;
                         width: 100%;
+                        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                        font-size: 14px;
+                        font-weight: 500;
+                        border-radius: 8px;
                     }
 
                     .container {
@@ -180,8 +203,8 @@
 
                     .overlay {
                         background: #FF416C;
-                        background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-                        background: linear-gradient(to right, #FF4B2B, #FF416C);
+                        background: -webkit-linear-gradient(to right, #00b7ff, #0045a8);
+                        background: linear-gradient(to right, #0045a8, #00b7ff);
                         background-repeat: no-repeat;
                         background-size: cover;
                         background-position: 0 0;
@@ -245,6 +268,12 @@
                         width: 40px;
                     }
 
+                    span {
+                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                        font-size: 18px;
+                        font-weight: 600;
+                    }
+
                     footer {
                         background-color: #222;
                         color: #fff;
@@ -269,54 +298,105 @@
                         color: #3c97bf;
                         text-decoration: none;
                     }
+
+                    .logo-login {
+                        width: 200px;
+                        height: auto;
+                    }
+
+                    .alert {
+                        color: white;
+                        position: fixed;
+                        top: 70px;
+                        right: 20px;
+                        z-index: 1050;
+                        opacity: 0;
+                        transform: translateX(100%);
+                        transition: opacity 0.5s, transform 0.5s;
+                    }
+
+                    .alert {
+                        padding: 15px 20px;
+                        border-radius: 4px;
+                    }
+
+                    .alert.show {
+                        opacity: 1;
+                        transform: translateX(0);
+                    }
                 </style>
             </head>
 
             <body>
+                <c:if test="${not empty success}">
+                    <div style="background-color: rgb(0, 193, 16);" class="alert" role="alert">
+                        ${success}
+                    </div>
+                </c:if>
+                <c:if test="${not empty error}">
+                    <div style="background-color: red;" class="alert" role="alert">
+                        ${error}
+                    </div>
+                </c:if>
                 <div class="container" id="container">
                     <div class="form-container sign-up-container">
-                        <form action="/addAcc" method="post">
-                            <h1>Tạo tài khoản</h1>
-                            <input name="username" type="text" placeholder="Name" />
-                            <input name="email" type="email" placeholder="Email" />
-                            <input name="password" type="password" placeholder="Password" />
-                            ${var}
-                            <button type="submit">Đăng Kí</button>
-                        </form>
+                        <form:form action="/register" method="post" modelAttribute="account">
+                            <span>Đăng kí tài khoản mới</span>
+                            <form:input path="username" type="text" placeholder="Nhập tên đăng nhập"
+                                required="required" />
+                            <form:input path="email" type="email" placeholder="Nhập địa chỉ Email"
+                                required="required" />
+                            <form:input path="password" type="password" placeholder="Nhập mật khẩu"
+                                required="required" />
+                            <button type="submit">ĐĂNG KÍ</button>
+                        </form:form>
                     </div>
                     <div class="form-container sign-in-container">
-                        <!-- <form action="/login" method="post">
-                            <h1>Đăng nhập</h1>
-                            <input name="username" id="username" type="text" placeholder="Username" />
-                            <input name="password" id="password" type="password" placeholder="Password" />
+                        <form action="/login" method="post">
+                            <img class="logo-login" src="/images/logo.png" alt="">
+                            <input name="username" id="username" type="text" placeholder="Tên đăng nhập" />
+                            <input name="password" id="password" type="password" placeholder="Mật khẩu" />
                             <c:if test="${param.error != null}">
-                                <div class="my-2"
-                                    style="color: red; font-size: 14px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-                                    Thông tin không chính xác !
+                                <div class="mb-2"
+                                    style="margin-bottom: 10px;color: red; font-size: 14px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;font-weight: 500;">
+                                    Thông tin đăng nhập không chính xác !
                                 </div>
                             </c:if>
                             <div>
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                             </div>
-                            <button>Đăng Nhập</button>
-                        </form> -->
+                            <button>ĐĂNG NHẬP</button>
+                        </form>
                     </div>
                     <div class="overlay-container">
                         <div class="overlay">
                             <div class="overlay-panel overlay-left">
-                                <h1>Welcome Back!</h1>
-                                <p>To keep connected with us please login with your personal info</p>
-                                <button class="ghost" id="signIn">Sign In</button>
+                                <span>Nếu đã có tài khoản ?</span>
+                                <p>Tiến hành quay lại đăng nhập hệ thống !</p>
+                                <button class="ghost" id="signIn">ĐĂNG NHẬP</button>
                             </div>
                             <div class="overlay-panel overlay-right">
-                                <h1>Hello, Friend!</h1>
-                                <p>Enter your personal details and start journey with us</p>
-                                <button class="ghost" id="signUp">Sign Up</button>
+                                <span>Chào mừng bạn đến với TroNhanh247</span>
+                                <p>Đăng kí tài khoản để sử dụng các dịch vụ cùng chúng tôi !</p>
+                                <button class="ghost" id="signUp">ĐĂNG KÍ</button>
                             </div>
                         </div>
                     </div>
                 </div>
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        var alert = document.querySelector(".alert");
+                        if (alert) {
+                            // Thêm class "show" để hiển thị thông báo
+                            alert.classList.add("show");
 
+                            // Sau 3 giây, tự động ẩn thông báo
+                            setTimeout(function () {
+                                alert.classList.remove("show");
+                            }, 3000); // 3000ms = 3 giây
+                        }
+                    });
+                </script>
                 <script>
                     const signUpButton = document.getElementById('signUp');
                     const signInButton = document.getElementById('signIn');
@@ -337,6 +417,7 @@
                         localStorage.setItem("isSignUpActive", "false");
                     });
                 </script>
+
             </body>
 
             </html>
