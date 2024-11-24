@@ -1,5 +1,7 @@
 package com.nhatro247.nhatro247.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -107,7 +109,11 @@ public class Post {
     public String toString() {
         return "Post [postID=" + postID + ", title=" + title + ", image=" + image + ", content=" + content
                 + ", isActive=" + isActive + ", description=" + description + ", createTime=" + createTime
-                + ", postType=" + postType + ", account=" + account + "]";
+                + ", postType=" + postType + ", account=" + account + ", getPostID()=" + getPostID() + ", getTitle()="
+                + getTitle() + ", getImage()=" + getImage() + ", getContent()=" + getContent() + ", getClass()="
+                + getClass() + ", getIsActive()=" + getIsActive() + ", getDescription()=" + getDescription()
+                + ", getCreateTime()=" + getCreateTime() + ", getPostType()=" + getPostType() + ", getAccount()="
+                + getAccount() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
     }
 
 }

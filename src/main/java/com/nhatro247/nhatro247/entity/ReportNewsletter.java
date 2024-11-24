@@ -19,6 +19,7 @@ public class ReportNewsletter {
     private String phone;
     private String email;
     private int isStatus;
+    private String createTime;
 
     @ManyToOne
     @JoinColumn(name = "newsletterID")
@@ -76,6 +77,14 @@ public class ReportNewsletter {
 
     public void setNewsletter(Newsletter newsletter) {
         this.newsletter = newsletter;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 
 }

@@ -51,4 +51,7 @@ public interface NewsletterRepository extends JpaRepository<Newsletter, Long>, J
     @Query(value = "Select * from tbl_newsletter where is_status=1 and is_active=1 and svip=1 order by create_time desc", nativeQuery = true)
     List<Newsletter> findNewsletterSvip();
 
+    @Query(value = "SELECT * FROM tbl_newsletter where newsletterid not like :id and is_status=1 and is_active=1 and newsletter_typeid = :typeID and newsletter_address like :address order by create_time desc limit 3", nativeQuery = true)
+    List<Newsletter> findLimit3ByNotID(@Param("typeID") long typeID, @Param("address") String address,
+            @Param("id") int id);
 }

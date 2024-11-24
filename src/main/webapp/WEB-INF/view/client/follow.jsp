@@ -198,6 +198,9 @@
                                 <h6>| NEWSLETTER SAVE</h6>
                                 <h2>BẢN TIN ĐÃ LƯU</h2>
                             </div>
+                            <c:if test="${save == null}">
+                                Không có bản tin nào
+                            </c:if>
                             <c:forEach var="news" items="${save}">
                                 <div class="save-item">
                                     <div class="save-item-img">

@@ -23,6 +23,8 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     Post findByPostID(long postID);
 
+    void deleteByPostID(long postID);
+
     List<Post> findByPostType(PostType postType);
 
     List<Post> findByPostTypeAndIsActive(PostType postType, int isActive);

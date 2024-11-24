@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import com.nhatro247.nhatro247.entity.Account;
 import com.nhatro247.nhatro247.entity.Newsletter;
 import com.nhatro247.nhatro247.entity.NewsletterFollow;
+import com.nhatro247.nhatro247.entity.NewsletterType;
 import com.nhatro247.nhatro247.entity.Newsletter_;
 import com.nhatro247.nhatro247.entity.ReportNewsletter;
 import com.nhatro247.nhatro247.entity.dto.InfoNewsletterDTO;
@@ -36,6 +37,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class NewsletterController {
@@ -56,8 +58,13 @@ public class NewsletterController {
 
     @GetMapping("/newsletter-detail/{id}")
     public String getNewsletterDetailPage(Model model, @PathVariable("id") int id) {
+        Newsletter newsletter = this.newsletterService.getNewsletterByID(id);
+        NewsletterType type = newsletter.getNewsletterType();
+        long typeID = type.getNewsletterTypeID();
+        String address = newsletter.getNewsletterAddress();
         model.addAttribute("menu", this.menuService.getAll());
-        model.addAttribute("newsletters", this.newsletterService.getNewsletterByID(id));
+        model.addAttribute("newsletters", newsletter);
+        model.addAttribute("newsletterRelate", this.newsletterService.getTop3Relate(typeID, address, id));
         model.addAttribute("report", new ReportNewsletter());
         return "client/newsletterDetail";
     }
@@ -123,17 +130,21 @@ public class NewsletterController {
     }
 
     @GetMapping("/delete-newsletter/{id}")
-    public String deleteNewsletterClient(@PathVariable("id") long id) {
+    public String deleteNewsletterClient(@PathVariable("id") long id, RedirectAttributes redirectAttributes) {
         Newsletter newsletter = this.newsletterService.getNewsletterByID(id);
         if (newsletter != null) {
             this.newsletterService.deleteNewsletter(id);
+            redirectAttributes.addFlashAttribute("success", "Xóa bản tin thành công !");
             return "redirect:/maneger-newsletter";
+        } else {
+            redirectAttributes.addFlashAttribute("error", "Đã có lỗi xảy ra, vui lòng thử lại !");
+            return "/client/manager";
         }
-        return "/client/manager";
+
     }
 
     @GetMapping("/update-active-newsletter/{id}")
-    public String updateAtive(@PathVariable("id") long id) {
+    public String updateAtive(@PathVariable("id") long id, RedirectAttributes redirectAttributes) {
         Newsletter newsletter = this.newsletterService.getNewsletterByID(id);
         if (newsletter != null) {
             if (newsletter.getIsActive() == 0) {
@@ -142,20 +153,26 @@ public class NewsletterController {
                 newsletter.setIsActive(0);
             }
             this.newsletterService.addNewsletter(newsletter);
+            redirectAttributes.addFlashAttribute("success", "Cập nhật trạng thái hoạt động bản tin thành công !");
             return "redirect:/maneger-newsletter";
+        } else {
+            redirectAttributes.addFlashAttribute("error", "Đã có lỗi xảy ra, vui lòng thử lại !");
+            return "client/manager";
         }
-        return "client/manager";
     }
 
     @GetMapping("/update-svip-newsletter/{id}")
-    public String updateSvip(@PathVariable("id") long id) {
+    public String updateSvip(@PathVariable("id") long id, RedirectAttributes redirectAttributes) {
         Newsletter newsletter = this.newsletterService.getNewsletterByID(id);
         if (newsletter != null) {
             newsletter.setSvip(1);
             this.newsletterService.addNewsletter(newsletter);
+            redirectAttributes.addFlashAttribute("success", "Cập nhật trạng thái SVIP bản tin thành công !");
             return "redirect:/maneger-newsletter";
+        } else {
+            redirectAttributes.addFlashAttribute("error", "Đã có lỗi xảy ra, vui lòng thử lại !");
+            return "client/manager";
         }
-        return "client/manager";
     }
 
     @GetMapping("/post")
@@ -174,7 +191,7 @@ public class NewsletterController {
 
     @PostMapping("/new/port")
     public String add(@ModelAttribute("infoNewsletterDTO") InfoNewsletterDTO infoNewsletterDTO,
-            @RequestParam("file") MultipartFile[] files) {
+            @RequestParam("file") MultipartFile[] files, RedirectAttributes redirectAttributes) {
         Account account = infoNewsletterDTO.getAccount();
         Account acc = this.accountService.getAccountByID(account.getAccountID());
         if (acc != null) {
@@ -183,28 +200,32 @@ public class NewsletterController {
             acc.setEmail(account.getEmail());
             acc.setPhone(account.getPhone());
             this.accountService.addAccount(acc);
+            Newsletter newsletter = infoNewsletterDTO.getNewsletter();
+            LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy");
+            Newsletter news = this.newsletterService.getNewsletterByID(newsletter.getNewsletterID());
+            String formattedDate = now.format(formatter);
+            newsletter.setCreateTime(formattedDate);
+            newsletter.setAccount(account);
+            List<String> filename = this.uploadService.handeSaveUploadFile(files);
+            String image1 = filename.get(0);
+            String image2 = filename.get(1);
+            String image3 = filename.get(2);
+            newsletter.setImage1(image1);
+            newsletter.setImage2(image2);
+            newsletter.setImage3(image3);
+            this.newsletterService.addNewsletter(newsletter);
+            redirectAttributes.addFlashAttribute("success", "Đăng bản tin thành công, vui lòng đợi phê duyệt !");
+            return "redirect:/post";
+        } else {
+            redirectAttributes.addFlashAttribute("error", "Đã có lỗi xảy ra vui lòng thử lại !");
+            return "client/post";
         }
-        Newsletter newsletter = infoNewsletterDTO.getNewsletter();
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy");
-        Newsletter news = this.newsletterService.getNewsletterByID(newsletter.getNewsletterID());
-        String formattedDate = now.format(formatter);
-        newsletter.setCreateTime(formattedDate);
-        newsletter.setAccount(account);
-        List<String> filename = this.uploadService.handeSaveUploadFile(files);
-        String image1 = filename.get(0);
-        String image2 = filename.get(1);
-        String image3 = filename.get(2);
-        newsletter.setImage1(image1);
-        newsletter.setImage2(image2);
-        newsletter.setImage3(image3);
-        this.newsletterService.addNewsletter(newsletter);
-        return "redirect:/post";
     }
 
     @PostMapping("/update-post")
     public String update(@ModelAttribute("infoNewsletterDTO") InfoNewsletterDTO infoNewsletterDTO,
-            @RequestParam("file") MultipartFile[] files) {
+            @RequestParam("file") MultipartFile[] files, RedirectAttributes redirectAttributes) {
         Account account = infoNewsletterDTO.getAccount();
         Account acc = this.accountService.getAccountByID(account.getAccountID());
         Newsletter newsletter = infoNewsletterDTO.getNewsletter();
@@ -261,9 +282,11 @@ public class NewsletterController {
                 news.setImage3(filenames.get(2));
             }
             this.newsletterService.addNewsletter(news);
+            redirectAttributes.addFlashAttribute("success", "Cập nhật thông tin thành công !");
             return "redirect:/maneger-newsletter";
         } else {
-            return "redirect:/delete-newsletter/" + newsletter.getNewsletterID();
+            redirectAttributes.addFlashAttribute("error", "Đã có lỗi xảy ra, vui lòng thử lại!");
+            return "redirect:/manager-edit-newsletter/" + newsletter.getNewsletterID();
         }
     }
 

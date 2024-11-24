@@ -1,5 +1,8 @@
 package com.nhatro247.nhatro247.controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import org.springframework.stereotype.Controller;
 
 import com.nhatro247.nhatro247.entity.FeedBack;
@@ -23,6 +26,10 @@ public class ReportController {
     @PostMapping("/report")
     public String postMethodName(@ModelAttribute("report") ReportNewsletter reportNewsletter) {
         Newsletter newsletter = reportNewsletter.getNewsletter();
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy");
+        String formattedDate = now.format(formatter);
+        reportNewsletter.setCreateTime(formattedDate);
         long id = newsletter.getNewsletterID();
         this.reportService.addReport(reportNewsletter);
         return "redirect:/newsletter-detail/" + id;

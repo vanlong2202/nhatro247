@@ -15,5 +15,9 @@ public interface NewsletterFollowRepository extends JpaRepository<NewsletterFoll
 
     List<NewsletterFollow> findAllByAccount(Account account);
 
+    List<NewsletterFollow> findByNewsletter(Newsletter newsletter);
+
     void delete(NewsletterFollow newsletterFollow);
+
+    void deleteByNewsletter(Newsletter newsletter);
 }

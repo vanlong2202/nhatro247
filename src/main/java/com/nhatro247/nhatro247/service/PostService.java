@@ -60,4 +60,8 @@ public class PostService {
     public List<Post> getPostByIDNot(PostType postType, int isActive, long postID) {
         return this.postRepository.findByPostTypeAndIsActiveAndPostIDNot(postType, isActive, postID);
     }
+
+    public void deletePostByID(long id) {
+        this.postRepository.deleteById(id);
+    }
 }

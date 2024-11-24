@@ -19,6 +19,8 @@
                 <link rel="stylesheet" href="/css/owl.css">
                 <link rel="stylesheet" href="/css/animate.css">
                 <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
                 <style>
                     .preview-img {
                         display: flex;
@@ -67,6 +69,22 @@
                     textarea {
                         border-radius: 2px;
                     }
+
+                    .alert {
+                        color: white;
+                        position: fixed;
+                        top: 170px;
+                        right: 20px;
+                        z-index: 1050;
+                        opacity: 0;
+                        transform: translateX(100%);
+                        transition: opacity 0.5s, transform 0.5s;
+                    }
+
+                    .alert.show {
+                        opacity: 1;
+                        transform: translateX(0);
+                    }
                 </style>
             </head>
 
@@ -81,6 +99,20 @@
                         </div>
                     </div>
                 </div>
+                <c:if test="${not empty success}">
+                    <div class="alert alert-success bg-success text-light border-0 alert-dismissible fade show"
+                        role="alert">
+                        ${success}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </c:if>
+                <c:if test="${not empty error}">
+                    <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show"
+                        role="alert">
+                        ${error}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </c:if>
                 <div class="sub-header">
                     <div class="container">
                         <div class="row">
@@ -415,6 +447,20 @@
                             $("#previewImage3").attr("src", imgURL);
                             $("#previewImage3").css({ "display": "block" });
                         });
+                    });
+                </script>
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        var alert = document.querySelector(".alert");
+                        if (alert) {
+                            // Thêm class "show" để hiển thị thông báo
+                            alert.classList.add("show");
+
+                            // Sau 3 giây, tự động ẩn thông báo
+                            setTimeout(function () {
+                                alert.classList.remove("show");
+                            }, 3000); // 3000ms = 3 giây
+                        }
                     });
                 </script>
                 <script src="/jquery/jquery.min.js"></script>

@@ -206,8 +206,19 @@
                                                     <div class="row">
                                                         <div class="col-lg-3 col-md-4 label">Trạng Thái bản tin :</div>
                                                         <div class="col-lg-9 col-md-8">
-                                                            <a href="" class="btn btn-primary  btn-sm"
-                                                                title="Xem Chi Tiết">Chờ Phê Duyệt</a>
+                                                            <c:if test="${newsletter.isStatus==0}">
+                                                                <a href="" class="btn btn-primary  btn-sm"
+                                                                    title="Xem Chi Tiết">Chờ Phê Duyệt</a>
+                                                            </c:if>
+                                                            <c:if test="${newsletter.isStatus==1}">
+                                                                <a href="" class="btn btn-success  btn-sm"
+                                                                    title="Xem Chi Tiết">Đã Phê Duyệt</a>
+                                                            </c:if>
+                                                            <c:if test="${newsletter.isStatus==2}">
+                                                                <a href="" class="btn btn-danger  btn-sm"
+                                                                    title="Xem Chi Tiết">Từ Chối</a>
+                                                            </c:if>
+
                                                         </div>
                                                     </div>
                                                 </div>

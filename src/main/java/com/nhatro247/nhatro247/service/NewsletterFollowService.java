@@ -45,4 +45,12 @@ public class NewsletterFollowService {
     public List<NewsletterFollow> getAll() {
         return this.newsletterFollowRepository.findAll();
     }
+
+    public List<NewsletterFollow> getByNewsletterID(Newsletter newsletter) {
+        return this.newsletterFollowRepository.findByNewsletter(newsletter);
+    }
+
+    public void deleteByNewsletter(Newsletter newsletter) {
+        this.newsletterFollowRepository.deleteByNewsletter(newsletter);
+    }
 }

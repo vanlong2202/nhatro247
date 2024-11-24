@@ -259,4 +259,8 @@ public class NewsletterService {
         return this.newsletterRepository.findNewsletterSvip();
     }
 
+    public List<Newsletter> getTop3Relate(long typeID, String address, int id) {
+        return this.newsletterRepository.findLimit3ByNotID(typeID, address, id);
+    }
+
 }

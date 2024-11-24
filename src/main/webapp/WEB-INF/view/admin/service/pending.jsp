@@ -11,12 +11,8 @@
                 <title>NhaTro247 - Trang Quản Trị</title>
                 <meta content="" name="description">
                 <meta content="" name="keywords">
-
-                <!-- Favicons -->
                 <link href="/admin/img/favicon.png" rel="icon">
                 <link href="/admin/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-                <!-- Google Fonts -->
                 <link href="https://fonts.gstatic.com" rel="preconnect">
                 <link
                     href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
@@ -29,6 +25,8 @@
                 <link href="/admin/vendor/remixicon/remixicon.css" rel="stylesheet">
                 <link href="/admin/vendor/simple-datatables/style.css" rel="stylesheet">
                 <link href="/admin/css/style.css" rel="stylesheet">
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
                 <style>
                     table td {
                         font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -40,6 +38,30 @@
                         font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
                         font-weight: bold;
                     }
+
+                    .table-data-title {
+                        width: 300px;
+                        display: -webkit-box;
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;
+                        -webkit-line-clamp: 2;
+                    }
+
+                    .alert {
+                        color: white;
+                        position: fixed;
+                        top: 70px;
+                        right: 20px;
+                        z-index: 1050;
+                        opacity: 0;
+                        transform: translateX(100%);
+                        transition: opacity 0.5s, transform 0.5s;
+                    }
+
+                    .alert.show {
+                        opacity: 1;
+                        transform: translateX(0);
+                    }
                 </style>
             </head>
 
@@ -49,6 +71,22 @@
 
                     <div class="pagetitle">
                         <h1>QUẢN LÍ BẢN TIN</h1>
+                        <c:if test="${not empty success}">
+                            <div class="alert alert-success bg-success text-light border-0 alert-dismissible fade show"
+                                role="alert">
+                                ${success}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        </c:if>
+                        <c:if test="${not empty error}">
+                            <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show"
+                                role="alert">
+                                ${error}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        </c:if>
                     </div>
 
                     <section class="section">
@@ -74,7 +112,9 @@
                                                 <c:forEach var="newsletter" items="${news}" varStatus="status">
                                                     <tr>
                                                         <td>#${status.index + 1}</td>
-                                                        <td>${newsletter.title}</td>
+                                                        <td>
+                                                            <div class="table-data-title">${newsletter.title}</div>
+                                                        </td>
                                                         <td>${newsletter.newsletterType.name}</td>
                                                         <td>${newsletter.createTime}</td>
                                                         <td>${newsletter.account.fullName}</td>
@@ -111,7 +151,20 @@
                 <jsp:include page="../layout/sidebar.jsp" />
                 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
                         class="bi bi-arrow-up-short"></i></a>
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        var alert = document.querySelector(".alert");
+                        if (alert) {
+                            // Thêm class "show" để hiển thị thông báo
+                            alert.classList.add("show");
 
+                            // Sau 3 giây, tự động ẩn thông báo
+                            setTimeout(function () {
+                                alert.classList.remove("show");
+                            }, 3000); // 3000ms = 3 giây
+                        }
+                    });
+                </script>
                 <script src="/admin/vendor/apexcharts/apexcharts.min.js"></script>
                 <script src="/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
                 <script src="/admin/vendor/chart.js/chart.umd.js"></script>

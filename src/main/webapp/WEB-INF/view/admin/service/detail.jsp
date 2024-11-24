@@ -12,10 +12,11 @@
                     <title>NhaTro247 - Trang Quản Trị</title>
                     <meta content="" name="description">
                     <meta content="" name="keywords">
-
-                    <!-- Favicons -->
                     <link href="/admin/img/favicon.png" rel="icon">
                     <link href="/admin/img/apple-touch-icon.png" rel="apple-touch-icon">
+                    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+                        rel="stylesheet">
+
 
                     <!-- Google Fonts -->
                     <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -30,6 +31,9 @@
                     <link href="/admin/vendor/remixicon/remixicon.css" rel="stylesheet">
                     <link href="/admin/vendor/simple-datatables/style.css" rel="stylesheet">
                     <link href="/admin/css/style.css" rel="stylesheet">
+                    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+                        rel="stylesheet">
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
                     <style>
                         table td {
                             font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -226,17 +230,13 @@
                                                     <div class="row">
                                                         <div class="col-lg-3 col-md-4 label">Trạng thái hoạt động:</div>
                                                         <div class="col-lg-9 col-md-8">
-                                                            <c:if test="${newsletter.isActive == 0}">
-                                                                <a style="width: 100px;" href=""
-                                                                    class="btn btn-dark  btn-sm"
-                                                                    title="Xem Chi Tiết">Ẩn</a>
-                                                                </a>
-                                                            </c:if>
                                                             <c:if test="${newsletter.isActive == 1}">
-                                                                <a style="width: 100px;" href=""
-                                                                    class="btn btn-danger  btn-sm"
-                                                                    title="Xem Chi Tiết">Hiển Thị</a>
-                                                                </a>
+                                                                <i class="fa-solid fa-circle-check fa-beat"
+                                                                    style="color: #00ff55;"></i>
+                                                            </c:if>
+                                                            <c:if test="${newsletter.isActive == 0}">
+                                                                <i class="fa-solid fa-circle-xmark fa-beat"
+                                                                    style="color: #ff0000;"></i>
                                                             </c:if>
                                                         </div>
                                                     </div>

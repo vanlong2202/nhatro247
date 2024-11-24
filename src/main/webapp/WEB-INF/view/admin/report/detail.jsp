@@ -11,6 +11,8 @@
                 <title>NhaTro247 - Trang Quản Trị</title>
                 <meta content="" name="description">
                 <meta content="" name="keywords">
+
+                <!-- Favicons -->
                 <link href="/admin/img/favicon.png" rel="icon">
                 <link href="/admin/img/apple-touch-icon.png" rel="apple-touch-icon">
                 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
@@ -44,7 +46,7 @@
                     }
 
                     .table-data-title {
-                        width: 200px;
+                        width: 300px;
                         display: -webkit-box;
                         -webkit-box-orient: vertical;
                         overflow: hidden;
@@ -74,6 +76,19 @@
                         opacity: 1;
                         transform: translateX(0);
                     }
+
+                    .card-img {
+                        width: 100%;
+                        height: 250px;
+                        border-radius: 8px;
+                        overflow: hidden;
+                    }
+
+                    .card-img img {
+                        width: 33%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
                 </style>
             </head>
 
@@ -82,84 +97,72 @@
                 <main id="main" class="main">
 
                     <div class="pagetitle">
-                        <h1>QUẢN LÍ BÁO CÁO BẢN TIN</h1>
+                        <h1>BÁO CÁO BẢN TIN</h1>
                     </div>
 
-                    <section class="section">
+                    <div class="card">
+                        <div class="card-img" style="display: flex; justify-content: space-between;">
+                            <img src="/uploads/${report.newsletter.image1}">
+                            <img src="/uploads/${report.newsletter.image2}">
+                            <img src="/uploads/${report.newsletter.image3}">
+                        </div>
+
+                        <div class="card-body mt-2">
+                            <a href="/newsletter-detail/${report.newsletter.newsletterID}"
+                                class="card-title">${report.newsletter.title}</a>
+                        </div>
+                    </div>
+                    <section class="section profile">
                         <div class="row">
-                            <div class="col-lg-12">
-
+                            <div class="col-xl-12">
                                 <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Danh Sách Báo Cáo Cần Xác Thực</h5>
-                                        <c:if test="${not empty success}">
-                                            <div class="alert alert-success bg-success text-light border-0 alert-dismissible fade show"
-                                                role="alert">
-                                                ${success}
-                                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                        </c:if>
-                                        <c:if test="${not empty error}">
-                                            <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show"
-                                                role="alert">
-                                                ${error}
-                                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                        </c:if>
-                                        <table class="table datatable">
-                                            <thead>
-                                                <tr>
-                                                    <th>STT</th>
-                                                    <th>Tiêu đề</th>
-                                                    <th>Nội dung</th>
-                                                    <th>Email</th>
-                                                    <th>Số điện thoại</th>
-                                                    <th>Trạng thái</th>
-                                                    <th>Chức năng</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <c:forEach var="reportNewsletter" items="${report}" varStatus="status">
-                                                    <tr>
-                                                        <td>#${status.index + 1}</td>
-                                                        <td>
-                                                            <div class="table-data-title">
-                                                                ${reportNewsletter.newsletter.title}</div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="table-data-title">${reportNewsletter.context}
-                                                            </div>
-                                                        </td>
-                                                        <td>${reportNewsletter.email}</td>
-                                                        <td>${reportNewsletter.phone}</td>
-                                                        <td>
-                                                            <button style="width: 122px;" type="button"
-                                                                class="btn mb-2 btn-primary btn-sm">Cần Xác
-                                                                Thực</button>
-                                                            </a>
-                                                        </td>
-                                                        <td>
-                                                            <a href="/newsletter-detail/${reportNewsletter.newsletter.newsletterID}"
-                                                                class="btn btn-info btn-sm "><i
-                                                                    class="fa-solid fa-code fa-flip"
-                                                                    style="color: #ffffff;"></i></a>
-                                                            <a style="width: 88px;"
-                                                                href="/admin/report-detail/${reportNewsletter.reportID}"
-                                                                class="btn btn-success btn-sm">Xác Thực</a>
-                                                        </td>
-                                                    </tr>
-                                                </c:forEach>
-                                            </tbody>
-                                        </table>
+                                    <div class="card-body pt-3">
+                                        <div class="tab-content pt-2">
+                                            <div class="tab-pane fade show active profile-overview"
+                                                id="profile-overview">
+                                                <h5 class="card-title">THÔNG TIN BÁO CÁO</h5>
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-4 label">Số Điện Thoại:</div>
+                                                    <div style="font-weight: bold;" class="col-lg-9 col-md-8">
+                                                        ${report.phone}</div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-4 label ">Email:</div>
+                                                    <div style="font-weight: bold;" class="col-lg-9 col-md-8">
+                                                        ${report.email}
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-4 label ">Nội dung báo cáo:</div>
+                                                    <div style="font-weight: bold;" class="col-lg-9 col-md-8">
+                                                        ${report.context}
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-4 label ">Ngày báo cáo:</div>
+                                                    <div style="font-weight: bold;" class="col-lg-9 col-md-8">
+                                                        ${report.createTime}
+                                                    </div>
+                                                </div>
 
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
 
+                                </div>
                             </div>
                         </div>
                     </section>
+
+                    <div style="display: flex;justify-content: center;">
+                        <a style="margin-right: 5px;width: 88px;" href="/admin/report-comfirm/${report.reportID}"
+                            class="btn btn-success btn-sm">Xác
+                            Thực</a>
+                        <div>
+                            <button style="width: 88px;" onclick="history.back()" type="reset"
+                                class="btn btn-secondary btn-sm">Trở lại</button>
+                        </div>
+                    </div>
 
                 </main>
                 <jsp:include page="../layout/sidebar.jsp" />

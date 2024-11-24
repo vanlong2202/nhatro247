@@ -282,41 +282,45 @@
                         </div>
                     </div>
                     <div class="properties section mt-1">
-
                         <div class="container">
                             <div class="row">
-                                <div class="row">
-                                    <?php foreach ($ds as $row) : ?>
+                                <c:forEach var="post" items="${newsletterRelate}">
                                     <div class="col-lg-4 col-md-6">
                                         <div class="item">
-                                            <a href="chitietbantin.php?id=<?php echo $row['TinID']; ?>"><img
-                                                    style="height: 260px; width: 350px;"
-                                                    src="<?php echo $row['Tin_image1']; ?>" alt=""></a>
-                                            <span class="category">
-                                                <?php echo $row['Tin_diachi']; ?>
-                                            </span>
+                                            <a href="/newsletter-detail/${post.newsletterID}"><img
+                                                    style="width: 100%; height: 200px;object-fit: cover;"
+                                                    src="/uploads/${post.image1}" alt=""></a>
+                                            <span class="category">${post.newsletterAddress}</span>
                                             <h6>
-                                                <?php echo number_format($row['Tin_gia']); ?> VNĐ
+                                                <fmt:formatNumber value="${post.price}" />
+                                                VND
                                             </h6>
-                                            <h4><a href="chitietbantin.php?id=<?php echo $row['TinID']; ?>">
-                                                    <?php echo $row['Tin_title']; ?>
-                                                </a></h4>
-                                            <p>
-                                                <?php echo $row['Tin_diachichitiet']; ?>
-                                            </p>
+                                            <h4
+                                                style="display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;">
+                                                <a href="property-details.html">${post.title}</a>
+                                            </h4>
                                             <ul>
-                                                <li><span>
-                                                        <?php echo $row['Tin_time']; ?>
-                                                    </span></li>
+                                                <li>Diện tích: <span>${post.acreage} m²</span></li>
+                                                <li>Phòng khả dụng: <span>${post.vacantRoom} phòng</span>
+                                                </li>
+                                                <li>Loại hình: <span>${post.newsletterType.name}</span>
+                                                </li>
+                                                <li>Ngày cập nhật: <span>${post.createTime}</span></li>
                                             </ul>
-                                            <div class="main-button">
-                                                <a href="chitietbantin.php?id=<?php echo $row['TinID']; ?>">THÔNG TIN
-                                                    CHI TIẾT</a>
+                                            <div style="display: flex; justify-content: space-evenly;">
+                                                <div class="main-button">
+                                                    <a href="/newsletter-detail/${post.newsletterID}">THÔNG
+                                                        TIN
+                                                        CHI TIẾT</a>
+                                                </div>
+                                                <div class="main-button">
+                                                    <a href="property-details.html"><i
+                                                            class="fa-brands fa-gratipay"></i></a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <?php endforeach; ?>
-                                </div>
+                                </c:forEach>
                             </div>
                         </div>
                     </div>

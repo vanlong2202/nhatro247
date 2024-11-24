@@ -9,6 +9,7 @@ import com.nhatro247.nhatro247.entity.Role;
 import com.nhatro247.nhatro247.service.AccountService;
 import com.nhatro247.nhatro247.service.FeedBackService;
 import com.nhatro247.nhatro247.service.NewsletterService;
+import com.nhatro247.nhatro247.service.PostService;
 import com.nhatro247.nhatro247.service.PostTypeService;
 import com.nhatro247.nhatro247.service.ReportService;
 
@@ -19,14 +20,17 @@ public class AdminController {
     private final ReportService reportService;
     private final FeedBackService feedBackService;
     private final PostTypeService postTypeService;
+    private final PostService postService;
 
     public AdminController(AccountService accountService, NewsletterService newsletterService,
-            ReportService reportService, FeedBackService feedBackService, PostTypeService postTypeService) {
+            ReportService reportService, FeedBackService feedBackService, PostTypeService postTypeService,
+            PostService postService) {
         this.accountService = accountService;
         this.newsletterService = newsletterService;
         this.reportService = reportService;
         this.feedBackService = feedBackService;
         this.postTypeService = postTypeService;
+        this.postService = postService;
     }
 
     @GetMapping("/admin/account")
@@ -95,6 +99,14 @@ public class AdminController {
         model.addAttribute("post", new Post());
         model.addAttribute("type", this.postTypeService.getAll());
         return "admin/post/addPost";
+    }
+
+    @GetMapping("/admin/post")
+    public String getAdminPostPage(Model model) {
+        Role role = new Role();
+        role.setRoleID(1);
+        model.addAttribute("listPost", this.postService.getAll());
+        return "admin/post/view";
     }
 
 }

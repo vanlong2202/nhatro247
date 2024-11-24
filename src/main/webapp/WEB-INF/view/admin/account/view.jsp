@@ -12,9 +12,10 @@
                 <meta content="" name="description">
                 <meta content="" name="keywords">
 
-                <!-- Favicons -->
                 <link href="/admin/img/favicon.png" rel="icon">
                 <link href="/admin/img/apple-touch-icon.png" rel="apple-touch-icon">
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
 
                 <!-- Google Fonts -->
                 <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -29,6 +30,8 @@
                 <link href="/admin/vendor/remixicon/remixicon.css" rel="stylesheet">
                 <link href="/admin/vendor/simple-datatables/style.css" rel="stylesheet">
                 <link href="/admin/css/style.css" rel="stylesheet">
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
                 <style>
                     table td {
                         font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -39,6 +42,22 @@
                     table th {
                         font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
                         font-weight: bold;
+                    }
+
+                    .alert {
+                        color: white;
+                        position: fixed;
+                        top: 70px;
+                        right: 20px;
+                        z-index: 1050;
+                        opacity: 0;
+                        transform: translateX(100%);
+                        transition: opacity 0.5s, transform 0.5s;
+                    }
+
+                    .alert.show {
+                        opacity: 1;
+                        transform: translateX(0);
                     }
                 </style>
             </head>
@@ -54,21 +73,36 @@
                     <section class="section">
                         <div class="row">
                             <div class="col-lg-12">
-
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title">Danh Sách Chi Tiết</h5>
+                                        <c:if test="${not empty success}">
+                                            <div class="alert alert-success bg-success text-light border-0 alert-dismissible fade show"
+                                                role="alert">
+                                                ${success}
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                        </c:if>
+                                        <c:if test="${not empty error}">
+                                            <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show"
+                                                role="alert">
+                                                ${error}
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                        </c:if>
                                         <table class="table datatable">
                                             <thead>
                                                 <tr>
-                                                    <th>STT</th>
-                                                    <th>Tên Đăng Nhập</th>
-                                                    <th>Họ và Tên</th>
-                                                    <th>Phone</th>
-                                                    <th>Email</th>
-                                                    <th>Facebook</th>
-                                                    <th>Quyền hạn</th>
-                                                    <th>Chức năng</th>
+                                                    <th>ID</th>
+                                                    <th>USERNAME</th>
+                                                    <th>FULLNAME</th>
+                                                    <th>PHONE</th>
+                                                    <th>EMAIL</th>
+                                                    <th>FACEBOOK</th>
+                                                    <th>ROLE</th>
+                                                    <th>FUNCTION</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -87,14 +121,17 @@
                                                                 </a>
                                                             </c:if>
                                                         </td>
-                                                        <td><a href="/admin/update-info/${account.accountID}"
-                                                                class="btn btn-dark btn-sm " title="Cập Nhật Thông Tin">
-                                                                <i class="ri-edit-2-line"></i>
-                                                            </a>
-                                                            <a href="/admin/delete-info/${account.accountID}"
-                                                                class="btn btn-danger btn-sm " title="Xóa Tài Khoản">
-                                                                <i class="ri-delete-bin-2-fill"></i>
-                                                            </a>
+                                                        <td>
+                                                            <a style="background-color: white;box-shadow: 0 2px 5px grey"
+                                                                href="/admin/update-info/${account.accountID}"
+                                                                type="button" class="btn btn-secondary btn-sm"
+                                                                title="Update Info"><i class="fa-solid fa-pen"
+                                                                    style="color: #ff9500;"></i></a>
+                                                            <a style="background-color: white;box-shadow: 0 2px 5px grey"
+                                                                href="/admin/delete-info/${account.accountID}"
+                                                                class="btn btn-danger btn-sm" title="Xóa bản tin"><i
+                                                                    class="fa-solid fa-trash fa-bounce"
+                                                                    style="color: #ff0000;"></i><span></span></a>
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
@@ -112,7 +149,17 @@
                 <jsp:include page="../layout/sidebar.jsp" />
                 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
                         class="bi bi-arrow-up-short"></i></a>
-
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        var alert = document.querySelector(".alert");
+                        if (alert) {
+                            alert.classList.add("show");
+                            setTimeout(function () {
+                                alert.classList.remove("show");
+                            }, 3000);
+                        }
+                    });
+                </script>
                 <script src="/admin/vendor/apexcharts/apexcharts.min.js"></script>
                 <script src="/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
                 <script src="/admin/vendor/chart.js/chart.umd.js"></script>

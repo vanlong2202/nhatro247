@@ -11,10 +11,10 @@
                 <title>NhaTro247 - Trang Quản Trị</title>
                 <meta content="" name="description">
                 <meta content="" name="keywords">
-
-                <!-- Favicons -->
                 <link href="/admin/img/favicon.png" rel="icon">
                 <link href="/admin/img/apple-touch-icon.png" rel="apple-touch-icon">
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
 
                 <!-- Google Fonts -->
                 <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -29,6 +29,8 @@
                 <link href="/admin/vendor/remixicon/remixicon.css" rel="stylesheet">
                 <link href="/admin/vendor/simple-datatables/style.css" rel="stylesheet">
                 <link href="/admin/css/style.css" rel="stylesheet">
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
                 <style>
                     table td {
                         font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -39,6 +41,34 @@
                     table th {
                         font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
                         font-weight: bold;
+                    }
+
+                    .alert {
+                        color: white;
+                        position: fixed;
+                        top: 70px;
+                        right: 20px;
+                        z-index: 1050;
+                        opacity: 0;
+                        transform: translateX(100%);
+                        transition: opacity 0.5s, transform 0.5s;
+                    }
+
+                    .alert.show {
+                        opacity: 1;
+                        transform: translateX(0);
+                    }
+
+                    .table-data-title {
+                        width: 200px;
+                        display: -webkit-box;
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;
+                        -webkit-line-clamp: 2;
+                    }
+
+                    .table-data-active {
+                        text-align: center;
                     }
                 </style>
             </head>
@@ -58,6 +88,22 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title">Danh Sách Trạng Thái Hoạt Động Bản Tin</h5>
+                                        <c:if test="${not empty success}">
+                                            <div class="alert alert-success bg-success text-light border-0 alert-dismissible fade show"
+                                                role="alert">
+                                                ${success}
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                        </c:if>
+                                        <c:if test="${not empty error}">
+                                            <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show"
+                                                role="alert">
+                                                ${error}
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                        </c:if>
                                         <table class="table datatable">
                                             <thead>
                                                 <tr>
@@ -65,7 +111,6 @@
                                                     <th>Tiêu đề</th>
                                                     <th>Loại hình</th>
                                                     <th>Thời gian</th>
-                                                    <th>Người đăng</th>
                                                     <th>Trạng thái</th>
                                                     <th>Hoạt Động</th>
                                                     <th>Chức năng</th>
@@ -75,10 +120,11 @@
                                                 <c:forEach var="newsletter" items="${news}" varStatus="status">
                                                     <tr>
                                                         <td>#${status.index + 1}</td>
-                                                        <td>${newsletter.title}</td>
+                                                        <td>
+                                                            <div class="table-data-title">${newsletter.title}</div>
+                                                        </td>
                                                         <td>${newsletter.newsletterType.name}</td>
                                                         <td>${newsletter.createTime}</td>
-                                                        <td>${newsletter.account.fullName}</td>
                                                         <td>
                                                             <c:if test="${newsletter.isStatus == 1}">
                                                                 <button style="width: 122px;" type="button"
@@ -95,46 +141,44 @@
 
                                                         </td>
                                                         <td>
-                                                            <c:if test="${newsletter.isActive == 0}">
-                                                                <button style="width: 88px;" type="button"
-                                                                    class="btn mb-2 btn-dark btn-sm">Ẩn</button>
-                                                                </a>
-                                                            </c:if>
-                                                            <c:if test="${newsletter.isActive == 1}">
-                                                                <button
-                                                                    style="width: 88px; color: aliceblue;background-color: rgb(255, 0, 230);"
-                                                                    type="button" class="btn mb-2 btn-sm">Hiển
-                                                                    Thị</button>
-                                                                </a>
-                                                            </c:if>
+                                                            <div class="table-data-active">
+                                                                <c:if test="${newsletter.isActive == 1}">
+                                                                    <i class="fa-solid fa-circle-check fa-beat"
+                                                                        style="color: #00ff55;"></i>
+                                                                </c:if>
+                                                                <c:if test="${newsletter.isActive == 0}">
+                                                                    <i class="fa-solid fa-circle-xmark fa-beat"
+                                                                        style="color: #ff0000;"></i>
+                                                                </c:if>
+                                                            </div>
 
                                                         </td>
                                                         <td>
-                                                            <div style="display: flex; justify-content: space-between;">
-                                                                <a style="margin-right: 5px;"
-                                                                    href="/admin/newsletter-detail/${newsletter.newsletterID}"
-                                                                    class="btn btn-secondary btn-sm "><i
-                                                                        class="bi bi-eye-fill"></i></a>
-                                                                <c:if test="${newsletter.isActive == 0}">
-                                                                    <a style="margin-right: 5px;"
-                                                                        href="/admin/update-active/${newsletter.newsletterID}"
-                                                                        class="btn btn-secondary btn-sm "
-                                                                        title="Xem chi tiết"><i
-                                                                            class="bi bi-eye-fill"></i></a>
-                                                                </c:if>
-                                                                <c:if test="${newsletter.isActive == 1}">
-                                                                    <a style="margin-right: 5px;"
-                                                                        href="/admin/update-active/${newsletter.newsletterID}"
-                                                                        class="btn btn-secondary btn-sm "
-                                                                        title="Xem chi tiết"><i
-                                                                            class="bi bi-eye-slash-fill"></i></a>
-                                                                </c:if>
-                                                                <a href="/admin/newsletter-delete/${newsletter.newsletterID}"
-                                                                    class="btn btn-danger btn-sm" title="Xóa bản tin"><i
-                                                                        class="fa-solid fa-trash"><i
-                                                                            class="bi bi-trash"></i></a>
-                                                            </div>
-
+                                                            <a style="background-color: white;box-shadow: 0 2px 5px grey"
+                                                                href="/newsletter-detail/${newsletter.newsletterID}"
+                                                                class="btn btn-info btn-sm" title="Xem Chi Tiết">
+                                                                <i style="color: rgb(0, 38, 255);"
+                                                                    class="fas fa-eye"></i>
+                                                            </a>
+                                                            <c:if test="${newsletter.isActive == 1}">
+                                                                <a style="background-color: white;box-shadow: 0 2px 5px grey"
+                                                                    href="/admin/update-active/${newsletter.newsletterID}"
+                                                                    type="button" class="btn btn-sm" title="Đăng Lại"><i
+                                                                        class="fa-solid fa-toggle-on"
+                                                                        style="color: #00ff55;"></i></a>
+                                                            </c:if>
+                                                            <c:if test="${newsletter.isActive == 0}">
+                                                                <a style="background-color: white;box-shadow: 0 2px 5px grey"
+                                                                    href="/admin/update-active/${newsletter.newsletterID}"
+                                                                    type="button" class="btn btn-sm" title="Đăng Lại"><i
+                                                                        class="fa-solid fa-toggle-off"
+                                                                        style="color: #ff0000;"></i></a>
+                                                            </c:if>
+                                                            <a style="background-color: white;box-shadow: 0 2px 5px grey"
+                                                                href="/admin/newsletter-delete/${newsletter.newsletterID}"
+                                                                class="btn btn-danger btn-sm" title="Xóa bản tin"><i
+                                                                    class="fa-solid fa-trash fa-bounce"
+                                                                    style="color: #ff0000;"></i><span></span></a>
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
@@ -152,7 +196,20 @@
                 <jsp:include page="../layout/sidebar.jsp" />
                 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
                         class="bi bi-arrow-up-short"></i></a>
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        var alert = document.querySelector(".alert");
+                        if (alert) {
+                            // Thêm class "show" để hiển thị thông báo
+                            alert.classList.add("show");
 
+                            // Sau 3 giây, tự động ẩn thông báo
+                            setTimeout(function () {
+                                alert.classList.remove("show");
+                            }, 3000); // 3000ms = 3 giây
+                        }
+                    });
+                </script>
                 <script src="/admin/vendor/apexcharts/apexcharts.min.js"></script>
                 <script src="/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
                 <script src="/admin/vendor/chart.js/chart.umd.js"></script>

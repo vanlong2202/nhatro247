@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.nhatro247.nhatro247.entity.Account;
 import com.nhatro247.nhatro247.repository.AccountRepository;
@@ -27,7 +28,7 @@ public class AccountAdminController {
     }
 
     @PostMapping("/admin/update-submit")
-    public String updateAccount(@ModelAttribute("info") Account account) {
+    public String updateAccount(@ModelAttribute("info") Account account, RedirectAttributes redirectAttributes) {
         Account acc = this.accountService.getAccountByID(account.getAccountID());
         if (acc != null) {
             acc.setFullName(account.getFullName());
@@ -36,8 +37,10 @@ public class AccountAdminController {
             acc.setPhone(account.getPhone());
             acc.setFacebook(account.getFacebook());
             this.accountService.addAccount(acc);
+            redirectAttributes.addFlashAttribute("success", "Cập Nhật Thông Tin Người Dùng Thành Công !");
             return "redirect:/admin/account";
         } else {
+            redirectAttributes.addFlashAttribute("error", "Đã có lỗi xảy ra !");
             return "redirect:/admin/update-info/" + acc.getAccountID();
         }
     }

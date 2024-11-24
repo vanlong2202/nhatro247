@@ -56,7 +56,9 @@ public class PostType {
     @Override
     public String toString() {
         return "PostType [postTypeID=" + postTypeID + ", name=" + name + ", description=" + description + ", posts="
-                + posts + "]";
+                + posts + ", getPostTypeID()=" + getPostTypeID() + ", getName()=" + getName() + ", getDescription()="
+                + getDescription() + ", getPosts()=" + getPosts() + ", getClass()=" + getClass() + ", hashCode()="
+                + hashCode() + ", toString()=" + super.toString() + "]";
     }
 
 }
