@@ -6,7 +6,7 @@
                 <ul class="sidebar-nav" id="sidebar-nav">
 
                     <li class="nav-item">
-                        <a class="nav-link " href="index.html">
+                        <a class="nav-link " href="/admin">
                             <i class="bi bi-grid"></i>
                             <span>Dashboard</span>
                         </a>
@@ -113,8 +113,8 @@
                         </a>
                         <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                             <li>
-                                <a href="icons-bootstrap.html">
-                                    <i class="bi bi-circle"></i><span>Bootstrap Icons</span>
+                                <a href="/admin/bill-pending">
+                                    <i class="bi bi-circle"></i><span>Hóa đơn nạp tiền</span>
                                 </a>
                             </li>
                             <li>

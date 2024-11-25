@@ -43,6 +43,8 @@ public class Newsletter {
     private String image3;
     private String description;
     private String approver;
+    @Column(columnDefinition = "MEDIUMTEXT")
+    private String history;
 
     @ManyToOne
     @JoinColumn(name = "newsletterTypeID")
@@ -258,6 +260,22 @@ public class Newsletter {
         this.price = price;
     }
 
+    public List<NewsletterFollow> getNewsletterFollows() {
+        return newsletterFollows;
+    }
+
+    public void setNewsletterFollows(List<NewsletterFollow> newsletterFollows) {
+        this.newsletterFollows = newsletterFollows;
+    }
+
+    public String getHistory() {
+        return history;
+    }
+
+    public void setHistory(String history) {
+        this.history = history;
+    }
+
     @Override
     public String toString() {
         return "Newsletter [newsletterID=" + newsletterID + ", title=" + title + ", detail=" + detail + ", format="
@@ -266,16 +284,8 @@ public class Newsletter {
                 + vacantRoom + ", selfManagement=" + selfManagement + ", prioritize=" + prioritize + ", createTime="
                 + createTime + ", isStatus=" + isStatus + ", isActive=" + isActive + ", svip=" + svip + ", image1="
                 + image1 + ", image2=" + image2 + ", image3=" + image3 + ", description=" + description + ", approver="
-                + approver + ", newsletterType=" + newsletterType + ", account=" + account + ", reportNewsletter="
-                + reportNewsletter + "]";
-    }
-
-    public List<NewsletterFollow> getNewsletterFollows() {
-        return newsletterFollows;
-    }
-
-    public void setNewsletterFollows(List<NewsletterFollow> newsletterFollows) {
-        this.newsletterFollows = newsletterFollows;
+                + approver + ", history=" + history + ", newsletterType=" + newsletterType + ", account=" + account
+                + ", newsletterFollows=" + newsletterFollows + ", reportNewsletter=" + reportNewsletter + "]";
     }
 
 }

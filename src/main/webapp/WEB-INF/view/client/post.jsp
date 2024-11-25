@@ -407,7 +407,7 @@
                             </div>
                         </div>
                         <div class="form-group d-grid gap-2 col-2 mx-auto mb-3">
-                            <input type="submit" class="btn btn-danger" value="ĐĂNG TIN">
+                            <input type="submit" class="btn btn-danger" value="ĐĂNG TIN [20.000 VNĐ/Bài]">
                         </div>
 
 

@@ -14,6 +14,7 @@ import com.nhatro247.nhatro247.entity.NewsletterType;
 import com.nhatro247.nhatro247.entity.Post;
 import com.nhatro247.nhatro247.entity.PostType;
 import com.nhatro247.nhatro247.service.AccountService;
+import com.nhatro247.nhatro247.service.BillService;
 import com.nhatro247.nhatro247.service.MenuService;
 import com.nhatro247.nhatro247.service.NewsletterFollowService;
 import com.nhatro247.nhatro247.service.NewsletterService;
@@ -31,16 +32,18 @@ public class HomeController {
     private final AccountService accountService;
     private final PostService postService;
     private final PostTypeService postTypeService;
+    private final BillService billService;
 
     public HomeController(MenuService menuService, NewsletterService newsletterService,
             NewsletterFollowService newsletterFollowService, AccountService accountService, PostService postService,
-            PostTypeService postTypeService) {
+            PostTypeService postTypeService, BillService billService) {
         this.menuService = menuService;
         this.newsletterService = newsletterService;
         this.newsletterFollowService = newsletterFollowService;
         this.accountService = accountService;
         this.postService = postService;
         this.postTypeService = postTypeService;
+        this.billService = billService;
     }
 
     @GetMapping("")
@@ -81,14 +84,13 @@ public class HomeController {
     }
 
     @GetMapping("/deposit")
-    public String getDepositPage(Model model) {
+    public String getDepositPage(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        String user = (String) session.getAttribute("username");
+        Account account = this.accountService.getAccountByName(user);
         model.addAttribute("menu", this.menuService.getAll());
+        model.addAttribute("bills", this.billService.getAllByAccount(account));
         return "client/deposit";
-    }
-
-    @GetMapping("/admin")
-    public String getAdminPage() {
-        return "admin/dashboard/view";
     }
 
     @GetMapping("/error-page")

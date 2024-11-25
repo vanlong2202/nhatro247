@@ -1,5 +1,6 @@
 package com.nhatro247.nhatro247.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.nhatro247.nhatro247.entity.Account;
 import com.nhatro247.nhatro247.entity.Newsletter;
 import com.nhatro247.nhatro247.entity.NewsletterType;
+import com.nhatro247.nhatro247.entity.dto.DashboardNewsletterDTO;
 import com.nhatro247.nhatro247.entity.dto.NewsletterCriteriaDTO;
 import com.nhatro247.nhatro247.repository.NewsletterRepository;
 import com.nhatro247.nhatro247.service.specification.NewsletterSpecs;
@@ -263,4 +265,18 @@ public class NewsletterService {
         return this.newsletterRepository.findLimit3ByNotID(typeID, address, id);
     }
 
+    public List<DashboardNewsletterDTO> getStatictisNews() {
+        List<Object[]> rawResults = newsletterRepository.getDashboardNewsAdmin();
+        List<DashboardNewsletterDTO> results = new ArrayList<>();
+
+        for (Object[] row : rawResults) {
+            String date = (String) row[0];
+            int statusID = ((Number) row[1]).intValue();
+            long count = ((Number) row[2]).longValue();
+
+            results.add(new DashboardNewsletterDTO(date, statusID, count));
+        }
+
+        return results;
+    }
 }

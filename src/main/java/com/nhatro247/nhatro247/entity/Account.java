@@ -25,6 +25,7 @@ public class Account {
     private String phone;
     private String address;
     private String password;
+    private long balance;
 
     @NotNull
     private String email;
@@ -45,8 +46,27 @@ public class Account {
     @OneToMany(mappedBy = "account")
     private List<Post> posts;
 
+    @OneToMany(mappedBy = "account")
+    private List<Bill> bill;
+
     public int getAccountID() {
         return accountID;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+
+    public List<Bill> getBill() {
+        return bill;
+    }
+
+    public void setBill(List<Bill> bill) {
+        this.bill = bill;
     }
 
     public void setAccountID(int accountID) {
@@ -133,19 +153,28 @@ public class Account {
         this.newsletter = newsletter;
     }
 
-    @Override
-    public String toString() {
-        return "Account [accountID=" + accountID + ", username=" + username + ", fullName=" + fullName + ", phone="
-                + phone + ", address=" + address + ", password=" + password + ", email=" + email + ", facebook="
-                + facebook + ", description=" + description + ", role=" + role + ", newsletter=" + newsletter + "]";
-    }
-
     public List<NewsletterFollow> getNewsletterFollows() {
         return newsletterFollows;
     }
 
     public void setNewsletterFollows(List<NewsletterFollow> newsletterFollows) {
         this.newsletterFollows = newsletterFollows;
+    }
+
+    public long getBalance() {
+        return balance;
+    }
+
+    public void setBalance(long balance) {
+        this.balance = balance;
+    }
+
+    @Override
+    public String toString() {
+        return "Account [accountID=" + accountID + ", username=" + username + ", fullName=" + fullName + ", phone="
+                + phone + ", address=" + address + ", password=" + password + ", balance=" + balance + ", email="
+                + email + ", facebook=" + facebook + ", description=" + description + ", role=" + role + ", newsletter="
+                + newsletter + ", newsletterFollows=" + newsletterFollows + ", posts=" + posts + ", bill=" + bill + "]";
     }
 
 }

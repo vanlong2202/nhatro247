@@ -696,7 +696,7 @@
                             </div>
                             <div class="modal-body">
                                 Nâng cấp bản tin xuất hiện ở vị trí ưu tiên chỉ với giá <span
-                                    style="font-weight: bold;">29.000 VND</span> là một tính năng
+                                    style="font-weight: bold;">99.000 VND</span> là một tính năng
                                 giúp bạn tăng khả năng tiếp cận và thu hút sự chú ý cho bản tin của mình. Khi sử dụng
                                 dịch vụ này, bản tin của bạn sẽ được hiển thị ở vị trí nổi bật nhất trên trang, đảm bảo
                                 rằng người xem dễ dàng nhìn thấy và tiếp cận nhanh chóng.
@@ -706,7 +706,7 @@
                                     data-bs-dismiss="modal">Đóng</button>
                                 <a id="modal-confirm-btn" href=""
                                     style="width: 111px; background-color: #ff9500;color: white;"
-                                    class="btn btn-sm">29.000 VND</a>
+                                    class="btn btn-sm">99.000 VND</a>
                             </div>
                         </div>
                     </div>

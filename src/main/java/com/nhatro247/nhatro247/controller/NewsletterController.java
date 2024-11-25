@@ -15,6 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import com.nhatro247.nhatro247.entity.Account;
+import com.nhatro247.nhatro247.entity.Bill;
+import com.nhatro247.nhatro247.entity.BillType;
 import com.nhatro247.nhatro247.entity.Newsletter;
 import com.nhatro247.nhatro247.entity.NewsletterFollow;
 import com.nhatro247.nhatro247.entity.NewsletterType;
@@ -23,6 +25,7 @@ import com.nhatro247.nhatro247.entity.ReportNewsletter;
 import com.nhatro247.nhatro247.entity.dto.InfoNewsletterDTO;
 import com.nhatro247.nhatro247.entity.dto.NewsletterCriteriaDTO;
 import com.nhatro247.nhatro247.service.AccountService;
+import com.nhatro247.nhatro247.service.BillService;
 import com.nhatro247.nhatro247.service.MenuService;
 import com.nhatro247.nhatro247.service.NewsletterService;
 import com.nhatro247.nhatro247.service.NewsletterTypeService;
@@ -46,14 +49,17 @@ public class NewsletterController {
     private final AccountService accountService;
     private final NewsletterTypeService newsletterTypeService;
     private final UploadService uploadService;
+    private final BillService billService;
 
     public NewsletterController(NewsletterService newsletterService, MenuService menuService,
-            AccountService accountService, NewsletterTypeService newsletterTypeService, UploadService uploadService) {
+            AccountService accountService, NewsletterTypeService newsletterTypeService, UploadService uploadService,
+            BillService billService) {
         this.newsletterService = newsletterService;
         this.menuService = menuService;
         this.accountService = accountService;
         this.newsletterTypeService = newsletterTypeService;
         this.uploadService = uploadService;
+        this.billService = billService;
     }
 
     @GetMapping("/newsletter-detail/{id}")
@@ -167,16 +173,43 @@ public class NewsletterController {
     }
 
     @GetMapping("/update-svip-newsletter/{id}")
-    public String updateSvip(@PathVariable("id") long id, RedirectAttributes redirectAttributes) {
+    public String updateSvip(@PathVariable("id") long id, RedirectAttributes redirectAttributes,
+            HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        String user = (String) session.getAttribute("username");
+        Account account = this.accountService.getAccountByName(user);
         Newsletter newsletter = this.newsletterService.getNewsletterByID(id);
-        if (newsletter != null) {
+        if (newsletter != null && account != null && account.getBalance() > 99000) {
+            LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy");
+            String formattedDate = now.format(formatter);
+            DateTimeFormatter code = DateTimeFormatter.ofPattern("HHmmssddMMyyyy");
+            String paycode = now.format(code);
+
+            account.setBalance(account.getBalance() - 99000);
+            account.setDescription(account.getDescription() + "[-99000 VNĐ Time:" + formattedDate + "]");
+            this.accountService.addAccount(account);
+
+            Bill bill = new Bill();
+            BillType billType = new BillType();
+            billType.setBillTypeID(2);
+            bill.setAmount("99000");
+            bill.setBillType(billType);
+            bill.setAccount(account);
+            bill.setConfirmTime(formattedDate);
+            bill.setCreateTime(formattedDate);
+            bill.setIsStatus(1);
+            bill.setTransferContent("svip " + account.getUsername() + "");
+            bill.setTransactionCode(paycode);
+            this.billService.addBill(bill);
+
             newsletter.setSvip(1);
             this.newsletterService.addNewsletter(newsletter);
             redirectAttributes.addFlashAttribute("success", "Cập nhật trạng thái SVIP bản tin thành công !");
             return "redirect:/maneger-newsletter";
         } else {
-            redirectAttributes.addFlashAttribute("error", "Đã có lỗi xảy ra, vui lòng thử lại !");
-            return "client/manager";
+            redirectAttributes.addFlashAttribute("error", "Số dư tài khoản không đủ để thực hiện thao tác này !");
+            return "redirect:/maneger-newsletter";
         }
     }
 
@@ -199,17 +232,22 @@ public class NewsletterController {
             @RequestParam("file") MultipartFile[] files, RedirectAttributes redirectAttributes) {
         Account account = infoNewsletterDTO.getAccount();
         Account acc = this.accountService.getAccountByID(account.getAccountID());
-        if (acc != null) {
+        if (acc != null && acc.getBalance() > 20000) {
+            LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy");
+            String formattedDate = now.format(formatter);
+            DateTimeFormatter code = DateTimeFormatter.ofPattern("HHmmssddMMyyyy");
+            String paycode = now.format(code);
             acc.setFullName(account.getFullName());
             acc.setFacebook(account.getFacebook());
             acc.setEmail(account.getEmail());
             acc.setPhone(account.getPhone());
+            acc.setBalance(acc.getBalance() - 20000);
+            acc.setDescription(acc.getDescription() + "[-20000 VNĐ Time:" + formattedDate + "]");
             this.accountService.addAccount(acc);
+
             Newsletter newsletter = infoNewsletterDTO.getNewsletter();
-            LocalDateTime now = LocalDateTime.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy");
             Newsletter news = this.newsletterService.getNewsletterByID(newsletter.getNewsletterID());
-            String formattedDate = now.format(formatter);
             newsletter.setCreateTime(formattedDate);
             newsletter.setAccount(account);
             List<String> filename = this.uploadService.handeSaveUploadFile(files);
@@ -220,11 +258,26 @@ public class NewsletterController {
             newsletter.setImage2(image2);
             newsletter.setImage3(image3);
             this.newsletterService.addNewsletter(newsletter);
+
+            Bill bill = new Bill();
+            BillType billType = new BillType();
+            billType.setBillTypeID(2);
+            bill.setAmount("20000");
+            bill.setBillType(billType);
+            bill.setAccount(acc);
+            bill.setConfirmTime(formattedDate);
+            bill.setCreateTime(formattedDate);
+            bill.setIsStatus(1);
+            bill.setTransferContent("dangbai " + acc.getUsername() + "");
+            bill.setTransactionCode(paycode);
+
+            this.billService.addBill(bill);
             redirectAttributes.addFlashAttribute("success", "Đăng bản tin thành công, vui lòng đợi phê duyệt !");
             return "redirect:/post";
         } else {
-            redirectAttributes.addFlashAttribute("error", "Đã có lỗi xảy ra vui lòng thử lại !");
-            return "client/post";
+            redirectAttributes.addFlashAttribute("error",
+                    "Số dư tài khoản không đủ, Vui lòng nạp thêm tiền vào tài khoản !");
+            return "redirect:/post";
         }
     }
 
@@ -260,6 +313,8 @@ public class NewsletterController {
             news.setNewsletterAddress(newsletter.getNewsletterAddress());
             news.setAddressDetail(newsletter.getAddressDetail());
             news.setDetail(newsletter.getDetail());
+            news.setHistory(
+                    news.getHistory() + " [Starus:" + news.getIsStatus() + " - Time update: " + formattedDate + "]");
             news.setIsStatus(0);
             news.setIsActive(0);
             news.setDescription("");

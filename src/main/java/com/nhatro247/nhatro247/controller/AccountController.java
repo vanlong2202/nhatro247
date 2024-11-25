@@ -12,6 +12,7 @@ import com.nhatro247.nhatro247.entity.Account;
 import com.nhatro247.nhatro247.entity.Newsletter;
 import com.nhatro247.nhatro247.entity.Role;
 import com.nhatro247.nhatro247.service.AccountService;
+import com.nhatro247.nhatro247.service.BillService;
 import com.nhatro247.nhatro247.service.MenuService;
 import com.nhatro247.nhatro247.service.NewsletterFollowService;
 import com.nhatro247.nhatro247.service.NewsletterService;
@@ -32,16 +33,19 @@ public class AccountController {
     private final PasswordEncoder passwordEncoder;
     private final NewsletterService newsletterService;
     private final NewsletterFollowService newsletterFollowService;
+    private final BillService billService;
 
     public AccountController(AccountService accountService,
             PasswordEncoder passwordEncoder,
             MenuService menuService,
-            NewsletterService newsletterService, NewsletterFollowService newsletterFollowService) {
+            NewsletterService newsletterService, NewsletterFollowService newsletterFollowService,
+            BillService billService) {
         this.accountService = accountService;
         this.passwordEncoder = passwordEncoder;
         this.menuService = menuService;
         this.newsletterService = newsletterService;
         this.newsletterFollowService = newsletterFollowService;
+        this.billService = billService;
     }
 
     @GetMapping("/profile")
@@ -51,7 +55,7 @@ public class AccountController {
         String user = (String) session.getAttribute("username");
         Account account = this.accountService.getAccountByName(user);
         model.addAttribute("info", account);
-        model.addAttribute("news", this.newsletterService.findByIsStatusAndAccount(1, account));
+        model.addAttribute("bills", this.billService.getAllByAccount(account));
         return "client/profile";
     }
 

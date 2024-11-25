@@ -1,12 +1,17 @@
 package com.nhatro247.nhatro247.controller.admin;
 
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.nhatro247.nhatro247.entity.Post;
 import com.nhatro247.nhatro247.entity.Role;
+import com.nhatro247.nhatro247.entity.dto.DashboardNewsletterDTO;
 import com.nhatro247.nhatro247.service.AccountService;
+import com.nhatro247.nhatro247.service.BillService;
 import com.nhatro247.nhatro247.service.FeedBackService;
 import com.nhatro247.nhatro247.service.NewsletterService;
 import com.nhatro247.nhatro247.service.PostService;
@@ -21,16 +26,23 @@ public class AdminController {
     private final FeedBackService feedBackService;
     private final PostTypeService postTypeService;
     private final PostService postService;
+    private final BillService billService;
 
     public AdminController(AccountService accountService, NewsletterService newsletterService,
             ReportService reportService, FeedBackService feedBackService, PostTypeService postTypeService,
-            PostService postService) {
+            PostService postService, BillService billService) {
         this.accountService = accountService;
         this.newsletterService = newsletterService;
         this.reportService = reportService;
         this.feedBackService = feedBackService;
         this.postTypeService = postTypeService;
         this.postService = postService;
+        this.billService = billService;
+    }
+
+    @GetMapping("/admin")
+    public String getAdminPage() {
+        return "admin/dashboard/view";
     }
 
     @GetMapping("/admin/account")
@@ -107,6 +119,18 @@ public class AdminController {
         role.setRoleID(1);
         model.addAttribute("listPost", this.postService.getAll());
         return "admin/post/view";
+    }
+
+    @GetMapping("/admin/bill-pending")
+    public String getBillPendingAdmin(Model model) {
+        model.addAttribute("bills", this.billService.getBillByIsStatus(0));
+        return "admin/bill/pending";
+    }
+
+    @GetMapping("/api/dashboard/chart-data")
+    public ResponseEntity<List<DashboardNewsletterDTO>> getStatistics() {
+        List<DashboardNewsletterDTO> statistics = newsletterService.getStatictisNews();
+        return ResponseEntity.ok(statistics);
     }
 
 }
