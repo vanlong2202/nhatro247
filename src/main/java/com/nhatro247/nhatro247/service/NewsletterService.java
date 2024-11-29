@@ -279,4 +279,8 @@ public class NewsletterService {
 
         return results;
     }
+
+    public int getTotalNewsMonth(String month) {
+        return this.newsletterRepository.getCountNewsMonth(month);
+    }
 }

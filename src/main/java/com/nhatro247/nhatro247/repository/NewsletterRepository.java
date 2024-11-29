@@ -16,6 +16,7 @@ import com.nhatro247.nhatro247.entity.NewsletterType;
 import com.nhatro247.nhatro247.entity.Post;
 import com.nhatro247.nhatro247.entity.dto.DashboardNewsletterDTO;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Repository
@@ -88,4 +89,7 @@ public interface NewsletterRepository extends JpaRepository<Newsletter, Long>, J
                         "\n" + //
                         "", nativeQuery = true)
         List<Object[]> getDashboardNewsAdmin();
+
+        @Query(value = "SELECT count(*) as total FROM tbl_newsletter where SUBSTRING(create_time, 13, 13) like :month", nativeQuery = true)
+        int getCountNewsMonth(@Param("month") String month);
 }

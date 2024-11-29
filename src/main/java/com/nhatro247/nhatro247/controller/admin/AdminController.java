@@ -1,5 +1,10 @@
 package com.nhatro247.nhatro247.controller.admin;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -9,7 +14,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.nhatro247.nhatro247.entity.Post;
 import com.nhatro247.nhatro247.entity.Role;
+import com.nhatro247.nhatro247.entity.dto.DashboardAccountDTO;
+import com.nhatro247.nhatro247.entity.dto.DashboardFeedbackDTO;
 import com.nhatro247.nhatro247.entity.dto.DashboardNewsletterDTO;
+import com.nhatro247.nhatro247.entity.dto.DashboardReportDTO;
 import com.nhatro247.nhatro247.service.AccountService;
 import com.nhatro247.nhatro247.service.BillService;
 import com.nhatro247.nhatro247.service.FeedBackService;
@@ -41,7 +49,60 @@ public class AdminController {
     }
 
     @GetMapping("/admin")
-    public String getAdminPage() {
+    public String getAdminPage(Model model) {
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("MM");
+        String currentMonth = formatter.format(date);
+
+        LocalDate today = LocalDate.now();
+        LocalDate lastMonth = today.minusMonths(1);
+        int lastMonthValue = lastMonth.getMonthValue();
+
+        if (currentMonth.length() < 2) {
+            String month = "0" + currentMonth + "%";
+        }
+        String month = currentMonth + "%";
+
+        if (lastMonthValue < 10) {
+            String lastmonth = "0" + lastMonthValue + "%";
+        }
+        String lastmonth = lastMonthValue + "%";
+
+        BigDecimal totalBillMonthValue = this.billService.getTotalBillMonth(month);
+        BigDecimal totalBillLastMonthValue = this.billService.getTotalBillMonth(lastmonth);
+        BigDecimal difference = totalBillMonthValue.subtract(totalBillLastMonthValue);
+        BigDecimal percentageChange = difference
+                .divide(totalBillLastMonthValue, 2, RoundingMode.HALF_UP)
+                .multiply(new BigDecimal("100"));
+
+        int totalNewsletterMonth = this.newsletterService.getTotalNewsMonth(month);
+        int totalNewsletterLastMonth = this.newsletterService.getTotalNewsMonth(lastmonth);
+        double percentageNews = totalNewsletterMonth;
+        if (totalNewsletterLastMonth != 0) {
+            percentageNews = ((double) (totalNewsletterMonth - totalNewsletterLastMonth) / totalNewsletterLastMonth)
+                    * 100;
+        }
+        int countReport = this.reportService.getALL().size();
+        int countAcc = this.accountService.getAllAccounts().size();
+        List<DashboardReportDTO> dashboardReportDTOs = this.reportService.getStatictisReport();
+
+        List<DashboardFeedbackDTO> dashboardFeedbackDTOs = this.feedBackService.getStatictisDashBoard();
+
+        List<DashboardAccountDTO> dashboardAccountDTOs = this.accountService.getAccStatitisDB();
+        model.addAttribute("dbAccount", dashboardAccountDTOs);
+        model.addAttribute("dbFeedBack", dashboardFeedbackDTOs);
+        model.addAttribute("dbReport", dashboardReportDTOs);
+        model.addAttribute("countReport", countReport);
+        model.addAttribute("countTotalAcc", countAcc);
+        model.addAttribute("newsmonth", totalNewsletterMonth);
+        model.addAttribute("newslastmonth", totalNewsletterLastMonth);
+        model.addAttribute("percentageNews", percentageNews);
+        model.addAttribute("countAcc", this.accountService.countAccountDashboard());
+        model.addAttribute("percentageChange", percentageChange);
+        model.addAttribute("totalBillMonth", totalBillMonthValue);
+        model.addAttribute("month", currentMonth);
+        model.addAttribute("lastmonth", lastMonthValue);
+        model.addAttribute("totalBillLastMonth", totalBillLastMonthValue);
         return "admin/dashboard/view";
     }
 

@@ -1,5 +1,6 @@
 package com.nhatro247.nhatro247.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.tags.shaded.org.apache.regexp.recompile;
@@ -7,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.nhatro247.nhatro247.entity.Account;
 import com.nhatro247.nhatro247.entity.Role;
+import com.nhatro247.nhatro247.entity.dto.DashboardAccountDTO;
+import com.nhatro247.nhatro247.entity.dto.DashboardNewsletterDTO;
 import com.nhatro247.nhatro247.repository.AccountRepository;
 
 @Service
@@ -43,5 +46,22 @@ public class AccountService {
 
     public void deleAccount(int id) {
         this.accountRepository.deleteById(id);
+    }
+
+    public int countAccountDashboard() {
+        return this.accountRepository.getCountAccount();
+    }
+
+    public List<DashboardAccountDTO> getAccStatitisDB() {
+        List<Object[]> rawResults = accountRepository.getCountAccDashboard();
+        List<DashboardAccountDTO> results = new ArrayList<>();
+
+        for (Object[] row : rawResults) {
+            int roleid = ((Number) row[0]).intValue();
+            long count = ((Number) row[1]).longValue();
+
+            results.add(new DashboardAccountDTO(roleid, count));
+        }
+        return results;
     }
 }

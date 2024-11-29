@@ -1,5 +1,6 @@
 package com.nhatro247.nhatro247.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -32,4 +33,7 @@ public class BillService {
         return this.billRepository.findByBillID(billID);
     }
 
+    public BigDecimal getTotalBillMonth(String month) {
+        return this.billRepository.getTotalBillMonth(month);
+    }
 }
