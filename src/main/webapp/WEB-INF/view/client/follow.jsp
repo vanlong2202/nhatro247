@@ -13,8 +13,9 @@
                         rel="stylesheet">
                     <link rel="stylesheet"
                         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-                    <title>Tìm Kiếm Chỗ Ở Online</title>
+                    <title>Bản tin lưu - TroNhanh247</title>
                     <link href="/css/bootstrap.min.css" rel="stylesheet">
+                    <link href="/images/icon.png" rel="icon">
                     <link rel="stylesheet" href="/css/fontawesome.css">
                     <link rel="stylesheet" href="/css/templatemo-villa-agency.css">
                     <link rel="stylesheet" href="/css/owl.css">
@@ -119,20 +120,11 @@
                             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                             font-weight: 600;
                             font-size: 14px;
-                            color: white;
+                            color: #4d4d4d;
+                            background-color: #f4f4f4;
                             padding: 10px;
                             width: 111px;
                             border-radius: 5px;
-                        }
-
-                        .btn-detail {
-                            background-color: #001e8a;
-                            width: 111px;
-                        }
-
-                        .btn-delete {
-                            background-color: #fc0000;
-                            width: 111px;
                         }
 
                         .save-item-submit {
@@ -145,6 +137,10 @@
                             display: flex;
                             align-items: center;
                             justify-content: space-between;
+                        }
+
+                        footer {
+                            margin-top: 0;
                         }
                     </style>
                 </head>
@@ -186,71 +182,77 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <span class="breadcrumb"><a href="#">Home</a> / PROFILE</span>
-                                    <h3>Trang Cá Nhân</h3>
+                                    <span class="breadcrumb"><a href="">Home</a> / NEWSLETTER SAVE</span>
+                                    <h3>BẢN TIN ĐÃ LƯU</h3>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="container">
-                        <div class="row">
-                            <div style="margin-top: 20px;margin-bottom: 20px;" class="section-heading">
-                                <h6>| NEWSLETTER SAVE</h6>
-                                <h2>BẢN TIN ĐÃ LƯU</h2>
-                            </div>
-                            <c:if test="${save == null}">
-                                Không có bản tin nào
-                            </c:if>
-                            <c:forEach var="news" items="${save}">
-                                <div class="save-item">
-                                    <div class="save-item-img">
-                                        <img src="/uploads/${news.newsletter.image1}" alt="">
-                                        <label class="svip-label"><i class="fa-solid fa-heart fa-beat"
-                                                style="color: #ff007b;"></i></label>
+                    <div class="best-deal">
+                        <div class="container">
+                            <div class="row">
+                                <div style="margin-top: 20px;margin-bottom: 20px;" class="section-heading">
+                                    <h6>| NEWSLETTER SAVE</h6>
+                                    <h2>BẢN TIN ĐÃ LƯU</h2>
+                                </div>
+                                <c:if test="${empty save}">
+                                    <div class="notication-error">
+                                        <span>Không tìm thấy kết quả</span>
                                     </div>
-                                    <div class="save-item-context">
-                                        <div class="save-item-title">
-                                            <span>${news.newsletter.title} <i class="fa-solid fa-circle-check fa-fade"
-                                                    style="color: #0091ff;"></i></span>
+                                </c:if>
+                                <c:forEach var="news" items="${save}">
+                                    <div class="save-item">
+                                        <div class="save-item-img">
+                                            <img src="/uploads/${news.newsletter.image1}" alt="">
+                                            <label class="svip-label"><i class="fa-solid fa-heart fa-beat"
+                                                    style="color: #ff007b;"></i></label>
                                         </div>
-                                        <div>
-                                            <div class="item">
-                                                <div>
-                                                    <p>từ <span style="color: brown;">
-                                                            <fmt:formatNumber value="${news.newsletter.price}" />
-                                                            vnd/tháng<span></p>
-                                                    <div class="save-item-button">
-                                                        <button> ${news.newsletter.format}</button>
-                                                        <button> ${news.newsletter.newsletterType.name}</button>
+                                        <div class="save-item-context">
+                                            <div class="save-item-title">
+                                                <span>${news.newsletter.title} <i
+                                                        class="fa-solid fa-circle-check fa-fade"
+                                                        style="color: #0091ff;"></i></span>
+                                            </div>
+                                            <div>
+                                                <div class="item">
+                                                    <div>
+                                                        <p>từ <span style="color: brown;">
+                                                                <fmt:formatNumber value="${news.newsletter.price}" />
+                                                                vnd/tháng<span></p>
+                                                        <div class="save-item-button">
+                                                            <button> ${news.newsletter.format}</button>
+                                                            <button> ${news.newsletter.newsletterType.name}</button>
+                                                        </div>
+
+                                                        <p><i class="fa-solid fa-fire fa-beat"
+                                                                style="color: #f01414;"></i>
+                                                            ${news.newsletter.addressDetail},
+                                                            ${news.newsletter.newsletterAddress}
+                                                        </p>
                                                     </div>
 
-                                                    <p><i class="fa-solid fa-fire fa-beat" style="color: #f01414;"></i>
-                                                        ${news.newsletter.addressDetail},
-                                                        ${news.newsletter.newsletterAddress}
-                                                    </p>
-                                                </div>
-
-                                                <div class="save-item-submit">
-                                                    <a href="/newsletter-detail/${news.newsletter.newsletterID}"
-                                                        class="item-button btn-detail"><i
-                                                            class="fa-solid fa-code fa-beat"
-                                                            style="color: #ffffff;"></i> Chi Tiết</a>
-                                                    <a href="/newsletter-follow/${news.newsletter.newsletterID}"
-                                                        class="item-button btn-delete"><i
-                                                            class="fa-solid fa-trash fa-beat"
-                                                            style="color: #ffffff;"></i> Xóa</a>
+                                                    <div class="save-item-submit">
+                                                        <a href="/newsletter-detail/${news.newsletter.newsletterID}"
+                                                            class="item-button btn-detail"><i class="fa-solid fa-eye"
+                                                                style="color: #006ec2;"></i> Xem chi Tiết</a>
+                                                        <a href="/newsletter-follow/${news.newsletter.newsletterID}"
+                                                            class="item-button btn-delete"><i
+                                                                class="fa-solid fa-trash fa-bounce"
+                                                                style="color: #ff0000;"></i> Xóa bản tin</a>
+                                                    </div>
                                                 </div>
                                             </div>
 
-                                        </div>
 
+                                        </div>
 
                                     </div>
 
-                                </div>
-                            </c:forEach>
+                                </c:forEach>
+                            </div>
                         </div>
                     </div>
+
                     <jsp:include page="../client/layout/footer.jsp" />
                     <script src="/jquery/jquery.min.js"></script>
                     <script src="/js/bootstrap.min.js"></script>

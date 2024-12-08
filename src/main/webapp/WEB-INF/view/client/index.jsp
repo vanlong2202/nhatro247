@@ -19,7 +19,11 @@
                     <link rel="stylesheet" href="/css/templatemo-villa-agency.css">
                     <link rel="stylesheet" href="/css/owl.css">
                     <link rel="stylesheet" href="/css/animate.css">
+                    <link href="/images/icon.png" rel="icon">
                     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+                    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+                        rel="stylesheet">
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
                     <style>
                         body {
                             background-color: #f4f4f4;
@@ -58,12 +62,12 @@
                         .container-city {
                             display: flex;
                             justify-content: space-between;
-                            padding: 0 0 50px 0;
+                            padding: 0 0 40px 0;
                         }
 
                         .container-blog {
                             width: 100%;
-                            margin: 0;
+                            margin: 10px 0;
                             padding: 0;
                             border-radius: 8px;
                             background-color: #f4f4f4;
@@ -73,6 +77,7 @@
                             display: flex;
                             justify-content: space-between;
                             padding: 20px 0;
+                            align-items: flex-end;
                         }
 
                         .header-blog a {
@@ -83,12 +88,13 @@
 
                         .blog-context {
                             display: flex;
-                            justify-content: space-between;
+                            justify-content: flex-start;
+                            gap: 1%;
                             padding-bottom: 3%;
                         }
 
                         .blog-items {
-                            width: 22%;
+                            width: 24%;
                             height: auto;
                             background-color: white;
                             border-radius: 8px;
@@ -106,10 +112,11 @@
                         }
 
                         .blog-items-detail {
-                            padding: 15px 10px;
+                            margin: 15px 10px;
                             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                             font-weight: 600;
                             display: flex;
+                            align-items: center;
                         }
 
                         .blog-items-detail span {
@@ -126,6 +133,54 @@
                             overflow: hidden;
                             text-overflow: ellipsis;
                         }
+
+                        .container-category {
+                            background-color: white;
+                            border-radius: 8px;
+                            padding: 30px 20px;
+                            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+                        }
+
+                        .categpry-text {
+                            font-size: 16px;
+                            color: #595959;
+                            font-weight: lighter;
+                            line-height: 1.5;
+                        }
+
+                        .category-list {
+                            display: flex;
+                            gap: 20px;
+                            flex-wrap: wrap;
+                            margin-top: 20px;
+                        }
+
+                        .category-item {
+                            width: 22%;
+                            display: grid;
+                        }
+
+                        .category-item__link {
+                            font-weight: 500;
+                            color: black;
+                        }
+
+                        .category-item__link:hover {
+                            color: #003694;
+                        }
+
+                        .category-item__count {
+                            font-weight: lighter;
+                            font-size: 13px;
+                        }
+
+                        .title-container {
+                            font-size: 24px;
+                            line-height: 1.5;
+                            font-weight: 700;
+                            color: #0045a8;
+                            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                        }
                     </style>
                 </head>
 
@@ -140,6 +195,20 @@
                             </div>
                         </div>
                     </div>
+                    <c:if test="${not empty success}">
+                        <div class="alert alert-success bg-success text-light border-0 alert-dismissible fade show"
+                            role="alert">
+                            ${success}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </c:if>
+                    <c:if test="${not empty error}">
+                        <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show"
+                            role="alert">
+                            ${error}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </c:if>
                     <div class="sub-header">
                         <div class="container">
                             <div class="row">
@@ -207,6 +276,31 @@
                                                             <a href="/newsletter-detail/${post.newsletterID}"><img
                                                                     src="/uploads/${post.image1}" alt=""></a>
                                                             <div class="tag">VIP</div>
+                                                            <div class="service-follow">
+                                                                <c:set var="isFollowed" value="false" />
+                                                                <c:forEach var="save" items="${follow}">
+                                                                    <c:if
+                                                                        test="${save.newsletter.newsletterID == post.newsletterID}">
+                                                                        <c:set var="isFollowed" value="true" />
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${isFollowed}">
+                                                                        <a
+                                                                            href="/newsletter-follow/${post.newsletterID}">
+                                                                            <i class="fa-solid fa-heart"
+                                                                                style="color: #ff6190;"></i>
+                                                                        </a>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <a
+                                                                            href="/newsletter-follow/${post.newsletterID}">
+                                                                            <i class="fa-solid fa-heart"
+                                                                                style="color: #ababab;"></i>
+                                                                        </a>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </div>
                                                         </div>
                                                         <div class="newsletter-item-context">
                                                             <div class="newsletter-context-title"><a
@@ -519,8 +613,7 @@
 
                     <div class="container">
                         <div class="section-heading text-center mt-5 mb-5">
-                            <h3
-                                style="font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;">
+                            <h3 class="title-container">
                                 TỈNH THÀNH NỔI BẬT</h3>
                         </div>
                         <div class="container-city">
@@ -560,12 +653,29 @@
                             </div>
                         </div>
                     </div>
+                    <div class="container">
+                        <div class="container-category">
+                            <h3 class="title-container">
+                                KHÁM PHÁ TRỌ MỚI Ở CÁC TỈNH THÀNH</h3>
+                            <span class="categpry-text">Dưới đây là tổng hợp các tỉnh thành có nhiều trọ mới và được
+                                quan tâm nhất</span>
+                            <div class="category-list">
+                                <c:forEach var="link" items="${itemsLink}">
+                                    <div class="category-item">
+                                        <a href="/service?page=1&address=${link.address}"
+                                            class="category-item__link">${link.address}</a>
+                                        <span class="category-item__count">${link.count} phòng trọ</span>
+                                    </div>
+                                </c:forEach>
+                            </div>
+                        </div>
+
+                    </div>
 
                     <div class="container">
                         <div class="container-blog">
                             <div class="header-blog">
-                                <h3
-                                    style="font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;">
+                                <h3 class="title-container">
                                     TIN TỨC NỔI BẬT</h3>
                                 <a href="/blog" class="button btn-text">Xem thêm <i
                                         class="fa-solid fa-arrow-right-long"></i></a>
@@ -583,6 +693,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="contact section">
                         <div class="container">
                             <div class="row">
@@ -668,6 +779,17 @@
                         </div>
                     </div>
                     <jsp:include page="../client/layout/footer.jsp" />
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            var alert = document.querySelector(".alert");
+                            if (alert) {
+                                alert.classList.add("show");
+                                setTimeout(function () {
+                                    alert.classList.remove("show");
+                                }, 3000);
+                            }
+                        });
+                    </script>
                     <script src="/jquery/jquery.min.js"></script>
                     <script src="/js/bootstrap.min.js"></script>
                     <script src="/js/isotope.min.js"></script>

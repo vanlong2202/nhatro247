@@ -1,9 +1,6 @@
 package com.nhatro247.nhatro247.entity;
 
 import java.util.List;
-
-import com.nhatro247.nhatro247.service.validator.RegisterChecked;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,13 +23,10 @@ public class Account {
     private String address;
     private String password;
     private long balance;
-
     @NotNull
     private String email;
-
     private String facebook;
     private String description;
-
     @ManyToOne
     @JoinColumn(name = "roleID")
     private Role role;

@@ -21,51 +21,9 @@
                     <link rel="stylesheet" href="/css/owl.css">
                     <link rel="stylesheet" href="/css/animate.css">
                     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
-                </head>
-
-                <body>
-                    <!-- <div id="js-preloader" class="js-preloader">
-                    <div class="preloader-inner">
-                        <span class="dot"></span>
-                        <div class="dots">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                    </div>
-                </div> -->
-                    <div class="sub-header">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-8 col-md-8">
-                                    <ul class="info">
-                                        <li><i class="fa fa-envelope"></i> kiemtro247.com</li>
-                                        <li><i class="fa fa-map"></i>Nghệ An, Việt Nam</li>
-                                    </ul>
-                                </div>
-                                <div class="col-lg-4 col-md-4">
-                                    <ul class="social-links">
-                                        <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-                                        <li><a href="https://x.com/minthu" target="_blank"><i
-                                                    class="fab fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <jsp:include page="../client/layout/header.jsp" />
-                    <div class="page-heading header-text">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <span class="breadcrumb"><a href="#">Home</a> / SREACH</span>
-                                    <h3>TÌM KIẾM DỊCH VỤ</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+                        rel="stylesheet">
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
                     <style>
                         #room-list {
                             position: absolute;
@@ -103,13 +61,15 @@
                             justify-content: space-around;
                             width: 100%;
                             max-width: 100%;
+                            margin-bottom: 20px;
                         }
 
                         .service-filter {
-                            background-color: #f4f4f4;
+                            background-color: white;
                             width: 20%;
                             margin-right: 20px;
                             border-radius: 8px;
+                            align-self: flex-start;
                         }
 
                         .box-subtitle {
@@ -141,7 +101,6 @@
                             display: flex;
                             align-items: center;
                             margin: 8px;
-
                         }
 
 
@@ -163,13 +122,15 @@
                         }
 
                         .radio p {
-                            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-                            font-size: 18px;
+                            font-size: 15px;
+                            font-weight: 500;
+                            color: #6e6e6e;
                         }
 
                         .checkbox p {
-                            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-                            font-size: 18px;
+                            font-size: 15px;
+                            font-weight: 500;
+                            color: #6e6e6e;
                         }
 
                         .checkbox input:checked {
@@ -224,7 +185,7 @@
 
                         .btn-submit {
                             border-top: 1px #ccc solid;
-                            padding: 10px;
+                            padding: 15px 10px;
                         }
 
                         .arrange-form {
@@ -261,13 +222,96 @@
                             border: none;
                             border-radius: 8px;
                             color: #555;
-                            background-color: #f4f4f4;
                         }
 
                         .select-form {
                             margin: 5px;
                         }
+
+                        .select-fillter select {
+                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                            font-weight: 500;
+                            color: #585858;
+                        }
+
+                        .select-fillter option {
+                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                            font-weight: 500;
+                            color: #585858;
+                        }
+
+                        .select-input {
+                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                            font-weight: 500;
+                            color: #585858;
+                            height: 55px;
+                        }
+
+                        .button-search {
+                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                            font-weight: 600;
+                        }
                     </style>
+                </head>
+
+                <body>
+                    <div id="js-preloader" class="js-preloader">
+                        <div class="preloader-inner">
+                            <span class="dot"></span>
+                            <div class="dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <c:if test="${not empty success}">
+                        <div class="alert alert-success bg-success text-light border-0 alert-dismissible fade show"
+                            role="alert">
+                            ${success}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </c:if>
+                    <c:if test="${not empty error}">
+                        <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show"
+                            role="alert">
+                            ${error}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </c:if>
+                    <div class="sub-header">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-8 col-md-8">
+                                    <ul class="info">
+                                        <li><i class="fa fa-envelope"></i> kiemtro247.com</li>
+                                        <li><i class="fa fa-map"></i>Nghệ An, Việt Nam</li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-4 col-md-4">
+                                    <ul class="social-links">
+                                        <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                                        <li><a href="https://x.com/minthu" target="_blank"><i
+                                                    class="fab fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <jsp:include page="../client/layout/header.jsp" />
+                    <div class="page-heading header-text">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <span class="breadcrumb"><a href="#">Home</a> / SREACH</span>
+                                    <h3>TÌM KIẾM DỊCH VỤ</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="properties section">
                         <div class="container">
                             <div class="row">
@@ -287,15 +331,16 @@
                                                             <div
                                                                 class="form-group col-md-11 mb-12 d-flex search-results">
                                                                 <input type="hidden" name="page" value="1">
-                                                                <input type="text" class="form-control" name="title"
-                                                                    id="title" placeholder="Tìm Kiếm Nhanh">
+                                                                <input type="text" class="select-input form-control"
+                                                                    name="title" id="title"
+                                                                    placeholder="Nhập thông tin tìm kiếm...">
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-12 d-flex justify-content-center">
-                                                    <div class="col-md-3">
+                                                    <div class="select-fillter col-md-3">
                                                         <select class="form-control" name="address" id="address"
                                                             required>
                                                             <option selected disabled value="0">Bạn muốn tìm trọ ở
@@ -367,7 +412,7 @@
                                                             <option value="Đồng Tháp">Đồng Tháp</option>
                                                         </select>
                                                     </div>
-                                                    <div class="col-md-3">
+                                                    <div class="select-fillter col-md-3">
                                                         <select class="form-control" name="format" id="format" required>
                                                             <option selected disabled value="0">Hình Thức Dịch Vụ
                                                             </option>
@@ -384,7 +429,7 @@
                                                                 chủ</option>
                                                         </select>
                                                     </div>
-                                                    <div class="col-md-3">
+                                                    <div class="select-fillter col-md-3">
                                                         <select class="form-control" name="price" id="price" required>
                                                             <option selected disabled>Mức giá</i>
                                                             </option>
@@ -398,8 +443,8 @@
                                                     </div>
                                                     <div class="col-md-2">
                                                         <button type="button" onclick="generateURL()"
-                                                            style="background-color: #0045a8;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;font-weight: 400;color: white;"
-                                                            class="form-control btn ">Tìm
+                                                            style="background-color: #0045a8;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;font-weight: 600;color: white;"
+                                                            class="button-search form-control btn ">Tìm
                                                             Kiếm</button>
                                                     </div>
                                                 </div>
@@ -426,31 +471,31 @@
                                                     <input class="form-check-input" type="radio" id="acreage_1"
                                                         name="area" value="duoi-20m-vuong">
                                                     <span></span>
-                                                    <p>Dưới 20 m2</p>
+                                                    <p>Dưới 20 m²</p>
                                                 </label>
                                                 <label class="radio" for="acreage2">
                                                     <input class="form-check-input" type="radio" id="acreage2"
                                                         name="area" value="tu-20m-den-40m-vuong">
                                                     <span></span>
-                                                    <p>20-40 m2</p>
+                                                    <p>Khoảng 20-40 m²</p>
                                                 </label>
                                                 <label class="radio" for="area_3">
                                                     <input class="form-check-input" type="radio" id="acreage_3"
                                                         name="area" value="tu-40m-den-60m-vuong">
                                                     <span></span>
-                                                    <p>40-60 m2</p>
+                                                    <p>Khoảng 40-60 m²</p>
                                                 </label>
                                                 <label class="radio" for="area_4">
                                                     <input class="form-check-input" type="radio" id="acreage4"
                                                         name="area" value="tu-60m-den-80m-vuong">
                                                     <span></span>
-                                                    <p>60-80 m2</p>
+                                                    <p>Khoảng 60-80 m²</p>
                                                 </label>
                                                 <label class="radio" for="area_5">
                                                     <input class="form-check-input" type="radio" id="acreage_5"
                                                         name="area" value="tren-80m-vuong">
                                                     <span></span>
-                                                    <p>Trên 80 m2</p>
+                                                    <p>Trên 80 m²</p>
                                                 </label>
                                             </div>
                                         </div>
@@ -560,11 +605,9 @@
                                                     </select>
                                                 </form>
                                             </div>
-
                                         </div>
-
                                     </div>
-                                    <div class="row">
+                                    <div>
                                         <c:if test="${totalPages ==  0}">
                                             <div
                                                 style="text-align: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;margin-top: 30px;">
@@ -572,39 +615,59 @@
                                         </c:if>
                                         <c:if test="${totalPages > 0}">
                                             <c:forEach var="post" items="${list}">
-                                                <div class="col-lg-4 col-md-6">
-                                                    <div class="item">
+                                                <div class="service-item">
+                                                    <div class="service-item-img">
                                                         <a href="/newsletter-detail/${post.newsletterID}"><img
-                                                                style="width: 100%; height: 200px;object-fit: cover;"
                                                                 src="/uploads/${post.image1}" alt=""></a>
-                                                        <span class="category">${post.newsletterAddress}</span>
-                                                        <h6>
-                                                            <fmt:formatNumber value="${post.price}" />
-                                                            VND
-                                                        </h6>
-                                                        <h4
-                                                            style="display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;">
-                                                            <a href="property-details.html">${post.title}</a>
-                                                        </h4>
-                                                        <ul>
-                                                            <li>Diện tích: <span>${post.acreage} m²</span></li>
-                                                            <li>Phòng khả dụng: <span>${post.vacantRoom} phòng</span>
-                                                            </li>
-                                                            <li>Loại hình: <span>${post.newsletterType.name}</span>
-                                                            </li>
-                                                            <li>Ngày cập nhật: <span>${post.createTime}</span></li>
-                                                        </ul>
-                                                        <div style="display: flex; justify-content: space-evenly;">
-                                                            <div class="main-button">
-                                                                <a href="/newsletter-detail/${post.newsletterID}">THÔNG
-                                                                    TIN
-                                                                    CHI TIẾT</a>
-                                                            </div>
-                                                            <div class="main-button">
-                                                                <a href="property-details.html"><i
-                                                                        class="fa-brands fa-gratipay"></i></a>
-                                                            </div>
+                                                        <c:if test="${post.svip == 1}">
+                                                            <div class="tag">VIP</div>
+                                                        </c:if>
+                                                        <div class="service-follow">
+                                                            <c:set var="isFollowed" value="false" />
+                                                            <c:forEach var="save" items="${follow}">
+                                                                <c:if
+                                                                    test="${save.newsletter.newsletterID == post.newsletterID}">
+                                                                    <c:set var="isFollowed" value="true" />
+                                                                </c:if>
+                                                            </c:forEach>
+                                                            <c:choose>
+                                                                <c:when test="${isFollowed}">
+                                                                    <a href="/newsletter-follow/${post.newsletterID}">
+                                                                        <i class="fa-solid fa-heart"
+                                                                            style="color: #ff6190;"></i>
+                                                                    </a>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <a href="/newsletter-follow/${post.newsletterID}">
+                                                                        <i class="fa-solid fa-heart"
+                                                                            style="color: #ababab;"></i>
+                                                                    </a>
+                                                                </c:otherwise>
+                                                            </c:choose>
                                                         </div>
+                                                    </div>
+                                                    <div class="service-item__content">
+                                                        <div class="service-context-title"><a
+                                                                href="/newsletter-detail/${post.newsletterID}">${post.title}
+                                                                <i class="fa-solid fa-circle-check"
+                                                                    style="color: #1168ff;"></i></a>
+                                                        </div>
+
+                                                        <div class="service-context-price"><span
+                                                                style="font-size: small;color: #555;">Từ</span> <span>
+                                                                <fmt:formatNumber value="${post.price}" />
+                                                                VNĐ/tháng
+                                                            </span></div>
+                                                        <div class="newsletter-context-button">
+                                                            <button>${post.format}</button>
+                                                            <button>${post.acreage} m²</button>
+                                                            <button>${post.newsletterType.name}</button>
+                                                        </div>
+                                                        <div class="service-context-address"><span><i
+                                                                    class="fa-solid fa-location-dot fa-beat"
+                                                                    style="color: #ff0000;"></i>
+                                                                ${post.newsletterAddress},
+                                                                ${post.addressDetail}</span></div>
                                                     </div>
                                                 </div>
                                             </c:forEach>
@@ -614,33 +677,42 @@
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <ul class="pagination">
-                                                    <c:if test="${curentPage > 2}">
+                                                    <c:if test="${curentPage > 3}">
                                                         <li>
-                                                            <a href="/service?page=1${queryString}">
-                                                                << </a>
+                                                            <a href="/service?page=1${queryString}"><i
+                                                                    class="fa-solid fa-angles-left"
+                                                                    style="color: #3a3a3a;"></i></a>
                                                         </li>
+
                                                     </c:if>
-                                                    <c:if test="${curentPage > 2}">
+                                                    <c:if test="${curentPage > 1}">
                                                         <li>
-                                                            <a href="/service?page=${curentPage-1}${queryString}">
-                                                                < </a>
+                                                            <a href="/service?page=${curentPage-1}${queryString}"><i
+                                                                    class="fa-solid fa-angle-left"
+                                                                    style="color: #3a3a3a;"></i></a>
                                                         </li>
                                                     </c:if>
                                                     <c:forEach begin="0" end="${totalPages-1}" varStatus="status">
                                                         <c:if
-                                                            test="${(status.index + 1) > curentPage-2 && curentPage+2 > (status.index + 1)}">
+                                                            test="${(status.index + 1) > curentPage-3 && curentPage+3 > (status.index + 1)}">
                                                             <li><a class="${(status.index + 1) eq curentPage ? 'is_active':''}"
                                                                     href="/service?page=${status.index+1}${queryString}">${status.index+1}</a>
                                                             </li>
                                                         </c:if>
                                                     </c:forEach>
-                                                    <c:if test="${(totalPages-1) > curentPage}">
-                                                        <li><a href="/service?page=${curentPage+1}${queryString}">></a>
+                                                    <c:if test="${(totalPages) > curentPage}">
+                                                        <li><a href="/service?page=${curentPage+1}${queryString}"><i
+                                                                    class="fa-solid fa-angle-right"
+                                                                    style="color: #3a3a3a;"></i></a>
                                                         </li>
+
                                                     </c:if>
-                                                    <c:if test="${(totalPages-2) > curentPage}">
-                                                        <li><a href="/service?page=${totalPages}${queryString}">>></a>
+                                                    <c:if test="${(totalPages-3) > curentPage}">
+                                                        <li><a href="/service?page=${totalPages}${queryString}"><i
+                                                                    class="fa-solid fa-angles-right"
+                                                                    style="color: #3a3a3a;"></i></a>
                                                         </li>
+
                                                     </c:if>
                                                 </ul>
                                             </div>
@@ -650,8 +722,67 @@
                             </div>
                         </div>
                     </div>
+                    <div class="container">
+                        <div class="container-category">
+                            <h3 class="title-container">
+                                KHÁM PHÁ TRỌ MỚI Ở CÁC TỈNH THÀNH</h3>
+                            <span class="categpry-text">Dưới đây là tổng hợp các tỉnh thành có nhiều trọ mới và được
+                                quan tâm nhất</span>
+                            <div class="category-list">
+                                <c:forEach var="link" items="${itemsLink}">
+                                    <div class="category-item">
+                                        <a href="/service?page=1&address=${link.address}"
+                                            class="category-item__link">${link.address}</a>
+                                        <span class="category-item__count">${link.count} phòng trọ</span>
+                                    </div>
+                                </c:forEach>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 30px;" class="container">
+                        <div class="section-heading text-center mt-5 mb-5">
+                            <h3 class="title-container">
+                                HỖ TRỢ KHÁCH HÀNG</h3>
+                            <span class="support-title">Bạn cần hỗ trợ Tìm kiếm, Đăng tin, Thanh toán? Liên hệ với chúng
+                                tôi ngay qua các hình
+                                thức:</span>
+                        </div>
+                        <div class="support-client">
+                            <div class="support-client__items">
+                                <div class="support-item__img"><img src="/images/icon_mail.svg" alt=""></div>
+                                <div class="support-item__socalmedia"><span>Email</span>
+                                </div>
+                                <div class="support-item__context"><span>Chúng tôi sẽ trả lời thắc mắc của bạn trong
+                                        vòng 24 giờ.</span></div>
+                                <div class="support-item__link"><a href="mailto:hovanlong2202@gmail.com">Email ngay</a>
+                                </div>
+                            </div>
+                            <div class="support-client__items">
+                                <div class="support-item__img"><img src="/images/icon_phone.svg" alt=""></div>
+                                <div class="support-item__socalmedia"><span>Hotline 24/7</span></div>
+                                <div class="support-item__context"><span>Điện thoại viên luôn sẵn sàng giải đáp các thắc
+                                        mắc của bạn.</span></div>
+                                <div class="support-item__link"><a href="tel:+84987298072">Gọi ngay</a></div>
+                            </div>
+                            <div class="support-client__items">
+                                <div class="support-item__img"><img src="/images/icon_mess.svg" alt=""></div>
+                                <div class="support-item__socalmedia"><span>Facebook</span></div>
+                                <div class="support-item__context"><span>Nhắn tin với chúng tôi trên nền tảng facebook
+                                        messenger</span></div>
+                                <div class="support-item__link"><a href="https://m.me/VnLong22.02">Gửi tin nhắn</a>
+                                </div>
+                            </div>
+                            <div class="support-client__items">
+                                <div class="support-item__img"><img src="/images/icon_zalo.svg" alt=""></div>
+                                <div class="support-item__socalmedia"><span>Zalo</span></div>
+                                <div class="support-item__context"><span>Nhắn tin hoặc gọi cho chúng tôi trên nền tảng
+                                        Zalo</span></div>
+                                <div class="support-item__link"><a href="https://zalo.me/0987298072">Liên hệ ngay</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <jsp:include page="../client/layout/footer.jsp" />
-
                     </div>
                     </div>
                     <script>
@@ -697,6 +828,20 @@
                             document.getElementById("sort").value = params.get("sort");
                         }
 
+                    </script>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            var alert = document.querySelector(".alert");
+                            if (alert) {
+                                // Thêm class "show" để hiển thị thông báo
+                                alert.classList.add("show");
+
+                                // Sau 3 giây, tự động ẩn thông báo
+                                setTimeout(function () {
+                                    alert.classList.remove("show");
+                                }, 3000); // 3000ms = 3 giây
+                            }
+                        });
                     </script>
                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
                     <script src="/jquery/jquery.min.js"></script>

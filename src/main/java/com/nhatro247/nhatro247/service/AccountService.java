@@ -2,14 +2,10 @@ package com.nhatro247.nhatro247.service;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.eclipse.tags.shaded.org.apache.regexp.recompile;
 import org.springframework.stereotype.Service;
-
 import com.nhatro247.nhatro247.entity.Account;
 import com.nhatro247.nhatro247.entity.Role;
 import com.nhatro247.nhatro247.entity.dto.DashboardAccountDTO;
-import com.nhatro247.nhatro247.entity.dto.DashboardNewsletterDTO;
 import com.nhatro247.nhatro247.repository.AccountRepository;
 
 @Service

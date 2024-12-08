@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.nhatro247.nhatro247.entity.Account;
+import com.nhatro247.nhatro247.entity.BillType;
 import com.nhatro247.nhatro247.entity.FeedBack;
 import com.nhatro247.nhatro247.entity.NewsletterType;
 import com.nhatro247.nhatro247.entity.Post;
@@ -47,17 +48,22 @@ public class HomeController {
     }
 
     @GetMapping("")
-    public String getHomePage(Model model) {
+    public String getHomePage(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        String user = (String) session.getAttribute("username");
+        Account account = this.accountService.getAccountByName(user);
         model.addAttribute("f", new FeedBack());
         model.addAttribute("menu", this.menuService.getAll());
         NewsletterType newsletterType = new NewsletterType();
         newsletterType.setNewsletterTypeID(2);
         NewsletterType newsletterType3 = new NewsletterType();
         newsletterType3.setNewsletterTypeID(3);
+        model.addAttribute("follow", this.newsletterFollowService.getAllByAccount(account));
         model.addAttribute("type2", this.newsletterService.getOneNewsletter(newsletterType, 1, 1, 1));
         model.addAttribute("type3", this.newsletterService.getOneNewsletter(newsletterType3, 1, 1, 1));
         model.addAttribute("list", this.newsletterService.getAllNewslettersSvip());
         model.addAttribute("posts", this.postService.getTop4Post());
+        model.addAttribute("itemsLink", this.newsletterService.gItemsNewsletterAddressDTOs());
         return "client/index";
     }
 
@@ -83,16 +89,6 @@ public class HomeController {
         return "client/blog";
     }
 
-    @GetMapping("/deposit")
-    public String getDepositPage(Model model, HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        String user = (String) session.getAttribute("username");
-        Account account = this.accountService.getAccountByName(user);
-        model.addAttribute("menu", this.menuService.getAll());
-        model.addAttribute("bills", this.billService.getAllByAccount(account));
-        return "client/deposit";
-    }
-
     @GetMapping("/error-page")
     public String getErrorPage() {
         return "admin/dashboard/error";
@@ -103,6 +99,7 @@ public class HomeController {
         HttpSession session = request.getSession(false);
         String user = (String) session.getAttribute("username");
         Account account = this.accountService.getAccountByName(user);
+
         model.addAttribute("f", new FeedBack());
         model.addAttribute("menu", this.menuService.getAll());
         NewsletterType newsletterType = new NewsletterType();

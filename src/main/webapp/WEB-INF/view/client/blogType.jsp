@@ -219,6 +219,10 @@
                         max-height: calc(1.5em * 2);
                     }
 
+                    .blog-item-title a {
+                        color: inherit;
+                    }
+
                     .blog-item-type {
                         margin: 10px;
                         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -228,6 +232,7 @@
 
                     .blog-item-content {
                         margin: 10px;
+                        color: #5e5e5e !important;
                         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                         font-size: 16px;
                         display: -webkit-box;

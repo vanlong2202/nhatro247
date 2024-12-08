@@ -240,13 +240,18 @@
                         margin: 10px;
                         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                         font-weight: 400;
-                        font-size: 14px;
+                        font-size: 15px;
+                        color: #827f7f;
+                        line-height: 1.5;
                     }
 
                     .blog-item-content {
                         margin: 10px;
                         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                        font-size: 16px;
+                        font-size: 15px !important;
+                        font-weight: 400;
+                        color: #827f7f;
+                        line-height: 1.5;
                         display: -webkit-box;
                         -webkit-box-orient: vertical;
                         overflow: hidden;
@@ -297,6 +302,7 @@
                         border: 2px #0045a8 solid;
                         padding: 12px 18px;
                         border-radius: 4px;
+                        color: inherit;
                     }
 
                     .content {
@@ -319,7 +325,7 @@
             </head>
 
             <body>
-                <div id="js-preloader" class="js-preloader">
+                <!-- <div id="js-preloader" class="js-preloader">
                     <div class="preloader-inner">
                         <span class="dot"></span>
                         <div class="dots">
@@ -328,7 +334,7 @@
                             <span></span>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="sub-header">
                     <div class="container">
                         <div class="row">
@@ -409,9 +415,10 @@
                                                 <a href="/blog-detail/${post.postID}">${post.title}</a>
                                             </div>
                                             <div class="blog-item-type">
-                                                <span><i class="fa-solid fa-tag fa-beat" style="color: #ff0000;"></i>
+                                                <span class="type-time"><i class="fa-solid fa-tag fa-beat"
+                                                        style="color: #ff0000;"></i>
                                                     ${post.postType.name}</span>
-                                                <span><i class="fa-solid fa-circle fa-2xs" style="color: #454545;"></i>
+                                                <span>-
                                                     ${post.createTime}</span>
                                             </div>
                                             <div class="blog-item-content">

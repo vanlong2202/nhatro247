@@ -25,11 +25,11 @@ public interface NewsletterRepository extends JpaRepository<Newsletter, Long>, J
 
         List<Newsletter> findByIsStatusAndAccount(int isStatus, Account account);
 
-        Page<Newsletter> findAll(Pageable pageable);
-
-        Page<Newsletter> findAll(Specification<Newsletter> spec, Pageable pageable);
+        Page<Newsletter> findByIsStatusAndAccount(int isStatus, Account account, Pageable pageable);
 
         List<Newsletter> findByIsStatusAndIsActive(int isStatus, int isActive);
+
+        Page<Newsletter> findByIsStatusAndIsActive(int isStatus, int isActive, Pageable pageable);
 
         List<Newsletter> findByIsStatusAndSvip(int isStatus, int svip);
 
@@ -92,4 +92,11 @@ public interface NewsletterRepository extends JpaRepository<Newsletter, Long>, J
 
         @Query(value = "SELECT count(*) as total FROM tbl_newsletter where SUBSTRING(create_time, 13, 13) like :month", nativeQuery = true)
         int getCountNewsMonth(@Param("month") String month);
+
+        @Query(value = "SELECT newsletter_address as address, count(*) as count FROM nhatro2471.tbl_newsletter where is_active = 1 and is_status = 1  group by newsletter_address order by count desc limit 12", nativeQuery = true)
+        List<Object[]> getItemListNewsletterAddress();
+
+        // @Query(value = "select * from tbl_newsletter where is_status=1 and is_active
+        // =1", nativeQuery = true)
+        // Page<Newsletter> getNewsAcitiList();
 }

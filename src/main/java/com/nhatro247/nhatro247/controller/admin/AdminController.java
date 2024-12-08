@@ -69,6 +69,9 @@ public class AdminController {
         String lastmonth = lastMonthValue + "%";
 
         BigDecimal totalBillMonthValue = this.billService.getTotalBillMonth(month);
+        if (totalBillMonthValue == null) {
+            totalBillMonthValue = new BigDecimal("0");
+        }
         BigDecimal totalBillLastMonthValue = this.billService.getTotalBillMonth(lastmonth);
         BigDecimal difference = totalBillMonthValue.subtract(totalBillLastMonthValue);
         BigDecimal percentageChange = difference

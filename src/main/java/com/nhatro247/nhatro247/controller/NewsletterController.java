@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import org.antlr.v4.runtime.atn.SemanticContext.AND;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -27,6 +28,7 @@ import com.nhatro247.nhatro247.entity.dto.NewsletterCriteriaDTO;
 import com.nhatro247.nhatro247.service.AccountService;
 import com.nhatro247.nhatro247.service.BillService;
 import com.nhatro247.nhatro247.service.MenuService;
+import com.nhatro247.nhatro247.service.NewsletterFollowService;
 import com.nhatro247.nhatro247.service.NewsletterService;
 import com.nhatro247.nhatro247.service.NewsletterTypeService;
 import com.nhatro247.nhatro247.service.UploadService;
@@ -38,6 +40,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -50,16 +53,18 @@ public class NewsletterController {
     private final NewsletterTypeService newsletterTypeService;
     private final UploadService uploadService;
     private final BillService billService;
+    private final NewsletterFollowService newsletterFollowService;
 
     public NewsletterController(NewsletterService newsletterService, MenuService menuService,
             AccountService accountService, NewsletterTypeService newsletterTypeService, UploadService uploadService,
-            BillService billService) {
+            BillService billService, NewsletterFollowService newsletterFollowService) {
         this.newsletterService = newsletterService;
         this.menuService = menuService;
         this.accountService = accountService;
         this.newsletterTypeService = newsletterTypeService;
         this.uploadService = uploadService;
         this.billService = billService;
+        this.newsletterFollowService = newsletterFollowService;
     }
 
     @GetMapping("/newsletter-detail/{id}")
@@ -92,59 +97,64 @@ public class NewsletterController {
 
     @GetMapping("/service")
     public String getServicePage(Model model, NewsletterCriteriaDTO newsletterCriteriaDTO, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        String user = (String) session.getAttribute("username");
+        Account account = this.accountService.getAccountByName(user);
         int page = 1;
+        int limit = 10;
         try {
             if (newsletterCriteriaDTO.getPage().isPresent()) {
                 page = Integer.parseInt(newsletterCriteriaDTO.getPage().get());
             }
         } catch (Exception e) {
         }
-        Pageable pageable = PageRequest.of(page - 1, 6);
+        Pageable pageable = PageRequest.of(page - 1, limit);
 
         if (newsletterCriteriaDTO.getSort() != null && newsletterCriteriaDTO.getSort().isPresent()) {
             String sort = newsletterCriteriaDTO.getSort().get();
             if (sort.equals("moi-nhat")) {
-                pageable = PageRequest.of(page - 1, 6, Sort.by(Newsletter_.CREATE_TIME).descending());
-
+                pageable = PageRequest.of(page - 1, limit, Sort.by(Newsletter_.CREATE_TIME).descending());
             } else if (sort.equals("gia-giam-dan")) {
-                pageable = PageRequest.of(page - 1, 6, Sort.by(Newsletter_.PRICE).descending());
-
+                pageable = PageRequest.of(page - 1, limit, Sort.by(Newsletter_.PRICE).descending());
             } else if (sort.equals("gia-tang-dan")) {
-                pageable = PageRequest.of(page - 1, 6, Sort.by(Newsletter_.PRICE).ascending());
-
+                pageable = PageRequest.of(page - 1, limit, Sort.by(Newsletter_.PRICE).ascending());
             } else {
-                pageable = PageRequest.of(page - 1, 6);
+                pageable = PageRequest.of(page - 1, limit);
             }
         } else {
-            pageable = PageRequest.of(page - 1, 6, Sort.by(Newsletter_.CREATE_TIME).descending());
+            pageable = PageRequest.of(page - 1, limit, Sort.by(Newsletter_.SVIP, Newsletter_.CREATE_TIME).descending());
         }
 
-        Page<Newsletter> getPage = this.newsletterService.getAllSpecs(pageable, newsletterCriteriaDTO);
+        Page<Newsletter> getPage = this.newsletterService.getAllSpecs(1, 1, pageable, newsletterCriteriaDTO);
         List<Newsletter> list = getPage.getContent().size() > 0 ? getPage.getContent() : new ArrayList<Newsletter>();
 
         String qs = request.getQueryString();
         if (qs != null && !qs.isBlank()) {
             qs = qs.replace("page=" + page, "");
         }
+
+        model.addAttribute("follow", this.newsletterFollowService.getAllByAccount(account));
         model.addAttribute("menu", this.menuService.getAll());
         model.addAttribute("list", list);
         model.addAttribute("request", getPage.getTotalElements());
         model.addAttribute("curentPage", page);
         model.addAttribute("totalPages", getPage.getTotalPages());
         model.addAttribute("queryString", qs);
+        model.addAttribute("itemsLink", this.newsletterService.gItemsNewsletterAddressDTOs());
         return "client/service";
     }
 
     @GetMapping("/delete-newsletter/{id}")
-    public String deleteNewsletterClient(@PathVariable("id") long id, RedirectAttributes redirectAttributes) {
+    public String deleteNewsletterClient(@PathVariable("id") long id, RedirectAttributes redirectAttributes,
+            @RequestHeader("Referer") String referer) {
         Newsletter newsletter = this.newsletterService.getNewsletterByID(id);
         if (newsletter != null) {
             this.newsletterService.deleteNewsletter(id);
             redirectAttributes.addFlashAttribute("success", "Xóa bản tin thành công !");
-            return "redirect:/maneger-newsletter";
+            return "redirect:" + referer;
         } else {
             redirectAttributes.addFlashAttribute("error", "Đã có lỗi xảy ra, vui lòng thử lại !");
-            return "/client/manager";
+            return "redirect:" + referer;
         }
 
     }

@@ -42,8 +42,9 @@
                             margin-left: 30px;
                             border-radius: 4px;
                             padding: 5px 10px 5px 10px;
-                            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-                            font-size: 16px;
+                            font-size: 14px;
+                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                            font-weight: 600;
                         }
                     </style>
                 </head>
@@ -200,7 +201,6 @@
                                                                 <th>Số tiền</th>
                                                                 <th>Nôi dung thanh toán</th>
                                                                 <th>Thời gian xác thực</th>
-                                                                <th>Hình thức</th>
                                                                 <th>Trạng thái</th>
                                                             </tr>
                                                         </thead>
@@ -233,20 +233,6 @@
                                                                     </td>
                                                                     <td>
                                                                         ${bill.confirmTime}
-                                                                    </td>
-                                                                    <td>
-                                                                        <c:if test="${bill.billType.billTypeID == 1}">
-                                                                            <button style="width: 122px;" type="button"
-                                                                                class="btn mb-2 btn-success btn-sm">${bill.billType.name}</button>
-                                                                        </c:if>
-                                                                        <c:if test="${bill.billType.billTypeID == 2}">
-                                                                            <button style="width: 122px;" type="button"
-                                                                                class="btn mb-2 btn-danger btn-sm">${bill.billType.name}</button>
-                                                                        </c:if>
-                                                                        <c:if test="${bill.billType.billTypeID == 3}">
-                                                                            <button style="width: 122px;" type="button"
-                                                                                class="btn mb-2 btn-danger btn-sm">${bill.billType.name}</button>
-                                                                        </c:if>
                                                                     </td>
                                                                     <td>
                                                                         <c:if test="${bill.isStatus == 0}">

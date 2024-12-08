@@ -16,6 +16,16 @@ public class NewsletterSpecs {
                 address);
     }
 
+    public static Specification<Newsletter> matchActive(int isActive) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(Newsletter_.IS_ACTIVE),
+                isActive);
+    }
+
+    public static Specification<Newsletter> matchStatus(int isStatus) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(Newsletter_.IS_STATUS),
+                isStatus);
+    }
+
     public static Specification<Newsletter> matchFormat(String format) {
         return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(Newsletter_.FORMAT), format);
     }

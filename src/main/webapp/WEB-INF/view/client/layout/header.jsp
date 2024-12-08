@@ -36,17 +36,18 @@
                 }
 
                 .header-area .main-nav .dropdown li:last-child:hover a {
-                    background-color: #000000;
+                    background-color: #eeeeee;
                     border-radius: 0;
                 }
 
                 .header-area .main-nav .dropdown li:last-child:hover {
-                    background-color: #000000;
+                    background-color: #eeeeee;
+                    border-radius: 4px;
                     border-radius: 0;
                 }
 
                 .header-area .main-nav .dropdown li:hover {
-                    background-color: #000000;
+                    background-color: #eeeeee;
                 }
 
                 li:hover ul.dropdown {
@@ -59,26 +60,33 @@
                         <div class="col-12">
                             <nav class="main-nav">
 
-                                <a href="index.html" class="logo">
-                                    <img style="height: 100px;" src="/images/logo.png" alt="">
+                                <a href="" class="logo">
+                                    <img style="height: 75px;width: auto;" src="/images/logo-tronhanh247.png" alt="">
                                 </a>
 
                                 <ul class="nav">
                                     <c:forEach var="mn" items="${menu}">
                                         <c:set var="result" value="/WEB-INF/view/client${mn.acctionName}.jsp" />
                                         <li><a class="<c:if test='${pageContext.request.requestURI == result}'>active</c:if>"
-                                                href="${mn.acctionName}">${mn.menuName}
+                                                href="${mn.controllerName}">${mn.menuName}
                                             </a>
-                                            <p>
-                                            </p>
                                         </li>
-
                                     </c:forEach>
 
-
                                     <c:if test="${not empty pageContext.request.userPrincipal}">
+                                        <c:if test="${sessionScope.role==2}">
+                                            <li><a href="/admin">Admin
+                                                </a>
+                                            </li>
+                                        </c:if>
                                         <li>
-                                            <a href=""><i class="fa-solid fa-user"></i>
+                                            <a
+                                                class="${pageContext.request.requestURI == '/WEB-INF/view/client/profile.jsp' || 
+                                            pageContext.request.requestURI == '/WEB-INF/view/client/manager.jsp' || 
+                                            pageContext.request.requestURI == '/WEB-INF/view/client/follow.jsp' || 
+                                            pageContext.request.requestURI == '/WEB-INF/view/client/deposit.jsp' ? 'active' : ''}"><i
+                                                    class="
+                                                fa-solid fa-user"></i>
                                                 Xin chào,
                                                 <c:out value="${sessionScope.username}" /> ▾
                                             </a>

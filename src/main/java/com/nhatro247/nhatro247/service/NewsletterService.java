@@ -12,6 +12,7 @@ import com.nhatro247.nhatro247.entity.Account;
 import com.nhatro247.nhatro247.entity.Newsletter;
 import com.nhatro247.nhatro247.entity.NewsletterType;
 import com.nhatro247.nhatro247.entity.dto.DashboardNewsletterDTO;
+import com.nhatro247.nhatro247.entity.dto.ItemsNewsletterAddressDTO;
 import com.nhatro247.nhatro247.entity.dto.NewsletterCriteriaDTO;
 import com.nhatro247.nhatro247.repository.NewsletterRepository;
 import com.nhatro247.nhatro247.service.specification.NewsletterSpecs;
@@ -48,11 +49,12 @@ public class NewsletterService {
         return this.newsletterRepository.findByIsStatusAndIsActive(isStatus, isActive);
     }
 
-    public Page<Newsletter> getAll(Pageable pageable, String name) {
+    public Page<Newsletter> getAll(int isStatus, int isActive, Pageable pageable, String name) {
         return this.newsletterRepository.findAll(NewsletterSpecs.titleLike(name), pageable);
     }
 
-    public Page<Newsletter> getAllSpecs(Pageable pageable, NewsletterCriteriaDTO newsletterCriteriaDTO) {
+    public Page<Newsletter> getAllSpecs(int isStatus, int isActive, Pageable pageable,
+            NewsletterCriteriaDTO newsletterCriteriaDTO) {
         if (newsletterCriteriaDTO.getPrice() == null
                 && newsletterCriteriaDTO.getPrioritize() == null
                 && newsletterCriteriaDTO.getAcreage() == null
@@ -61,9 +63,15 @@ public class NewsletterService {
                 && newsletterCriteriaDTO.getAddress() == null
                 && newsletterCriteriaDTO.getSelfManagement() == null
                 && newsletterCriteriaDTO.getType() == null) {
-            return this.newsletterRepository.findAll(pageable);
+            return this.newsletterRepository.findByIsStatusAndIsActive(isStatus, isActive, pageable);
         }
         Specification<Newsletter> combinedSpec = Specification.where(null);
+        if (newsletterCriteriaDTO != null) {
+            Specification<Newsletter> currentActiveSpecs = NewsletterSpecs.matchActive(1);
+            combinedSpec = combinedSpec.and(currentActiveSpecs);
+            Specification<Newsletter> currentStatusSpecs = NewsletterSpecs.matchStatus(1);
+            combinedSpec = combinedSpec.and(currentStatusSpecs);
+        }
         if (newsletterCriteriaDTO.getPrioritize() != null && newsletterCriteriaDTO.getPrioritize().isPresent()) {
             Specification<Newsletter> currentSpecs = this
                     .buildPrioritizeSpecification(newsletterCriteriaDTO.getPrioritize().get());
@@ -235,6 +243,10 @@ public class NewsletterService {
         return this.newsletterRepository.findByIsStatusAndAccount(isStatus, account);
     }
 
+    public Page<Newsletter> findByIsStatusAndAccount(Pageable pageable, int isStatus, Account account) {
+        return this.newsletterRepository.findByIsStatusAndAccount(isStatus, account, pageable);
+    }
+
     public List<Newsletter> findByAccountAndSvip(Account account, int svip) {
         return this.newsletterRepository.findByAccountAndSvip(account, svip);
     }
@@ -280,7 +292,22 @@ public class NewsletterService {
         return results;
     }
 
+    public List<ItemsNewsletterAddressDTO> gItemsNewsletterAddressDTOs() {
+        List<Object[]> rawResults = newsletterRepository.getItemListNewsletterAddress();
+        List<ItemsNewsletterAddressDTO> results = new ArrayList<>();
+        for (Object[] row : rawResults) {
+            String address = (String) row[0];
+            long count = ((Number) row[1]).longValue();
+            results.add(new ItemsNewsletterAddressDTO(address, count));
+        }
+        return results;
+    }
+
     public int getTotalNewsMonth(String month) {
         return this.newsletterRepository.getCountNewsMonth(month);
     }
+
+    // public Page<Newsletter> get() {
+    // return this.newsletterRepository.getNewsAcitiList();
+    // }
 }

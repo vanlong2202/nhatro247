@@ -50,6 +50,14 @@
                     .btn-close {
                         color: white;
                     }
+
+                    footer {
+                        margin-top: 0;
+                    }
+
+                    .section {
+                        margin-top: 0;
+                    }
                 </style>
             </head>
 
@@ -158,151 +166,161 @@
                                         <div class="tab-content" id="myTabContent">
                                             <div class="tab-pane fade show active" id="appartment" role="tabpanel"
                                                 aria-labelledby="appartment-tab">
-                                                <div class="card shadow mb-4">
-                                                    <div class="card-header">
-                                                        <h6 class="card-title">DANH SÁCH BẢN TIN ĐÃ PHÊ DUYỆT</h6>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <div class="card-body">
-                                                            <c:if test="${empty news}">
-                                                                Không có kết quả nào !
-                                                            </c:if>
-                                                            <c:if test="${not empty news}">
-                                                                <table class="table table-hover">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>ID</th>
-                                                                            <th>Tiều đề</th>
-                                                                            <th>Loại hình</th>
-                                                                            <th>Thời gian</th>
-                                                                            <th>Trạng thái</th>
-                                                                            <th>Hoạt động</th>
-                                                                            <th>Chức năng</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <c:forEach var="list" items="${news}"
-                                                                            varStatus="status">
-                                                                            <tr>
-                                                                                <td>#${status.index + 1}</td>
-                                                                                <td style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis; max-width: 200px;"
-                                                                                    class="col-lg-3">${list.title}
-                                                                                </td>
-                                                                                <td>
-                                                                                    ${list.newsletterType.name}
-                                                                                </td>
-                                                                                <td class="col-lg-2">
-                                                                                    ${list.createTime}</td>
-                                                                                <td>
-
-                                                                                    <c:if test="${list.isStatus == 0}">
-                                                                                        <button style="width: 122px;"
-                                                                                            type="button"
-                                                                                            class="btn mb-2 btn-primary btn-sm">Đang
-                                                                                            Phê
-                                                                                            Duyệt</button>
-                                                                                    </c:if>
-                                                                                    <c:if test="${list.isStatus == 1}">
-                                                                                        <button style="width: 122px;"
-                                                                                            type="button"
-                                                                                            class="btn mb-2 btn-success pd-2 btn-sm">Đã
-                                                                                            Phê Duyệt</button>
-                                                                                    </c:if>
-                                                                                    <c:if test="${list.isStatus == 2}">
-                                                                                        <button style="width: 122px;"
-                                                                                            type="button"
-                                                                                            class="btn mb-2 btn-danger btn-sm">Từ
-                                                                                            Chối</button>
-                                                                                    </c:if>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <c:if test="${list.isActive == 1}">
-                                                                                        <div
-                                                                                            style="width: 100px;text-align: center;">
-                                                                                            <i class="fa-solid fa-circle-check fa-beat"
-                                                                                                style="color: #00ff55;"></i>
-                                                                                        </div>
-
-                                                                                    </c:if>
-                                                                                    <c:if test="${list.isActive == 0}">
-                                                                                        <div
-                                                                                            style="width: 100px;text-align: center;">
-                                                                                            <i class="fa-solid fa-circle-xmark fa-beat"
-                                                                                                style="color: #ff0000;"></i>
-                                                                                        </div>
-                                                                                    </c:if>
-                                                                                </td>
-                                                                                <td>
-
-                                                                                    <a style="background-color: white;box-shadow: 0 2px 5px grey"
-                                                                                        href="/newsletter-detail/${list.newsletterID}"
-                                                                                        class="btn mb-2 btn-info btn-sm"
-                                                                                        title="Xem Chi Tiết">
-                                                                                        <i style="color: rgb(0, 38, 255);"
-                                                                                            class="fas fa-eye"></i>
-                                                                                    </a>
-                                                                                    <c:if test="${list.isActive == 1}">
-                                                                                        <a style="background-color: white;box-shadow: 0 2px 5px grey"
-                                                                                            href="" type="button"
-                                                                                            data-bs-toggle="modal"
-                                                                                            data-bs-target="#modalActive1"
-                                                                                            data-title="${list.title}"
-                                                                                            data-id="${list.newsletterID}"
-                                                                                            class="btn mb-2 btn-sm"
-                                                                                            title="Đăng Lại"><i
-                                                                                                class="fa-solid fa-toggle-on"
-                                                                                                style="color: #00ff55;"></i></a>
-                                                                                    </c:if>
-                                                                                    <c:if test="${list.isActive == 0}">
-                                                                                        <a style="background-color: white;box-shadow: 0 2px 5px grey"
-                                                                                            href="" type="button"
-                                                                                            data-bs-toggle="modal"
-                                                                                            data-bs-target="#modalActive"
-                                                                                            data-title="${list.title}"
-                                                                                            data-id="${list.newsletterID}"
-                                                                                            class="btn mb-2 btn-sm"
-                                                                                            title="Đăng Lại"><i
-                                                                                                class="fa-solid fa-toggle-off"
-                                                                                                style="color: #ff0000;"></i></a>
-                                                                                    </c:if>
-                                                                                    <a style="background-color: white;box-shadow: 0 2px 5px grey"
-                                                                                        href="/manager-edit-newsletter/${list.newsletterID}"
-                                                                                        type="button"
-                                                                                        class="btn mb-2 btn-secondary btn-sm"
-                                                                                        title="Đăng Lại"><i
-                                                                                            class="fa-solid fa-pen"
-                                                                                            style="color: #ff9500;"></i></a>
-                                                                                    <a style="background-color: white;box-shadow: 0 2px 5px grey"
-                                                                                        data-bs-toggle="modal"
-                                                                                        data-bs-target="#basicModal"
-                                                                                        data-title="${list.title}"
-                                                                                        data-id="${list.newsletterID}"
-                                                                                        class="btn mb-2 btn-danger btn-sm"
-                                                                                        title="Xóa bản tin"><i
-                                                                                            class="fa-solid fa-trash fa-bounce"
-                                                                                            style="color: #ff0000;"></i><span></span></a>
-                                                                                    <c:if test="${list.svip == 0}">
-                                                                                        <a style="background-color: white;box-shadow: 0 2px 5px grey"
-                                                                                            href="" type="button"
-                                                                                            data-bs-toggle="modal"
-                                                                                            data-bs-target="#modalSvip"
-                                                                                            data-title="${list.title}"
-                                                                                            data-id="${list.newsletterID}"
-                                                                                            class="btn mb-2 btn-sm"
-                                                                                            title="Đăng Lại"><i
-                                                                                                class="fa-solid fa-crown fa-beat"
-                                                                                                style="color: #FFD43B;"></i></a>
-                                                                                    </c:if>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </c:forEach>
-                                                                    </tbody>
-                                                                </table>
-                                                            </c:if>
+                                                <div class="service-items">
+                                                    <c:if test="${empty news}">
+                                                        <div class="notication-error">
+                                                            <span>Không có bản
+                                                                tin
+                                                                nào !</span>
                                                         </div>
-                                                    </div>
+                                                    </c:if>
+                                                    <c:forEach var="post" items="${news}">
+                                                        <div class="service-item">
+                                                            <div class="service-item-img">
+                                                                <a href="/newsletter-detail/${post.newsletterID}"><img
+                                                                        src="/uploads/${post.image1}" alt=""></a>
+                                                                <c:if test="${post.svip == 1}">
+                                                                    <div class="tag">VIP</div>
+                                                                </c:if>
+                                                            </div>
+                                                            <div class="service-item__content">
+                                                                <div class="service-context-title"><a
+                                                                        href="/newsletter-detail/${post.newsletterID}">${post.title}</a>
+                                                                </div>
+                                                                <div class="newsletter-context-button">
+                                                                    <button>${post.format}</button>
+                                                                    <button>${post.newsletterType.name}</button>
+                                                                    <button>${post.createTime}</button>
+                                                                </div>
+                                                                <div class="newsletter-context-button">
+                                                                    <c:if test="${post.isActive == 1}">
+                                                                        <button class="btn-active"
+                                                                            style="color: #005eff; border: 2px #005eff solid;">Đang
+                                                                            hoạt
+                                                                            động <i
+                                                                                class="fa-solid fa-circle fa-beat fa-xs"
+                                                                                style="color: #005eff;"></i></button>
+                                                                    </c:if>
+                                                                    <c:if test="${post.isActive == 0}">
+                                                                        <button class="btn-active"
+                                                                            style="color: #ff0000; border: 2px #ff0000 solid;">Không
+                                                                            hoạt
+                                                                            động <i
+                                                                                class="fa-solid fa-circle fa-beat fa-xs"
+                                                                                style="color: #ff0000;"></i></button>
+                                                                    </c:if>
+                                                                    <c:if test="${post.isStatus == 0}">
+                                                                        <button
+                                                                            style="background-color: #005eff;color: white;">Chờ
+                                                                            phê duyệt</button>
+                                                                    </c:if>
+                                                                    <c:if test="${post.isStatus == 1}">
+                                                                        <button
+                                                                            style="background-color: #198754;color: white;">Đã
+                                                                            phê duyệt</button>
+                                                                    </c:if>
+                                                                    <c:if test="${post.isStatus == 2}">
+                                                                        <button
+                                                                            style="background-color: #ff0000;color: white;">Bị
+                                                                            từ chối</button>
+                                                                    </c:if>
+                                                                </div>
+                                                                <div class="newsletter-context-button">
+                                                                    <c:if test="${post.svip == 0}">
+                                                                        <a href="" type="button" data-bs-toggle="modal"
+                                                                            data-bs-target="#modalSvip"
+                                                                            data-title="${post.title}"
+                                                                            data-id="${post.newsletterID}"><i
+                                                                                class="fa-solid fa-crown fa-beat"
+                                                                                style="color: #FFD43B;"></i> Nâng cấp
+                                                                            tin</a>
+                                                                    </c:if>
+                                                                    <a
+                                                                        href="/manager-edit-newsletter/${post.newsletterID}"><i
+                                                                            class="fa-solid fa-pen"
+                                                                            style="color: #ff9500;"></i> Sữa tin</a>
+                                                                    <c:if test="${post.isActive == 1}">
+                                                                        <a href="" type="button" data-bs-toggle="modal"
+                                                                            data-bs-target="#modalActive1"
+                                                                            data-title="${post.title}"
+                                                                            data-id="${post.newsletterID}"><i
+                                                                                class="fa-solid fa-toggle-off"
+                                                                                style="color: #ff0000;"></i> Đóng
+                                                                            tin</a>
+                                                                    </c:if>
+                                                                    <c:if test="${post.isActive == 0}">
+                                                                        <a href="" type="button" data-bs-toggle="modal"
+                                                                            data-bs-target="#modalActive"
+                                                                            data-title="${post.title}"
+                                                                            data-id="${post.newsletterID}"><i
+                                                                                class="fa-solid fa-toggle-on"
+                                                                                style="color: #00ff55;"></i> Bật tin</a>
+                                                                    </c:if>
+                                                                    <a data-bs-toggle="modal"
+                                                                        data-bs-target="#basicModal"
+                                                                        data-title="${post.title}"
+                                                                        data-id="${post.newsletterID}"><i
+                                                                            class="fa-solid fa-trash fa-bounce"
+                                                                            style="color: #ff0000;"></i> Xóa bản tin</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </c:forEach>
+                                                    <c:if test="${totalPages > 0}">
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <ul class="pagination">
+                                                                    <c:if test="${curentPage > 3}">
+                                                                        <li>
+                                                                            <a
+                                                                                href="/maneger-newsletter?page=1${queryString}"><i
+                                                                                    class="fa-solid fa-angles-left"
+                                                                                    style="color: #3a3a3a;"></i></a>
+                                                                        </li>
+
+                                                                    </c:if>
+                                                                    <c:if test="${curentPage > 1}">
+                                                                        <li>
+                                                                            <a
+                                                                                href="/maneger-newsletter?page=${curentPage-1}${queryString}"><i
+                                                                                    class="fa-solid fa-angle-left"
+                                                                                    style="color: #3a3a3a;"></i></a>
+                                                                        </li>
+                                                                    </c:if>
+                                                                    <c:forEach begin="0" end="${totalPages-1}"
+                                                                        varStatus="status">
+                                                                        <c:if
+                                                                            test="${(status.index + 1) > curentPage-3 && curentPage+3 > (status.index + 1)}">
+                                                                            <li><a class="${(status.index + 1) eq curentPage ? 'is_active':''}"
+                                                                                    href="/maneger-newsletter?page=${status.index+1}${queryString}">${status.index+1}</a>
+                                                                            </li>
+                                                                        </c:if>
+                                                                    </c:forEach>
+                                                                    <c:if test="${(totalPages) > curentPage}">
+                                                                        <li><a
+                                                                                href="/maneger-newsletter?page=${curentPage+1}${queryString}"><i
+                                                                                    class="fa-solid fa-angle-right"
+                                                                                    style="color: #3a3a3a;"></i></a>
+                                                                        </li>
+
+                                                                    </c:if>
+                                                                    <c:if test="${(totalPages-3) > curentPage}">
+                                                                        <li><a
+                                                                                href="/maneger-newsletter?page=${totalPages}${queryString}"><i
+                                                                                    class="fa-solid fa-angles-right"
+                                                                                    style="color: #3a3a3a;"></i></a>
+                                                                        </li>
+
+                                                                    </c:if>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </c:if>
                                                 </div>
+
+
                                             </div>
+
                                             <div class="tab-pane fade" id="villa" role="tabpanel"
                                                 aria-labelledby="villa-tab">
                                                 <div class="card shadow mb-4">
@@ -692,21 +710,29 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">NÂNG CẤP VỊ TRÍ ƯU TIÊN CHO BẢN TIN</h5>
+                                <h5 class="modal-title">NÂNG CẤP TIN [SVIP]</h5>
                             </div>
                             <div class="modal-body">
-                                Nâng cấp bản tin xuất hiện ở vị trí ưu tiên chỉ với giá <span
-                                    style="font-weight: bold;">99.000 VND</span> là một tính năng
-                                giúp bạn tăng khả năng tiếp cận và thu hút sự chú ý cho bản tin của mình. Khi sử dụng
-                                dịch vụ này, bản tin của bạn sẽ được hiển thị ở vị trí nổi bật nhất trên trang, đảm bảo
-                                rằng người xem dễ dàng nhìn thấy và tiếp cận nhanh chóng.
+                                <div class="body-items">
+                                    <span style="font-weight: 600;">Bản tin: </span><span
+                                        id="modal-body-content"></span><br>
+                                </div>
+                                <span style="font-weight: 600;">Phương thức thanh toán: </span><br>
+                                <input type="radio" checked>
+                                <span>Thanh toán bằng tài khoản cá
+                                    nhân</span><br>
+                                <div class="body-items">
+                                    <span style="font-weight: 600;">Số tiền thanh toán: </span><span
+                                        style="color: #ff0000;font-weight: 600;">99.000 VNĐ</span>
+                                </div>
+                                <div><i style="font-weight: initial;">(Tính năng giúp thay đổi vị trí hiển thị bản tin
+                                        để tiếp cận được nhiều người
+                                        xem hơn.)</i></div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary btn-sm"
-                                    data-bs-dismiss="modal">Đóng</button>
-                                <a id="modal-confirm-btn" href=""
-                                    style="width: 111px; background-color: #ff9500;color: white;"
-                                    class="btn btn-sm">99.000 VND</a>
+                                <button type="button" class="button-items__close" data-bs-dismiss="modal">Đóng</button>
+                                <a id="modal-confirm-btn" href="" class="button-items__submit" aria-readonly="true">Xác
+                                    nhận</a>
                             </div>
                         </div>
                     </div>
@@ -757,6 +783,7 @@
                             const button = event.relatedTarget;
                             const title = button.getAttribute('data-title');
                             const id = button.getAttribute('data-id');
+                            modalBodyContent.textContent = title;
                             confirmButton.href = '/update-svip-newsletter/' + id;
                         });
                     });
