@@ -138,7 +138,8 @@ public class AccountController {
             }
         } catch (Exception e) {
         }
-        Pageable pageable = PageRequest.of(page - 1, limit, Sort.by(Newsletter_.CREATE_TIME).descending());
+        Pageable pageable = PageRequest.of(page - 1, limit,
+                Sort.by(Newsletter_.CREATED_DATE, Newsletter_.SVIP).descending());
         Page<Newsletter> listPage = this.newsletterService.findByIsStatusAndAccount(pageable, 1, account);
         List<Newsletter> list = listPage.getContent().size() > 0 ? listPage.getContent() : new ArrayList<Newsletter>();
         model.addAttribute("info", account);

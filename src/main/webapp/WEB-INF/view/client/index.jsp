@@ -694,7 +694,7 @@
                         </div>
                     </div>
 
-                    <div class="contact section">
+                    <div class="contact section" id="contact-section">
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-4 offset-lg-4">

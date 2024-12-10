@@ -1,5 +1,7 @@
 package com.nhatro247.nhatro247.service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.data.domain.Page;
@@ -264,7 +266,7 @@ public class NewsletterService {
     }
 
     public Newsletter getOneNewsletter(NewsletterType newsletterType, int isStatus, int isActive, int svip) {
-        Sort sort = Sort.by(Sort.Direction.DESC, "createTime");
+        Sort sort = Sort.by(Sort.Direction.DESC, "createdDate");
         return this.newsletterRepository.findTopOneByNewsletterTypeAndIsStatusAndIsActiveAndSvip(newsletterType,
                 isStatus, isActive, svip, sort);
     }
@@ -307,7 +309,4 @@ public class NewsletterService {
         return this.newsletterRepository.getCountNewsMonth(month);
     }
 
-    // public Page<Newsletter> get() {
-    // return this.newsletterRepository.getNewsAcitiList();
-    // }
 }

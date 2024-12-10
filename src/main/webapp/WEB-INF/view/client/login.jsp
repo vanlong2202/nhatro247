@@ -429,7 +429,9 @@
                     <div class="forms-container">
                         <div class="signin-signup">
                             <form action="/login" method="post" class="sign-in-form">
-                                <div><img style="height: 155px;" src="/images/logo.png" alt=""></div>
+                                <div><a href="/">
+                                        <img style="height: 155px;" src="/images/logo.png" alt="">
+                                    </a></div>
                                 <div class="input-field">
                                     <i class="fas fa-user"></i>
                                     <input name="username" id="username" type="text" placeholder="Username" />

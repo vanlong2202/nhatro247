@@ -21,25 +21,101 @@
                     <link rel="stylesheet" href="/css/animate.css">
                     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
                     <style>
-                        table th {
-                            font-weight: normal;
-                        }
-
-                        span {
-                            font-weight: bold;
-                            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-                        }
-
                         .main-image {
                             width: auto;
                             height: 650px;
                             overflow: hidden;
+                            border-radius: 8px;
                         }
 
                         .main-image img {
                             width: 100%;
                             height: 100%;
                             object-fit: cover;
+                        }
+
+                        .button-report {
+                            background-color: white;
+                            color: #f35525;
+                            border: 2px #f35525 solid;
+                            border-radius: 4px;
+                            padding: 8px 20%;
+                            font-size: 16px;
+                            font-weight: 600;
+                        }
+
+                        .button-phone {
+                            background-color: #f35525;
+                            color: white;
+                            border: 2px #f35525 solid;
+                            border-radius: 4px;
+                            padding: 8px 10%;
+                            font-size: 16px;
+                            font-weight: 600;
+                        }
+
+                        .button-zalo {
+                            background-color: #003694;
+                            color: white;
+                            border: 2px #003694 solid;
+                            border-radius: 4px;
+                            padding: 8px 10%;
+                            font-size: 16px;
+                            font-weight: 600;
+                        }
+
+                        .button-items {
+                            margin-top: 50px;
+                        }
+
+                        .main-content h4 {
+                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                            text-transform: uppercase;
+                            line-height: 1.5;
+                            color: #f35525;
+                        }
+
+                        .main-content h5 {
+                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                            text-transform: uppercase;
+                            line-height: 1.5;
+                            color: #6e6e6e;
+                        }
+
+                        .newsletter-info {
+                            background-color: white;
+                            width: 100%;
+                            border-radius: 4px;
+                            height: 200px;
+                            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                        }
+
+                        table th {
+                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                            font-weight: 400;
+                            font-size: 16px;
+                            color: #6e6e6e;
+                            line-height: 1.5;
+                        }
+
+                        table td {
+                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                            font-weight: 400;
+                            font-size: 16px;
+                            color: #6e6e6e;
+                            line-height: 1.5;
+                        }
+
+                        table span {
+                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                            font-weight: 600;
+                            font-size: 16px;
+                            color: #003694;
+                            line-height: 1.5;
+                        }
+
+                        p {
+                            line-height: 2;
                         }
                     </style>
                 </head>
@@ -107,25 +183,30 @@
                                     </div>
                                     <div class="main-content">
                                         <span class="category">${newsletters.newsletterAddress}</span>
-                                        <h4 style="color: #f35525;">${newsletters.title}</h4>
+                                        <c:if test="${newsletters.svip == 1}">
+                                            <span style="color: red;" class="category">VIP</span>
+                                        </c:if>
+                                        <span class="category">${newsletters.newsletterType.name}</span>
+                                        <h4>${newsletters.title}</h4>
                                         <h5 class="mb-3">Thông Tin Dịch Vụ</h5>
-                                        <table style="" class="table table-bordered">
+
+                                        <table class="table table-bordered">
                                             <thead>
                                                 <tr>
                                                     <th class="col-lg-2" scope="col">Địa chỉ:</th>
-                                                    <td colspan="3"><span
-                                                            style="font-weight: bold;">${newsletters.addressDetail}</span>
+                                                    <td colspan="3"><span>${newsletters.addressDetail},
+                                                            ${newsletters.newsletterAddress}</span>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="col">Giá:</th>
-                                                    <td colspan="3">khoảng<span style="font-weight: bold;">
+                                                    <td colspan="3">khoảng<span>
                                                             <fmt:formatNumber value="${newsletters.price}" />
                                                         </span>đồng/tháng</td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="col">Hình thức:</th>
-                                                    <td class="col-lg-3"><span style="font-weight: bold;">
+                                                    <td class="col-lg-3"><span>
                                                             ${newsletters.format}
                                                         </span></td>
                                                     <th class="col-lg-2" scope="col">Tự quản: </th>
@@ -171,7 +252,9 @@
                                                     <th scope="col">Tỉnh thành:</th>
                                                     <td><span>${newsletters.newsletterAddress}</span></td>
                                                     <th scope="col">Ngày cập nhật:</th>
-                                                    <td><span>${newsletters.createTime}</span></td>
+                                                    <td><span>${newsletters.createTime},
+                                                            ${newsletters.formattedCreatedDate}
+                                                        </span></td>
                                                 </tr>
                                             </thead>
                                         </table>
@@ -259,15 +342,14 @@
                                                 </h4>
                                             </li>
                                         </ul>
-                                        <div class="mt-4 text-center">
-                                            <a href=""><input name="" type="submit" class="btn btn-danger"
-                                                    value="GỌI NGAY"> </a>
-                                            <a href="https://zalo.me/${newsletters.account.phone}"
+                                        <div class="button-items text-center">
+                                            <a class="button-phone" href="">Gọi ngay</a>
+                                            <a class="button-zalo" href="https://zalo.me/${newsletters.account.phone}"
                                                 class="btn btn-primary">ZALO</a>
                                         </div>
                                         <div class="mt-4 text-center">
-                                            <a href="" data-toggle="modal" data-target="#myModal"><input name=""
-                                                    type="submit" class="btn mb-2 btn-primary" value="Báo cáo bản tin">
+                                            <a class="button-report" href="" data-toggle="modal"
+                                                data-target="#myModal">Báo cáo bản tin
                                             </a>
                                         </div>
                                     </div>
@@ -312,10 +394,6 @@
                                                     <a href="/newsletter-detail/${post.newsletterID}">THÔNG
                                                         TIN
                                                         CHI TIẾT</a>
-                                                </div>
-                                                <div class="main-button">
-                                                    <a href="property-details.html"><i
-                                                            class="fa-brands fa-gratipay"></i></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -374,7 +452,49 @@
                             </div>
                         </div>
                     </div>
-
+                    <div style="margin-top: 30px;" class="container" id="support-info">
+                        <div class="section-heading text-center mt-5 mb-5">
+                            <h3 class="title-container">
+                                HỖ TRỢ KHÁCH HÀNG</h3>
+                            <span class="support-title">Bạn cần hỗ trợ Tìm kiếm, Đăng tin, Thanh toán? Liên hệ với chúng
+                                tôi ngay qua các hình
+                                thức:</span>
+                        </div>
+                        <div class="support-client">
+                            <div class="support-client__items">
+                                <div class="support-item__img"><img src="/images/icon_mail.svg" alt=""></div>
+                                <div class="support-item__socalmedia"><span>Email</span>
+                                </div>
+                                <div class="support-item__context"><span>Chúng tôi sẽ trả lời thắc mắc của bạn trong
+                                        vòng 24 giờ.</span></div>
+                                <div class="support-item__link"><a href="mailto:hovanlong2202@gmail.com">Email ngay</a>
+                                </div>
+                            </div>
+                            <div class="support-client__items">
+                                <div class="support-item__img"><img src="/images/icon_phone.svg" alt=""></div>
+                                <div class="support-item__socalmedia"><span>Hotline 24/7</span></div>
+                                <div class="support-item__context"><span>Điện thoại viên luôn sẵn sàng giải đáp các thắc
+                                        mắc của bạn.</span></div>
+                                <div class="support-item__link"><a href="tel:+84987298072">Gọi ngay</a></div>
+                            </div>
+                            <div class="support-client__items">
+                                <div class="support-item__img"><img src="/images/icon_mess.svg" alt=""></div>
+                                <div class="support-item__socalmedia"><span>Facebook</span></div>
+                                <div class="support-item__context"><span>Nhắn tin với chúng tôi trên nền tảng facebook
+                                        messenger</span></div>
+                                <div class="support-item__link"><a href="https://m.me/VnLong22.02">Gửi tin nhắn</a>
+                                </div>
+                            </div>
+                            <div class="support-client__items">
+                                <div class="support-item__img"><img src="/images/icon_zalo.svg" alt=""></div>
+                                <div class="support-item__socalmedia"><span>Zalo</span></div>
+                                <div class="support-item__context"><span>Nhắn tin hoặc gọi cho chúng tôi trên nền tảng
+                                        Zalo</span></div>
+                                <div class="support-item__link"><a href="https://zalo.me/0987298072">Liên hệ ngay</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <jsp:include page="../client/layout/footer.jsp" />
                     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>

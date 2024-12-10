@@ -113,7 +113,7 @@ public class NewsletterController {
         if (newsletterCriteriaDTO.getSort() != null && newsletterCriteriaDTO.getSort().isPresent()) {
             String sort = newsletterCriteriaDTO.getSort().get();
             if (sort.equals("moi-nhat")) {
-                pageable = PageRequest.of(page - 1, limit, Sort.by(Newsletter_.CREATE_TIME).descending());
+                pageable = PageRequest.of(page - 1, limit, Sort.by(Newsletter_.CREATED_DATE).descending());
             } else if (sort.equals("gia-giam-dan")) {
                 pageable = PageRequest.of(page - 1, limit, Sort.by(Newsletter_.PRICE).descending());
             } else if (sort.equals("gia-tang-dan")) {
@@ -245,6 +245,7 @@ public class NewsletterController {
         if (acc != null && acc.getBalance() > 20000) {
             LocalDateTime now = LocalDateTime.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy");
+            DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             String formattedDate = now.format(formatter);
             DateTimeFormatter code = DateTimeFormatter.ofPattern("HHmmssddMMyyyy");
             String paycode = now.format(code);
@@ -255,10 +256,10 @@ public class NewsletterController {
             acc.setBalance(acc.getBalance() - 20000);
             acc.setDescription(acc.getDescription() + "[-20000 VNĐ Time:" + formattedDate + "]");
             this.accountService.addAccount(acc);
-
             Newsletter newsletter = infoNewsletterDTO.getNewsletter();
             Newsletter news = this.newsletterService.getNewsletterByID(newsletter.getNewsletterID());
             newsletter.setCreateTime(formattedDate);
+            newsletter.setCreatedDate(now);
             newsletter.setAccount(account);
             List<String> filename = this.uploadService.handeSaveUploadFile(files);
             String image1 = filename.get(0);

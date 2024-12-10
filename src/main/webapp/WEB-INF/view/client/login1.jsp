@@ -76,7 +76,7 @@
                         color: #333;
                         font-size: 14px;
                         text-decoration: none;
-                        margin: 15px 0;
+                        /* margin: 15px 0; */
                     }
 
                     button {
@@ -353,7 +353,7 @@
                     </div>
                     <div class="form-container sign-in-container">
                         <form action="/login" method="post">
-                            <img class="logo-login" src="/images/logo.png" alt="">
+                            <a href="/"><img class="logo-login" src="/images/logo.png" alt=""></a>
                             <input name="username" id="username" type="text" placeholder="Tên đăng nhập" />
                             <input name="password" id="password" type="password" placeholder="Mật khẩu" />
                             <c:if test="${param.error != null}">

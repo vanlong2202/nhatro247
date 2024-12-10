@@ -13,9 +13,14 @@
                                     <div>
                                         <h4 class="footer-title">HỆ THỐNG</h4>
                                     </div>
-                                    <div class="footer-items"><a class="items-link" href="">Trang chủ</a></div>
-                                    <div class="footer-items"><a class="items-link" href="">Trang chủ</a></div>
-                                    <div class="footer-items"><a class="items-link" href="">Trang chủ</a></div>
+                                    <div class="footer-items"><a class="items-link" href="/post">Đăng tin</a></div>
+                                    <div class="footer-items"><a class="items-link" href="/blog">Tin tức</a></div>
+                                    <div class="footer-items"><a class="items-link" href="/#contact-section">Liên hệ</a>
+                                    </div>
+                                    <div class="footer-items"><a class="items-link" href="/service#support-info">Hỗ
+                                            trợ</a></div>
+                                    <div class="footer-items"><a class="items-link" href="/instruct">Hướng
+                                            dẫn thanh toán VNPay</a></div>
                                 </div>
                                 <div class="footer-content__item">
                                     <div>

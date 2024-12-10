@@ -85,6 +85,16 @@
                         opacity: 1;
                         transform: translateX(0);
                     }
+
+                    .button-submit {
+                        padding: 8px 12px;
+                        background-color: #003694;
+                        color: white;
+                        border: #003694;
+                        border-radius: 4px;
+                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                        font-weight: 400;
+                    }
                 </style>
             </head>
 
@@ -407,13 +417,53 @@
                             </div>
                         </div>
                         <div class="form-group d-grid gap-2 col-2 mx-auto mb-3">
-                            <input type="submit" class="btn btn-danger" value="ĐĂNG TIN [20.000 VNĐ/Bài]">
+                            <input type="submit" class="button-submit" value="Đăng Tin (20.000 VNĐ)">
                         </div>
-
-
-
                     </div>
                 </form:form>
+                <div style="margin-top: 30px;" class="container" id="support-info">
+                    <div class="section-heading text-center mt-5 mb-5">
+                        <h3 class="title-container">
+                            HỖ TRỢ KHÁCH HÀNG</h3>
+                        <span class="support-title">Bạn cần hỗ trợ Tìm kiếm, Đăng tin, Thanh toán? Liên hệ với chúng
+                            tôi ngay qua các hình
+                            thức:</span>
+                    </div>
+                    <div class="support-client">
+                        <div class="support-client__items">
+                            <div class="support-item__img"><img src="/images/icon_mail.svg" alt=""></div>
+                            <div class="support-item__socalmedia"><span>Email</span>
+                            </div>
+                            <div class="support-item__context"><span>Chúng tôi sẽ trả lời thắc mắc của bạn trong
+                                    vòng 24 giờ.</span></div>
+                            <div class="support-item__link"><a href="mailto:hovanlong2202@gmail.com">Email ngay</a>
+                            </div>
+                        </div>
+                        <div class="support-client__items">
+                            <div class="support-item__img"><img src="/images/icon_phone.svg" alt=""></div>
+                            <div class="support-item__socalmedia"><span>Hotline 24/7</span></div>
+                            <div class="support-item__context"><span>Điện thoại viên luôn sẵn sàng giải đáp các thắc
+                                    mắc của bạn.</span></div>
+                            <div class="support-item__link"><a href="tel:+84987298072">Gọi ngay</a></div>
+                        </div>
+                        <div class="support-client__items">
+                            <div class="support-item__img"><img src="/images/icon_mess.svg" alt=""></div>
+                            <div class="support-item__socalmedia"><span>Facebook</span></div>
+                            <div class="support-item__context"><span>Nhắn tin với chúng tôi trên nền tảng facebook
+                                    messenger</span></div>
+                            <div class="support-item__link"><a href="https://m.me/VnLong22.02">Gửi tin nhắn</a>
+                            </div>
+                        </div>
+                        <div class="support-client__items">
+                            <div class="support-item__img"><img src="/images/icon_zalo.svg" alt=""></div>
+                            <div class="support-item__socalmedia"><span>Zalo</span></div>
+                            <div class="support-item__context"><span>Nhắn tin hoặc gọi cho chúng tôi trên nền tảng
+                                    Zalo</span></div>
+                            <div class="support-item__link"><a href="https://zalo.me/0987298072">Liên hệ ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <jsp:include page="../client/layout/footer.jsp" />
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
                 <script

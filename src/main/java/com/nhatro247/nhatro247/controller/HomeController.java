@@ -24,6 +24,7 @@ import com.nhatro247.nhatro247.service.PostTypeService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HomeController {
@@ -107,6 +108,12 @@ public class HomeController {
         model.addAttribute("type2", this.newsletterService.getOneNewsletter(newsletterType, 1, 1, 1));
         model.addAttribute("list", this.newsletterService.getListActive(1, 1));
         return "client/test";
+    }
+
+    @GetMapping("/instruct")
+    public String getInstruct(Model model) {
+        model.addAttribute("menu", this.menuService.getAll());
+        return "client/instruct";
     }
 
 }

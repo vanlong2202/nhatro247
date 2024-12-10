@@ -739,7 +739,7 @@
                             </div>
                         </div>
                     </div>
-                    <div style="margin-top: 30px;" class="container">
+                    <div style="margin-top: 30px;" class="container" id="support-info">
                         <div class="section-heading text-center mt-5 mb-5">
                             <h3 class="title-container">
                                 HỖ TRỢ KHÁCH HÀNG</h3>

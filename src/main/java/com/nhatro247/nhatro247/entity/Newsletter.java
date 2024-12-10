@@ -1,8 +1,11 @@
 package com.nhatro247.nhatro247.entity;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -45,6 +48,8 @@ public class Newsletter {
     private String approver;
     @Column(columnDefinition = "MEDIUMTEXT")
     private String history;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createdDate;
 
     @ManyToOne
     @JoinColumn(name = "newsletterTypeID")
@@ -288,4 +293,16 @@ public class Newsletter {
                 + ", newsletterFollows=" + newsletterFollows + ", reportNewsletter=" + reportNewsletter + "]";
     }
 
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public String getFormattedCreatedDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss dd-MM-yyyy");
+        return createdDate.format(formatter);
+    }
 }
