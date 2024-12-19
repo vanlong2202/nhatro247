@@ -152,7 +152,7 @@
                             </div>
                         </div>
                     </div>
-                    <jsp:include page="../client/layout/header.jsp" />
+                    <jsp:include page="../layout/header.jsp" />
                     <div class="page-heading header-text">
                         <div class="container">
                             <div class="row">
@@ -495,7 +495,7 @@
                             </div>
                         </div>
                     </div>
-                    <jsp:include page="../client/layout/footer.jsp" />
+                    <jsp:include page="../layout/footer.jsp" />
                     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
                     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

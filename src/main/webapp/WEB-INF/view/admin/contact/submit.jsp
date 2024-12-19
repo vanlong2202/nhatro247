@@ -40,6 +40,22 @@
                         font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
                         font-weight: bold;
                     }
+
+                    .alert {
+                        color: white;
+                        position: fixed;
+                        top: 70px;
+                        right: 20px;
+                        z-index: 1050;
+                        opacity: 0;
+                        transform: translateX(100%);
+                        transition: opacity 0.5s, transform 0.5s;
+                    }
+
+                    .alert.show {
+                        opacity: 1;
+                        transform: translateX(0);
+                    }
                 </style>
             </head>
 
@@ -48,16 +64,31 @@
                 <main id="main" class="main">
 
                     <div class="pagetitle">
-                        <h1>QUẢN LÍ BÁO CÁO BẢN TIN</h1>
+                        <h1>QUẢN LÍ LIÊN HỆ</h1>
                     </div>
 
                     <section class="section">
                         <div class="row">
                             <div class="col-lg-12">
-
+                                <c:if test="${not empty success}">
+                                    <div class="alert alert-success bg-success text-light border-0 alert-dismissible fade show"
+                                        role="alert">
+                                        ${success}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                    </div>
+                                </c:if>
+                                <c:if test="${not empty error}">
+                                    <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show"
+                                        role="alert">
+                                        ${error}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                    </div>
+                                </c:if>
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title">Danh Sách Báo Cáo Đã Xác Thực</h5>
+                                        <h5 class="card-title">DANH SÁCH LIÊN HỆ CẦN XÁC NHẬN</h5>
                                         <table class="table datatable">
                                             <thead>
                                                 <tr>
@@ -77,19 +108,15 @@
                                                         <td>${feedback.title}</td>
                                                         <td>${feedback.email}</td>
                                                         <td>
-                                                            <button style="width: 122px;" type="button"
-                                                                class="btn mb-2 btn-success btn-sm">Đã Xác Thực</button>
-                                                            </a>
+                                                            <c:if test="${feedback.isStatus == 0}"><button
+                                                                    style="width: 122px;" type="button"
+                                                                    class="btn mb-2 btn-primary btn-sm">Chờ xác
+                                                                    nhận</button></c:if>
                                                         </td>
                                                         <td>
                                                             <div style="display: flex; justify-content: space-between;">
-                                                                <a style="margin-right: 5px;"
-                                                                    href="/newsletter-detail/${reportNewsletter.newsletter.newsletterID}"
-                                                                    class="btn btn-info btn-sm "><i
-                                                                        class="ri-code-s-slash-fill"></i></a>
-                                                                <a style="width: 111px;"
-                                                                    href="/admin/report-delete/${reportNewsletter.reportID}"
-                                                                    class="btn btn-danger btn-sm">Xóa Báo Cáo</a>
+                                                                <a href="/admin/contact-detail/${feedback.feedBackID}"
+                                                                    class="btn btn-success btn-sm">Xác nhận liên hệ</a>
                                                             </div>
 
                                                         </td>
@@ -109,7 +136,20 @@
                 <jsp:include page="../layout/sidebar.jsp" />
                 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
                         class="bi bi-arrow-up-short"></i></a>
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        var alert = document.querySelector(".alert");
+                        if (alert) {
+                            // Thêm class "show" để hiển thị thông báo
+                            alert.classList.add("show");
 
+                            // Sau 3 giây, tự động ẩn thông báo
+                            setTimeout(function () {
+                                alert.classList.remove("show");
+                            }, 3000); // 3000ms = 3 giây
+                        }
+                    });
+                </script>
                 <script src="/admin/vendor/apexcharts/apexcharts.min.js"></script>
                 <script src="/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
                 <script src="/admin/vendor/chart.js/chart.umd.js"></script>

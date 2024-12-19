@@ -144,7 +144,7 @@
                         </div>
                     </div>
                 </div>
-                <jsp:include page="../client/layout/header.jsp" />
+                <jsp:include page="../layout/header.jsp" />
                 <div class="page-heading header-text">
                     <div class="container">
                         <div class="row">
@@ -464,7 +464,7 @@
                         </div>
                     </div>
                 </div>
-                <jsp:include page="../client/layout/footer.jsp" />
+                <jsp:include page="../layout/footer.jsp" />
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
                 <script
                     src="https://cdn.tiny.cloud/1/1kalr2fw781xdi3fnqg9j82j2s13bamzismcjdi9x3t26imz/tinymce/6/tinymce.min.js"

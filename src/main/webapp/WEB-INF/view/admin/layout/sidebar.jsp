@@ -118,20 +118,17 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="icons-remix.html">
-                                    <i class="bi bi-circle"></i><span>Remix Icons</span>
+                                <a href="/admin/financial">
+                                    <i class="bi bi-circle"></i><span>Xử lí số dư</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="icons-boxicons.html">
-                                    <i class="bi bi-circle"></i><span>Boxicons</span>
+                                <a href="/admin/transaction">
+                                    <i class="bi bi-circle"></i><span>Lịch sử giao dịch</span>
                                 </a>
                             </li>
                         </ul>
-                    </li><!-- End Icons Nav -->
-
-
-
+                    </li>
                 </ul>
 
             </aside>

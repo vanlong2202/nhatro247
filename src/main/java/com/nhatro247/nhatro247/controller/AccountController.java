@@ -65,7 +65,7 @@ public class AccountController {
         Account account = this.accountService.getAccountByName(user);
         model.addAttribute("info", account);
         model.addAttribute("bills", this.billService.getAllByAccount(account));
-        return "client/profile";
+        return "client/profile/profile";
     }
 
     @GetMapping("/update-profile")
@@ -75,7 +75,7 @@ public class AccountController {
         String user = (String) session.getAttribute("username");
         Account account = this.accountService.getAccountByName(user);
         model.addAttribute("info", account);
-        return "client/updateProfile";
+        return "client/profile/updateProfile";
     }
 
     @PostMapping("/update-info")
@@ -154,7 +154,7 @@ public class AccountController {
         model.addAttribute("countRefuse", this.newsletterService.findByIsStatusAndAccount(2, account).size());
         model.addAttribute("countPending", this.newsletterService.findByIsStatusAndAccount(0, account).size());
         model.addAttribute("countSvip", this.newsletterService.findByAccountAndSvip(account, 1).size());
-        return "client/manager";
+        return "client/profile/manager";
     }
 
     @GetMapping("/newsletter-save")
@@ -164,7 +164,7 @@ public class AccountController {
         String user = (String) session.getAttribute("username");
         Account account = this.accountService.getAccountByName(user);
         model.addAttribute("save", this.newsletterFollowService.getAllByAccount(account));
-        return "client/follow";
+        return "client/profile/follow";
     }
 
     @GetMapping("/deposit")
@@ -176,6 +176,6 @@ public class AccountController {
         type.setBillTypeID(1);
         model.addAttribute("menu", this.menuService.getAll());
         model.addAttribute("bills", this.billService.getAllByType(type, account));
-        return "client/deposit";
+        return "client/profile/deposit";
     }
 }

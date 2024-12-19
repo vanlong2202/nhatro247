@@ -2289,6 +2289,7 @@ body {
   padding: 10px;
   margin-bottom: 10px;
   display: flex;
+  box-shadow: 0 2px 4px #cecece;
 }
 
 .service-item__content {

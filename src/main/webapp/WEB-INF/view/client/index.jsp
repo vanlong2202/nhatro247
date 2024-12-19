@@ -41,6 +41,14 @@
                         }
 
 
+                        #collapseTwo .accordion-body {
+                            display: -webkit-box;
+                            -webkit-line-clamp: 4;
+                            -webkit-box-orient: vertical;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            padding-bottom: 0;
+                        }
 
                         .city-text {
                             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -349,9 +357,11 @@
                                             <div class="col-lg-5">
                                                 <div class="section-heading">
                                                     <h6>| NHÀ, CĂN HỘ CHO THUÊ</h6>
-                                                    <h2
-                                                        style="display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;">
-                                                        ${type2.title}</h2>
+                                                    <a href="/newsletter-detail/${type2.newsletterID}">
+                                                        <h2
+                                                            style="display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;">
+                                                            ${type2.title}</h2>
+                                                    </a>
                                                 </div>
                                                 <div class="accordion" id="accordionExample">
                                                     <div class="accordion-item">
@@ -586,13 +596,15 @@
                                                                             src="/uploads/${type3.image1}" alt="">
                                                                     </div>
                                                                     <div class="col-lg-3">
-                                                                        <h3>${type3.title}</h3>
+                                                                        <h3 style="margin-bottom: 30px;">${type3.title}
+                                                                        </h3>
                                                                         <p
-                                                                            style="display: -webkit-box;-webkit-line-clamp: 4;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;">
+                                                                            style="line-height: 2;display: -webkit-box;-webkit-line-clamp: 4;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;">
                                                                             ${type3.detail}
                                                                         </p>
                                                                         <div class="icon-button">
-                                                                            <a href="property-details.html"><i
+                                                                            <a
+                                                                                href="/newsletter-detail/${type3.newsletterID}"><i
                                                                                     class="fa fa-calendar"></i>XEM CHI
                                                                                 TIẾT</a>
                                                                         </div>
@@ -693,7 +705,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="contact section" id="contact-section">
                         <div class="container">
                             <div class="row">

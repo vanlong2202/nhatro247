@@ -81,10 +81,10 @@
                                         </c:if>
                                         <li>
                                             <a
-                                                class="${pageContext.request.requestURI == '/WEB-INF/view/client/profile.jsp' || 
-                                            pageContext.request.requestURI == '/WEB-INF/view/client/manager.jsp' || 
-                                            pageContext.request.requestURI == '/WEB-INF/view/client/follow.jsp' || 
-                                            pageContext.request.requestURI == '/WEB-INF/view/client/deposit.jsp' ? 'active' : ''}"><i
+                                                class="${pageContext.request.requestURI == '/WEB-INF/view/client/profile/profile.jsp' || 
+                                            pageContext.request.requestURI == '/WEB-INF/view/client/profile/manager.jsp' || 
+                                            pageContext.request.requestURI == '/WEB-INF/view/client/profile/follow.jsp' || 
+                                            pageContext.request.requestURI == '/WEB-INF/view/client/profile/deposit.jsp' ? 'active' : ''}"><i
                                                     class="
                                                 fa-solid fa-user"></i>
                                                 Xin chào,

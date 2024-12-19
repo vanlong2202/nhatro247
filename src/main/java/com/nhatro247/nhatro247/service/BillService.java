@@ -44,4 +44,9 @@ public class BillService {
     public BigDecimal getTotalBillMonth(String month) {
         return this.billRepository.getTotalBillMonth(month);
     }
+
+    public List<Bill> getAll() {
+        Sort sort = Sort.by(Sort.Direction.DESC, "transactionCode");
+        return this.billRepository.findAll(sort);
+    }
 }

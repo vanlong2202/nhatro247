@@ -219,10 +219,6 @@
                         max-height: calc(1.5em * 2);
                     }
 
-                    .blog-item-title a {
-                        color: inherit;
-                    }
-
                     .blog-item-type {
                         margin: 10px;
                         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -232,36 +228,14 @@
 
                     .blog-item-content {
                         margin: 10px;
-                        color: #5e5e5e !important;
                         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                         font-size: 16px;
                         display: -webkit-box;
                         -webkit-box-orient: vertical;
                         overflow: hidden;
                         -webkit-line-clamp: 3;
-                    }
-
-                    .blog-item-content h3 strong {
-                        font-size: 16px;
-                        font-weight: normal;
-                    }
-
-                    .blog-item-content h2 strong {
-                        font-size: 16px;
-                        font-weight: normal;
-                    }
-
-                    .blog-item-content h1 strong {
-                        font-size: 16px;
-                        font-weight: normal;
-                    }
-
-                    .blog-item-content img {
-                        display: none;
-                    }
-
-                    .detail-content {
-                        display: none;
+                        line-height: 1.5;
+                        max-height: calc(1.5em * 3);
                     }
                 </style>
             </head>
@@ -298,7 +272,7 @@
                         </div>
                     </div>
                 </div>
-                <jsp:include page="../client/layout/header.jsp" />
+                <jsp:include page="../layout/header.jsp" />
                 <div class="page-heading header-text">
                     <div class="container">
                         <div class="row">
@@ -316,8 +290,36 @@
                             <span class="item sep">/</span>
                             <span class="item"><a href="/blog" class="item-link">Tin Tức</a></span>
                             <span class="item sep">/</span>
-                            <span class="item"><a href="" class="item-link">${type.name}</a></span>
+                            <span class="item"><a href="" class="item-link">${post.postType.name}</a></span>
+                            <span class="item sep">/</span>
+                            <span class="item"><a
+                                    href="https://tromoi.com/blog/tin-tro-moi/tro-moi-giai-phap-f5-cong-cuoc-tim-tro-cho-sinh-vien-va-nguoi-lao-dong-thoi-dai-4-0"
+                                    class="item-link">${post.title}</a></span>
                         </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="container-blog">
+                        <div class="header-blog">
+                            <h3
+                                style="color: #0045a8;font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;">
+                                ${post.title}</h3>
+                            <div class="time">
+                                <span
+                                    style="margin-top: 10px; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
+                                    <i class="fa-regular fa-clock fa-shake" style="color: #ff0000;"></i>
+                                    ${post.createTime}</span>
+
+                                <span><i class="fa-solid fa-tag fa-beat" style="color: #ff0000;"></i>
+                                    ${post.postType.name}</span>
+                            </div>
+
+                        </div>
+                        <div class="blog-context">
+                            ${post.content}
+                        </div>
+
                     </div>
                 </div>
                 <div class="container">
@@ -325,11 +327,10 @@
                         <div class="header-blog">
                             <h3
                                 style="color: #0045a8;font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;">
-                                ${type.name}</h3>
+                                TIN LIÊN QUAN</h3>
                         </div>
-
                         <div class="news-context">
-                            <c:forEach var="post" items="${listPost}">
+                            <c:forEach var="post" items="${postRelate}">
                                 <div class="news-items">
                                     <div class="news-img">
                                         <img src="/uploads/${post.image}" alt="">
@@ -353,15 +354,15 @@
                             </c:forEach>
 
                         </div>
+
                     </div>
-                </div>
-                <jsp:include page="../client/layout/footer.jsp" />
-                <script src="/jquery/jquery.min.js"></script>
-                <script src="/js/bootstrap.min.js"></script>
-                <script src="/js/isotope.min.js"></script>
-                <script src="/js/owl-carousel.js"></script>
-                <script src="/js/counter.js"></script>
-                <script src="/js/custom.js"></script>
+                    <jsp:include page="../layout/footer.jsp" />
+                    <script src="/jquery/jquery.min.js"></script>
+                    <script src="/js/bootstrap.min.js"></script>
+                    <script src="/js/isotope.min.js"></script>
+                    <script src="/js/owl-carousel.js"></script>
+                    <script src="/js/counter.js"></script>
+                    <script src="/js/custom.js"></script>
 
             </body>
 

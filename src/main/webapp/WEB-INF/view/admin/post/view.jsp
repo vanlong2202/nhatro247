@@ -93,7 +93,8 @@
                             <div class="col-lg-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <a style="margin: 10px;" class="btn btn-success">Thêm Bài viết</a>
+                                        <a href="/admin/addPost" style="margin: 10px;" class="mt-3 btn btn-success">Thêm
+                                            Bài viết</a>
                                         <c:if test="${not empty success}">
                                             <div class="alert alert-success bg-success text-light border-0 alert-dismissible fade show"
                                                 role="alert">

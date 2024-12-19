@@ -81,7 +81,7 @@
                             </div>
                         </div>
                     </div>
-                    <jsp:include page="../client/layout/header.jsp" />
+                    <jsp:include page="../layout/header.jsp" />
                     <div class="page-heading header-text">
                         <div class="container">
                             <div class="row">
@@ -165,6 +165,14 @@
                                                 <label for="email">Địa Chỉ Email</label>
                                                 <input value="${info.email}" type="text" name="email" id="email"
                                                     placeholder="Your Email..." readonly autocomplete="on">
+                                            </fieldset>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <fieldset>
+                                                <label for="phone">Facebook</label>
+                                                <input value="${info.facebook}" type="text" name="facebook"
+                                                    id="facebook" placeholder="Your Phone..." readonly
+                                                    autocomplete="on">
                                             </fieldset>
                                         </div>
                                         <div class="col-lg-12">
@@ -270,7 +278,7 @@
                     </div>
                     </div>
                     </div>
-                    <jsp:include page="../client/layout/footer.jsp" />
+                    <jsp:include page="../layout/footer.jsp" />
                     <script src="/jquery/jquery.min.js"></script>
                     <script src="/js/bootstrap.min.js"></script>
                     <script src="/js/isotope.min.js"></script>

@@ -166,7 +166,7 @@
                             </div>
                         </div>
                     </div>
-                    <jsp:include page="../client/layout/header.jsp" />
+                    <jsp:include page="../layout/header.jsp" />
                     <div class="page-heading header-text">
                         <div class="container">
                             <div class="row">
@@ -391,7 +391,7 @@
                             </div>
                         </div>
                     </div>
-                    <jsp:include page="../client/layout/footer.jsp" />
+                    <jsp:include page="../layout/footer.jsp" />
                     <script>
                         document.addEventListener('DOMContentLoaded', () => {
                             const radioButtons = document.querySelectorAll('input[name="totalamount"]');

@@ -77,7 +77,7 @@ public class NewsletterController {
         model.addAttribute("newsletters", newsletter);
         model.addAttribute("newsletterRelate", this.newsletterService.getTop3Relate(typeID, address, id));
         model.addAttribute("report", new ReportNewsletter());
-        return "client/newsletterDetail";
+        return "client/service/newsletterDetail";
     }
 
     @GetMapping("/manager-edit-newsletter/{id}")
@@ -92,7 +92,7 @@ public class NewsletterController {
         model.addAttribute("menu", this.menuService.getAll());
         model.addAttribute("infoNewsletterDTO", infoNewsletterDTO);
         model.addAttribute("newsletterType", this.newsletterTypeService.getAllType());
-        return "client/updateNewsletter";
+        return "client/service/updateNewsletter";
     }
 
     @GetMapping("/service")
@@ -141,7 +141,7 @@ public class NewsletterController {
         model.addAttribute("totalPages", getPage.getTotalPages());
         model.addAttribute("queryString", qs);
         model.addAttribute("itemsLink", this.newsletterService.gItemsNewsletterAddressDTOs());
-        return "client/service";
+        return "client/service/service";
     }
 
     @GetMapping("/delete-newsletter/{id}")
@@ -234,7 +234,7 @@ public class NewsletterController {
         dto.setNewsletter(new Newsletter());
         model.addAttribute("infoNewsletterDTO", dto);
         model.addAttribute("newsletterType", this.newsletterTypeService.getAllType());
-        return "client/post";
+        return "client/service/post";
     }
 
     @PostMapping("/new/port")
@@ -245,9 +245,8 @@ public class NewsletterController {
         if (acc != null && acc.getBalance() > 20000) {
             LocalDateTime now = LocalDateTime.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy");
-            DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            DateTimeFormatter code = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
             String formattedDate = now.format(formatter);
-            DateTimeFormatter code = DateTimeFormatter.ofPattern("HHmmssddMMyyyy");
             String paycode = now.format(code);
             acc.setFullName(account.getFullName());
             acc.setFacebook(account.getFacebook());

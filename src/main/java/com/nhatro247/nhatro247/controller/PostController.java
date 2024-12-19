@@ -65,7 +65,7 @@ public class PostController {
         model.addAttribute("menu", this.menuService.getAll());
         model.addAttribute("post", this.postService.getPostByID(id));
         model.addAttribute("postRelate", this.postService.getPostByIDNot(type, 1, id));
-        return "client/blogDetail";
+        return "client/blog/blogDetail";
     }
 
     @GetMapping("/blog-type/{id}")
@@ -74,7 +74,7 @@ public class PostController {
         model.addAttribute("menu", this.menuService.getAll());
         model.addAttribute("listPost", this.postService.getPostByIsActiveAndTypeID(postType, 1));
         model.addAttribute("type", postType);
-        return "client/blogType";
+        return "client/blog/blogType";
     }
 
 }

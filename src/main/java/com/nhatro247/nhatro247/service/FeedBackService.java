@@ -36,4 +36,20 @@ public class FeedBackService {
         }
         return results;
     }
+
+    public List<FeedBack> getFeedBacksByStatus(int isStatus) {
+        return this.feedBackRepository.findByIsStatus(isStatus);
+    }
+
+    public FeedBack getFeedBackByID(long feedBackID) {
+        return this.feedBackRepository.findByFeedBackID(feedBackID);
+    }
+
+    public void add(FeedBack feedBack) {
+        this.feedBackRepository.save(feedBack);
+    }
+
+    public void delete(FeedBack feedBack) {
+        this.feedBackRepository.delete(feedBack);
+    }
 }

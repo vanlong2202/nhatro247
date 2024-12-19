@@ -1,6 +1,8 @@
 package com.nhatro247.nhatro247.entity;
 
 import java.util.List;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,6 +28,7 @@ public class Account {
     @NotNull
     private String email;
     private String facebook;
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String description;
     @ManyToOne
     @JoinColumn(name = "roleID")

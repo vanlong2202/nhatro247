@@ -112,7 +112,6 @@
                                             <thead>
                                                 <tr>
                                                     <th>STT</th>
-                                                    <th>Tiêu đề</th>
                                                     <th>Nội dung</th>
                                                     <th>Email</th>
                                                     <th>Số điện thoại</th>
@@ -124,10 +123,6 @@
                                                 <c:forEach var="reportNewsletter" items="${report}" varStatus="status">
                                                     <tr>
                                                         <td>#${status.index + 1}</td>
-                                                        <td>
-                                                            <div class="table-data-title">
-                                                                ${reportNewsletter.newsletter.title}</div>
-                                                        </td>
                                                         <td>
                                                             <div class="table-data-title">${reportNewsletter.context}
                                                             </div>

@@ -71,7 +71,7 @@ public class HomeController {
     @GetMapping("/login")
     public String getLoginPage(Model model) {
         model.addAttribute("account", new Account());
-        return "client/login1";
+        return "client/auth/login";
     }
 
     @GetMapping("/blog")
@@ -87,7 +87,7 @@ public class HomeController {
         }
         model.addAttribute("postType", this.postTypeService.getAll());
         model.addAttribute("postByTypeID", postByTypeID);
-        return "client/blog";
+        return "client/blog/blog";
     }
 
     @GetMapping("/error-page")

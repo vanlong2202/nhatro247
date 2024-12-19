@@ -13,4 +13,8 @@ import com.nhatro247.nhatro247.entity.dto.DashboardFeedbackDTO;
 public interface FeedBackRepository extends JpaRepository<FeedBack, Long> {
     @Query(value = "select is_status as status, count(*) as count from tbl_feedback group by is_status", nativeQuery = true)
     List<Object[]> getCountFeedbackStatus();
+
+    List<FeedBack> findByIsStatus(int isStatus);
+
+    FeedBack findByFeedBackID(long feedBackID);
 }

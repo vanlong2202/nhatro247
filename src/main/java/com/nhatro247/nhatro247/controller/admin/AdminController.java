@@ -158,18 +158,6 @@ public class AdminController {
         return "admin/report/view";
     }
 
-    @GetMapping("/admin/contact-submit")
-    public String getPageContact(Model model) {
-        model.addAttribute("feedback", this.feedBackService.getAll());
-        return "admin/contact/submit";
-    }
-
-    @GetMapping("/admin/contact-view")
-    public String getPageContactView(Model model) {
-        model.addAttribute("feedback", this.feedBackService.getAll());
-        return "admin/contact/view";
-    }
-
     @GetMapping("/admin/addPost")
     public String getPageAddPost(Model model) {
         model.addAttribute("post", new Post());

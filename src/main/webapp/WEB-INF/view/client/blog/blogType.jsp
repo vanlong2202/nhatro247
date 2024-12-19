@@ -41,7 +41,6 @@
                     .blog-items {
                         margin-bottom: 20px;
                         display: flex;
-
                         height: 210px;
                         border-radius: 8px;
                         border: 1px solid #eaeaea;
@@ -49,45 +48,29 @@
                         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
                     }
 
-                    a.text-title {
+                    span.text-title {
                         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                         font-weight: 600;
                         font-size: 22px;
-                        color: black;
                     }
 
                     .item-info {
                         display: flex;
-                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                        font-size: 14px;
                     }
 
                     .item-info p {
                         font-size: 12px;
                         padding-bottom: 10px;
-                        display: -webkit-box;
-                        -webkit-line-clamp: 2;
-                        -webkit-box-orient: vertical;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
                     }
 
                     .items-context {
                         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                        padding: 20px;
+                        margin: 20px;
                         align-items: center;
-                        overflow: hidden;
-                    }
-
-                    .items-context p {
-                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                        font-size: medium;
-
                     }
 
                     .items-img {
-                        width: 300px;
-                        min-width: 300px;
+                        width: 50%;
                         overflow: hidden;
                     }
 
@@ -99,6 +82,10 @@
                     }
 
 
+                    .text-span {
+                        padding-bottom: 10px;
+                    }
+
                     .blog-items:hover {
                         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
                     }
@@ -107,7 +94,7 @@
                         transform: scale(1.1);
                     }
 
-                    .blog-items:hover a {
+                    .blog-items:hover span {
                         color: #0045a8;
                     }
 
@@ -116,7 +103,7 @@
                         flex-wrap: wrap;
                         gap: 25px;
                         justify-content: flex-start;
-                        padding-bottom: 10px;
+                        padding-bottom: 3%;
                     }
 
                     .news-items img {
@@ -142,7 +129,7 @@
                         display: flex;
                     }
 
-                    .news-items:hover .blog-item-title a {
+                    .news-items:hover .blog-item-title {
                         color: #0045a8;
                     }
 
@@ -233,41 +220,25 @@
                     }
 
                     .blog-item-title a {
-                        color: black;
+                        color: inherit;
                     }
 
                     .blog-item-type {
                         margin: 10px;
                         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                         font-weight: 400;
-                        font-size: 15px;
-                        color: #827f7f;
-                        line-height: 1.5;
+                        font-size: 14px;
                     }
 
                     .blog-item-content {
                         margin: 10px;
+                        color: #5e5e5e !important;
                         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                        font-size: 15px !important;
-                        font-weight: 400;
-                        color: #827f7f;
-                        line-height: 1.5;
+                        font-size: 16px;
                         display: -webkit-box;
                         -webkit-box-orient: vertical;
                         overflow: hidden;
                         -webkit-line-clamp: 3;
-                    }
-
-                    .blog-item-content img {
-                        display: none;
-                    }
-
-                    .blog-item-content a {
-                        display: none;
-                    }
-
-                    .detail-content {
-                        display: none;
                     }
 
                     .blog-item-content h3 strong {
@@ -285,47 +256,18 @@
                         font-weight: normal;
                     }
 
-                    .content h3 strong {
-                        font-size: 16px;
-                        font-weight: normal;
-                    }
-
-                    .blog-button-type {
-                        margin-top: 22px;
-                        color: #0045a8;
-                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                        font-weight: 600;
-                    }
-
-                    .blog-button-type a {
-                        background-color: white;
-                        border: 2px #0045a8 solid;
-                        padding: 12px 18px;
-                        border-radius: 4px;
-                        color: inherit;
-                    }
-
-                    .content {
-                        display: -webkit-box;
-                        -webkit-box-orient: vertical;
-                        overflow: hidden;
-                        -webkit-line-clamp: 2;
-                        margin-bottom: 10px;
-                    }
-
-                    .content img {
+                    .blog-item-content img {
                         display: none;
                     }
 
-                    .content h2 {
-                        font-size: 16px;
-                        font-weight: normal;
+                    .detail-content {
+                        display: none;
                     }
                 </style>
             </head>
 
             <body>
-                <!-- <div id="js-preloader" class="js-preloader">
+                <div id="js-preloader" class="js-preloader">
                     <div class="preloader-inner">
                         <span class="dot"></span>
                         <div class="dots">
@@ -334,7 +276,7 @@
                             <span></span>
                         </div>
                     </div>
-                </div> -->
+                </div>
                 <div class="sub-header">
                     <div class="container">
                         <div class="row">
@@ -356,7 +298,7 @@
                         </div>
                     </div>
                 </div>
-                <jsp:include page="../client/layout/header.jsp" />
+                <jsp:include page="../layout/header.jsp" />
                 <div class="page-heading header-text">
                     <div class="container">
                         <div class="row">
@@ -368,75 +310,52 @@
                     </div>
                 </div>
                 <div class="container">
+                    <div class="breadcrumbs">
+                        <div class="breadcrumbs-wrap">
+                            <span class="item"><a href="/" class="item-link">Trang chủ</a></span>
+                            <span class="item sep">/</span>
+                            <span class="item"><a href="/blog" class="item-link">Tin Tức</a></span>
+                            <span class="item sep">/</span>
+                            <span class="item"><a href="" class="item-link">${type.name}</a></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
                     <div class="container-blog">
                         <div class="header-blog">
                             <h3
                                 style="color: #0045a8;font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;">
-                                TIN TỨC CẬP NHẬT</h3>
+                                ${type.name}</h3>
                         </div>
-                        <c:forEach var="post" items="${postTop10}">
-                            <div class="blog-items">
-                                <div class="items-img">
-                                    <img src="/uploads/${post.image}" alt="">
-                                </div>
-                                <div class="items-context">
-                                    <div class="text-span">
-                                        <a href="/blog-detail/${post.postID}" class="text-title">${post.title}</a>
+
+                        <div class="news-context">
+                            <c:forEach var="post" items="${listPost}">
+                                <div class="news-items">
+                                    <div class="news-img">
+                                        <img src="/uploads/${post.image}" alt="">
+                                    </div>
+                                    <div class="blog-context-item">
+                                        <div class="blog-item-title">
+                                            <a href="/blog-detail/${post.postID}">${post.title}</a>
+                                        </div>
+                                        <div class="blog-item-type">
+                                            <span><i class="fa-solid fa-tag fa-beat" style="color: #ff0000;"></i>
+                                                ${post.postType.name}</span>
+                                            <span><i class="fa-solid fa-circle fa-2xs" style="color: #454545;"></i>
+                                                ${post.createTime}</span>
+                                        </div>
+                                        <div class="blog-item-content">
+                                            <span>${post.content}</span>
+                                        </div>
 
                                     </div>
-                                    <div class="blog-item-type">
-                                        <span><i class="fa-solid fa-tag fa-beat" style="color: #ff0000;"></i>
-                                            ${post.postType.name}</span>
-                                        <span><i class="fa-solid fa-circle fa-2xs" style="color: #454545;"></i>
-                                            ${post.createTime}</span>
-                                    </div>
-                                    <div class="content">${post.content}</div>
                                 </div>
-                            </div>
-                        </c:forEach>
+                            </c:forEach>
+
+                        </div>
                     </div>
                 </div>
-                <c:forEach var="type" items="${postType}">
-                    <div class="container">
-                        <div class="container-blog">
-                            <div class="header-blog">
-                                <h3
-                                    style="color: #0045a8;font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;">
-                                    ${type.name}</h3>
-                            </div>
-                            <div class="news-context">
-                                <c:forEach var="post" items="${postByTypeID[type.postTypeID]}">
-                                    <div class="news-items">
-                                        <div class="news-img">
-                                            <img src="/uploads/${post.image}" alt="">
-                                        </div>
-                                        <div class="blog-context-item">
-                                            <div class="blog-item-title">
-                                                <a href="/blog-detail/${post.postID}">${post.title}</a>
-                                            </div>
-                                            <div class="blog-item-type">
-                                                <span class="type-time"><i class="fa-solid fa-tag fa-beat"
-                                                        style="color: #ff0000;"></i>
-                                                    ${post.postType.name}</span>
-                                                <span>-
-                                                    ${post.createTime}</span>
-                                            </div>
-                                            <div class="blog-item-content">
-                                                <span>${post.content}</span>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </c:forEach>
-                            </div>
-                            <div class="blog-button-type"><a href="/blog-type/${type.postTypeID}">Xem Thêm <i
-                                        class="fa-solid fa-arrow-right fa-beat fa-sm"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </c:forEach>
-
-                <jsp:include page="../client/layout/footer.jsp" />
+                <jsp:include page="../layout/footer.jsp" />
                 <script src="/jquery/jquery.min.js"></script>
                 <script src="/js/bootstrap.min.js"></script>
                 <script src="/js/isotope.min.js"></script>
